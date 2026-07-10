@@ -85,20 +85,16 @@ const verTag = stable?.tagName ?? pre?.tagName ?? ''
     </div>
 
     <!-- Architecture pills (animates in) -->
-    <div id="dl-arch-section" class="overflow-hidden transition-all duration-400 ease-out" style="max-height: 0; opacity: 0;">
-      <div class="pt-1">
-        <p class="mb-2 text-xs text-muted-foreground">选择架构</p>
-        <div class="flex gap-2" id="dl-archs"></div>
-      </div>
+    <div id="dl-arch-section" class="mb-5 opacity-0 translate-y-2 transition-all duration-500 ease-out pointer-events-none">
+      <p class="mb-2 text-xs text-muted-foreground">选择架构</p>
+      <div class="flex gap-2" id="dl-archs"></div>
     </div>
 
     <!-- Download button (animates in) -->
-    <div id="dl-link-section" class="overflow-hidden transition-all duration-400 delay-150 ease-out" style="max-height: 0; opacity: 0;">
-      <div class="pt-4">
-        <a id="dl-link" href="#" target="_blank" class="hidden inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90">
-          <Icon name="lucide:download" class="size-4" />下载
-        </a>
-      </div>
+    <div id="dl-link-section" class="opacity-0 translate-y-2 transition-all duration-500 ease-out pointer-events-none">
+      <a id="dl-link" href="#" target="_blank" class="hidden inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90">
+        <Icon name="lucide:download" class="size-4" />下载
+      </a>
     </div>
   </div>
 </div>
@@ -162,14 +158,16 @@ const verTag = stable?.tagName ?? pre?.tagName ?? ''
 
   function closeModal() {
     dialog.classList.add('scale-95')
-    archSection.style.maxHeight = '0'
-    archSection.style.opacity = '0'
-    linkSection.style.maxHeight = '0'
-    linkSection.style.opacity = '0'
-    link.classList.add('hidden')
+    hideArchAndLink()
     setTimeout(function () {
       overlay.classList.add('opacity-0', 'pointer-events-none')
     }, 200)
+  }
+
+  function hideArchAndLink() {
+    archSection.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none')
+    linkSection.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none')
+    link.classList.add('hidden')
   }
 
   function highlightPlat(id) {
@@ -207,13 +205,9 @@ const verTag = stable?.tagName ?? pre?.tagName ?? ''
   }
 
   function showArchAndLink() {
-    // Animate in arch pills
-    archSection.style.maxHeight = archSection.scrollHeight + 'px'
-    archSection.style.opacity = '1'
-    // Animate in download link
+    archSection.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none')
     setTimeout(function () {
-      linkSection.style.maxHeight = linkSection.scrollHeight + 'px'
-      linkSection.style.opacity = '1'
+      linkSection.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none')
       updateLink()
     }, 250)
   }
@@ -253,11 +247,7 @@ const verTag = stable?.tagName ?? pre?.tagName ?? ''
         arch = (/arm|aarch64/i.test(ua)) ? 'ARM64' : 'x64'
       }
       // Reset arch section
-      archSection.style.maxHeight = '0'
-      archSection.style.opacity = '0'
-      linkSection.style.maxHeight = '0'
-      linkSection.style.opacity = '0'
-      link.classList.add('hidden')
+      hideArchAndLink()
       // Re-render with new archs
       setTimeout(function () {
         renderArchs(platData.archs, arch)
