@@ -1,53 +1,131 @@
 ---
 import Base from '../layouts/Base.astro';
-import { getReleases } from '../lib/releases.ts';
+import { Icon } from 'astro-icon/components';
+import { getReleases, MIRRORS, mirrorUrl } from '../lib/releases.ts';
 
 const releases = await getReleases()
 const stable = releases.find(r => !r.prerelease)
 const pre = releases.find(r => r.prerelease)
+
+const icons: Record<string, string> = {
+  windows: 'fa6-brands:windows',
+  'macos-intel': 'fa6-brands:apple',
+  'macos-arm': 'fa6-brands:apple',
+  linux: 'lucide:terminal',
+}
+const labels: Record<string, string> = {
+  windows: 'Windows 10/11 64位',
+  'macos-intel': 'macOS Intel',
+  'macos-arm': 'macOS Apple Silicon',
+  linux: 'Linux',
+}
+const notes: Record<string, string> = {
+  windows: '.msi / .exe',
+  'macos-intel': '.dmg (x64)',
+  'macos-arm': '.dmg (ARM64)',
+  linux: '.AppImage / .deb',
+}
+
+function assetUrl(release: typeof releases[0], platform: string): string | undefined {
+  const a = release.assets?.find(x => x.platform === platform)
+  if (a) return a.url
+  const fallbacks: Record<string, string> = {
+    windows: `${release.htmlUrl}/Qomicex_${release.version}_x64-setup.msi`,
+    'macos-intel': `${release.htmlUrl}/Qomicex_${release.version}_x64.dmg`,
+    'macos-arm': `${release.htmlUrl}/Qomicex_${release.version}_aarch64.dmg`,
+    linux: `${release.htmlUrl}/Qomicex_${release.version}_amd64.AppImage`,
+  }
+  return fallbacks[platform] || release.htmlUrl
+}
 ---
 
 <Base title="下载">
   <section class="mx-auto max-w-3xl px-4 py-16">
     <h1 class="mb-2 text-3xl font-bold">下载 Qomicex Launcher</h1>
-    <p class="mb-2 text-muted-foreground">选择你的操作系统，下载对应版本。</p>
-    <div class="mb-10 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-      <span class="rounded-full bg-primary/10 px-2.5 py-0.5 font-medium text-primary">
-        当前{stable ? ` 正式版 ` : ' '}v{stable?.version ?? pre?.version ?? '...'}
-      </span>
+    <p class="mb-2 text-muted-foreground">选择版本和操作系统，下载对应安装包。</p>
+
+    <div class="mb-8 flex flex-wrap gap-2" id="tab-bar">
+      <button data-tab="stable" class="tab-btn active inline-flex h-9 items-center gap-1.5 rounded-lg border border-border bg-primary px-4 text-sm font-medium text-primary-foreground shadow-sm transition-colors">
+        <Icon name="lucide:verified" class="size-4" />正式版{stable ? ` ${stable.version}` : ''}
+      </button>
       {pre && (
-        <a href="https://github.com/Qomicex-Public/Qomicex.Tauri/releases" target="_blank" class="rounded-full bg-yellow-500/10 px-2.5 py-0.5 font-medium text-yellow-600 transition-colors hover:bg-yellow-500/20 dark:text-yellow-400">
-          测试版 v{pre.version} 可用 →
-        </a>
+        <button data-tab="pre" class="tab-btn inline-flex h-9 items-center gap-1.5 rounded-lg border border-border bg-card px-4 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent">
+          <Icon name="lucide:beaker" class="size-4" />测试版 {pre.version}
+        </button>
       )}
     </div>
 
-    <div class="space-y-3">
-      {[
-        { platform: 'Windows', desc: 'Windows 10/11 64位', note: '.msi 安装包' },
-        { platform: 'macOS', desc: 'macOS 11+ Intel / Apple Silicon', note: '.dmg 镜像' },
-        { platform: 'Linux', desc: 'Linux x86_64', note: '.AppImage / .deb' },
-      ].map(item => {
-        return (
-          <div class="flex items-center justify-between rounded-xl border border-border bg-card p-5">
-            <div>
-              <h3 class="font-semibold">{item.platform}</h3>
-              <p class="text-sm text-muted-foreground">{item.desc}</p>
-              <p class="text-xs text-muted-foreground">{item.note}</p>
-            </div>
-            <a
-              href={`https://github.com/Qomicex-Public/Qomicex.Tauri/releases/latest`}
-              target="_blank"
-              class="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
-            >
-              下载
-            </a>
-          </div>
-        );
-      })}
+    <!-- Stable -->
+    <div id="tab-stable" class="tab-content">
+      {stable ? (
+        <div class="space-y-3">
+          {['windows', 'macos-intel', 'macos-arm', 'linux'].map(p => {
+            const url = assetUrl(stable, p)
+            return (
+              <div class="flex items-center justify-between rounded-xl border border-border bg-card p-5">
+                <div class="flex items-center gap-3">
+                  <Icon name={icons[p]} class="size-5 shrink-0 text-primary" />
+                  <div>
+                    <h3 class="font-semibold">{labels[p]}</h3>
+                    <p class="text-xs text-muted-foreground">{notes[p]}</p>
+                  </div>
+                </div>
+                <a href={url} target="_blank" data-dl={url} class="dl-btn inline-flex h-9 items-center gap-1.5 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90">
+                  <Icon name="lucide:download" class="size-4" />下载
+                </a>
+              </div>
+            )
+          })}
+        </div>
+      ) : <p class="text-muted-foreground">暂无正式版。</p>}
     </div>
 
+    <!-- Prerelease -->
+    {pre && (
+    <div id="tab-pre" class="tab-content hidden">
+      <div class="mb-3 flex items-center gap-2 rounded-lg bg-yellow-500/10 px-4 py-3 text-sm text-yellow-700 dark:text-yellow-300">
+        <Icon name="lucide:beaker" class="size-4 shrink-0" />
+        测试版包含最新功能但可能不稳定，仅供体验和反馈。
+      </div>
+      <div class="space-y-3">
+        {['windows', 'macos-intel', 'macos-arm', 'linux'].map(p => {
+          const url = assetUrl(pre, p)
+          return (
+            <div class="flex items-center justify-between rounded-xl border border-border bg-card p-5">
+              <div class="flex items-center gap-3">
+                <Icon name={icons[p]} class="size-5 shrink-0 text-primary" />
+                <div>
+                  <h3 class="font-semibold">{labels[p]}</h3>
+                  <p class="text-xs text-muted-foreground">{notes[p]}</p>
+                </div>
+              </div>
+              <a href={url} target="_blank" data-dl={url} class="dl-btn inline-flex h-9 items-center gap-1.5 rounded-md bg-yellow-600 px-4 text-sm font-medium text-white shadow transition-colors hover:bg-yellow-700">
+                <Icon name="lucide:download" class="size-4" />下载
+              </a>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+    )}
+
+    <!-- Mirror -->
     <div class="mt-8 rounded-xl border border-border bg-card p-5">
+      <div class="flex flex-wrap items-center gap-3">
+        <label for="mirror-select" class="flex items-center gap-1.5 text-sm font-medium">
+          <Icon name="lucide:globe" class="size-4" />镜像加速
+        </label>
+        <select id="mirror-select" class="flex-1 rounded-lg border border-input bg-background px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-primary min-w-0">
+          {MIRRORS.map(m => <option value={m.url}>{m.label}</option>)}
+        </select>
+        <button id="apply-mirror" class="inline-flex h-9 items-center gap-1.5 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90">
+          <Icon name="lucide:refresh-cw" class="size-4" />应用
+        </button>
+      </div>
+      <p class="mt-2 text-xs text-muted-foreground">选择镜像后点击"应用"，下载链接将自动替换为镜像地址。国内用户推荐使用镜像加速下载。</p>
+    </div>
+
+    <div class="mt-4 rounded-xl border border-border bg-card p-5">
       <h3 class="mb-2 font-semibold">系统要求</h3>
       <ul class="space-y-1 text-sm text-muted-foreground">
         <li>• 需要 Java 17 或更高版本（启动器内置 Java 下载功能）</li>
@@ -57,3 +135,35 @@ const pre = releases.find(r => r.prerelease)
     </div>
   </section>
 </Base>
+
+<script>
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active', 'bg-primary', 'text-primary-foreground', 'shadow-sm')
+        b.classList.add('bg-card', 'text-muted-foreground')
+      })
+      btn.classList.remove('bg-card', 'text-muted-foreground')
+      btn.classList.add('active', 'bg-primary', 'text-primary-foreground', 'shadow-sm')
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'))
+      const tab = document.getElementById('tab-' + btn.dataset.tab)
+      if (tab) tab.classList.remove('hidden')
+    })
+  })
+
+  // Mirror
+  document.getElementById('apply-mirror')?.addEventListener('click', () => {
+    const mirror = (document.getElementById('mirror-select') as HTMLSelectElement).value
+    const btns = document.querySelectorAll('.dl-btn') as NodeListOf<HTMLAnchorElement>
+    btns.forEach(a => {
+      const orig = a.dataset.dl
+      if (orig) a.href = mirror ? mirror + orig : orig
+      if (mirror) {
+        a.innerHTML = a.innerHTML.replace('下载', '镜像下载')
+      } else {
+        a.innerHTML = a.innerHTML.replace('镜像下载', '下载')
+      }
+    })
+  })
+</script>
