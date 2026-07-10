@@ -181,10 +181,29 @@ function assetUrl(version: string, platformId: string, tagName: string): string 
   </div>
 </dialog>
 
+<!-- Thank you overlay -->
+<div id="thanks-overlay" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+  <div class="mx-auto max-w-sm rounded-xl border border-border bg-background p-8 text-center shadow-2xl">
+    <div class="mx-auto mb-4 flex size-14 items-center justify-center rounded-full bg-primary/10">
+      <svg class="size-7 text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 class="mb-1 text-lg font-semibold">感谢下载 Qomicex Launcher</h2>
+    <p class="mb-1 text-sm text-muted-foreground">下载已开始，请稍候。</p>
+    <p class="mb-6 text-xs text-muted-foreground">
+      <span id="thanks-countdown">3</span> 秒后跳转至安装教程
+    </p>
+    <a href="/docs/install/" class="inline-flex h-9 items-center gap-1.5 rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90">
+      立即查看安装教程
+    </a>
+  </div>
+</div>
+
 <script>
   const dialog = document.getElementById('dl-dialog')
+  const overlay = document.getElementById('thanks-overlay')
+  var thanksTimer = null
+
   if (dialog) {
-    // Tabs
     document.querySelectorAll('.tab-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
         document.querySelectorAll('.tab-btn').forEach(function (b) {
@@ -199,7 +218,6 @@ function assetUrl(version: string, platformId: string, tagName: string): string 
       })
     })
 
-    // Open dialog
     document.querySelectorAll('.dl-trigger').forEach(function (btn) {
       btn.addEventListener('click', function () {
         document.getElementById('dl-version').textContent = 'v' + btn.dataset.dlVersion
@@ -220,7 +238,6 @@ function assetUrl(version: string, platformId: string, tagName: string): string 
       })
     })
 
-    // Confirm
     document.getElementById('dl-confirm').addEventListener('click', function () {
       var mirror = document.querySelector('input[name="mirror"]:checked')
       var origUrl = dialog.dataset.dlUrl
@@ -228,6 +245,20 @@ function assetUrl(version: string, platformId: string, tagName: string): string 
       var finalUrl = mirror && mirror.value ? mirror.value + origUrl : origUrl
       window.open(finalUrl, '_blank')
       dialog.close()
+      // Thanks overlay
+      overlay.classList.remove('hidden')
+      overlay.classList.add('flex')
+      var count = 3
+      document.getElementById('thanks-countdown').textContent = count
+      if (thanksTimer) clearInterval(thanksTimer)
+      thanksTimer = setInterval(function () {
+        count--
+        document.getElementById('thanks-countdown').textContent = count
+        if (count <= 0) {
+          clearInterval(thanksTimer)
+          window.location.href = '/docs/install/'
+        }
+      }, 1000)
     })
   }
 </script>
