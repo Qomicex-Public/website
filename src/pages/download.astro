@@ -1,51 +1,42 @@
 ---
 import Base from '../layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
-import { getReleases, MIRRORS, mirrorUrl } from '../lib/releases.ts';
+import { getReleases, MIRRORS } from '../lib/releases.ts';
 
 const releases = await getReleases()
 const stable = releases.find(r => !r.prerelease)
 const pre = releases.find(r => r.prerelease)
 
-const icons: Record<string, string> = {
-  windows: 'fa6-brands:windows',
-  'macos-intel': 'fa6-brands:apple',
-  'macos-arm': 'fa6-brands:apple',
-  linux: 'lucide:terminal',
-}
-const labels: Record<string, string> = {
-  windows: 'Windows 10/11 64位',
-  'macos-intel': 'macOS Intel',
-  'macos-arm': 'macOS Apple Silicon',
-  linux: 'Linux',
-}
-const notes: Record<string, string> = {
-  windows: '.msi / .exe',
-  'macos-intel': '.dmg (x64)',
-  'macos-arm': '.dmg (ARM64)',
-  linux: '.AppImage / .deb',
+const platforms = [
+  { id: 'windows', icon: 'fa6-brands:windows', label: 'Windows 10/11 64位', note: '.msi / .exe' },
+  { id: 'macos-intel', icon: 'fa6-brands:apple', label: 'macOS Intel', note: '.dmg (x64)' },
+  { id: 'macos-arm', icon: 'fa6-brands:apple', label: 'macOS Apple Silicon', note: '.dmg (ARM64)' },
+  { id: 'linux', icon: 'lucide:terminal', label: 'Linux', note: '.AppImage / .deb' },
+] as const
+
+function assetFileName(version: string, id: string): string {
+  const map: Record<string, string> = {
+    windows: `Qomicex_${version}_x64-setup.msi`,
+    'macos-intel': `Qomicex_${version}_x64.dmg`,
+    'macos-arm': `Qomicex_${version}_aarch64.dmg`,
+    linux: `Qomicex_${version}_amd64.AppImage`,
+  }
+  return map[id] ?? ''
 }
 
-function assetUrl(release: typeof releases[0], platform: string): string | undefined {
-  const a = release.assets?.find(x => x.platform === platform)
-  if (a) return a.url
-  const fallbacks: Record<string, string> = {
-    windows: `${release.htmlUrl}/Qomicex_${release.version}_x64-setup.msi`,
-    'macos-intel': `${release.htmlUrl}/Qomicex_${release.version}_x64.dmg`,
-    'macos-arm': `${release.htmlUrl}/Qomicex_${release.version}_aarch64.dmg`,
-    linux: `${release.htmlUrl}/Qomicex_${release.version}_amd64.AppImage`,
-  }
-  return fallbacks[platform] || release.htmlUrl
+function assetUrl(version: string, platformId: string, tagName: string): string {
+  const file = assetFileName(version, platformId)
+  return `https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/${tagName}/${file}`
 }
 ---
 
 <Base title="下载">
   <section class="mx-auto max-w-3xl px-4 py-16">
     <h1 class="mb-2 text-3xl font-bold">下载 Qomicex Launcher</h1>
-    <p class="mb-2 text-muted-foreground">选择版本和操作系统，下载对应安装包。</p>
+    <p class="mb-2 text-muted-foreground">选择版本和操作系统，点击下载查看可用下载源。</p>
 
     <div class="mb-8 flex flex-wrap gap-2" id="tab-bar">
-      <button data-tab="stable" class="tab-btn active inline-flex h-9 items-center gap-1.5 rounded-lg border border-border bg-primary px-4 text-sm font-medium text-primary-foreground shadow-sm transition-colors">
+      <button data-tab="stable" class="tab-btn active inline-flex h-9 items-center gap-1.5 rounded-lg border bg-primary px-4 text-sm font-medium text-primary-foreground shadow-sm transition-colors">
         <Icon name="lucide:verified" class="size-4" />正式版{stable ? ` ${stable.version}` : ''}
       </button>
       {pre && (
@@ -59,21 +50,21 @@ function assetUrl(release: typeof releases[0], platform: string): string | undef
     <div id="tab-stable" class="tab-content">
       {stable ? (
         <div class="space-y-3">
-          {['windows', 'macos-intel', 'macos-arm', 'linux'].map(p => {
-            const url = assetUrl(stable, p)
+          {platforms.map(p => {
+            const url = assetUrl(stable.version, p.id, stable.tagName)
             return (
-              <div class="flex items-center justify-between rounded-xl border border-border bg-card p-5">
-                <div class="flex items-center gap-3">
-                  <Icon name={icons[p]} class="size-5 shrink-0 text-primary" />
-                  <div>
-                    <h3 class="font-semibold">{labels[p]}</h3>
-                    <p class="text-xs text-muted-foreground">{notes[p]}</p>
-                  </div>
+            <button data-dl-version={stable.version} data-dl-platform={p.id} data-dl-prerelease="false" data-dl-url={url} data-dl-filename={assetFileName(stable.version, p.id)} class="dl-trigger flex w-full items-center justify-between rounded-xl border border-border bg-card p-5 text-left transition-all hover:border-primary/30 hover:shadow-[0_0_16px_-8px_hsl(var(--primary)/0.25)]">
+              <div class="flex items-center gap-3">
+                <Icon name={p.icon} class="size-5 shrink-0 text-primary" />
+                <div>
+                  <h3 class="font-semibold">{p.label}</h3>
+                  <p class="text-xs text-muted-foreground">{p.note}</p>
                 </div>
-                <a href={url} target="_blank" data-dl={url} class="dl-btn inline-flex h-9 items-center gap-1.5 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90">
-                  <Icon name="lucide:download" class="size-4" />下载
-                </a>
               </div>
+              <span class="inline-flex h-9 items-center gap-1.5 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow transition-colors">
+                <Icon name="lucide:download" class="size-4" />下载
+              </span>
+            </button>
             )
           })}
         </div>
@@ -88,44 +79,28 @@ function assetUrl(release: typeof releases[0], platform: string): string | undef
         测试版包含最新功能但可能不稳定，仅供体验和反馈。
       </div>
       <div class="space-y-3">
-        {['windows', 'macos-intel', 'macos-arm', 'linux'].map(p => {
-          const url = assetUrl(pre, p)
+        {platforms.map(p => {
+          const url = assetUrl(pre.version, p.id, pre.tagName)
           return (
-            <div class="flex items-center justify-between rounded-xl border border-border bg-card p-5">
-              <div class="flex items-center gap-3">
-                <Icon name={icons[p]} class="size-5 shrink-0 text-primary" />
-                <div>
-                  <h3 class="font-semibold">{labels[p]}</h3>
-                  <p class="text-xs text-muted-foreground">{notes[p]}</p>
-                </div>
+          <button data-dl-version={pre.version} data-dl-platform={p.id} data-dl-prerelease="true" data-dl-url={url} data-dl-filename={assetFileName(pre.version, p.id)} class="dl-trigger flex w-full items-center justify-between rounded-xl border border-border bg-card p-5 text-left transition-all hover:border-yellow-500/30 hover:shadow-[0_0_16px_-8px_hsl(var(--primary)/0.25)]">
+            <div class="flex items-center gap-3">
+              <Icon name={p.icon} class="size-5 shrink-0 text-primary" />
+              <div>
+                <h3 class="font-semibold">{p.label}</h3>
+                <p class="text-xs text-muted-foreground">{p.note}</p>
               </div>
-              <a href={url} target="_blank" data-dl={url} class="dl-btn inline-flex h-9 items-center gap-1.5 rounded-md bg-yellow-600 px-4 text-sm font-medium text-white shadow transition-colors hover:bg-yellow-700">
-                <Icon name="lucide:download" class="size-4" />下载
-              </a>
             </div>
+            <span class="inline-flex h-9 items-center gap-1.5 rounded-md bg-yellow-600 px-4 text-sm font-medium text-white shadow transition-colors">
+              <Icon name="lucide:download" class="size-4" />下载
+            </span>
+          </button>
           )
         })}
       </div>
     </div>
     )}
 
-    <!-- Mirror -->
     <div class="mt-8 rounded-xl border border-border bg-card p-5">
-      <div class="flex flex-wrap items-center gap-3">
-        <label for="mirror-select" class="flex items-center gap-1.5 text-sm font-medium">
-          <Icon name="lucide:globe" class="size-4" />镜像加速
-        </label>
-        <select id="mirror-select" class="flex-1 rounded-lg border border-input bg-background px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-primary min-w-0">
-          {MIRRORS.map(m => <option value={m.url}>{m.label}</option>)}
-        </select>
-        <button id="apply-mirror" class="inline-flex h-9 items-center gap-1.5 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90">
-          <Icon name="lucide:refresh-cw" class="size-4" />应用
-        </button>
-      </div>
-      <p class="mt-2 text-xs text-muted-foreground">选择镜像后点击"应用"，下载链接将自动替换为镜像地址。国内用户推荐使用镜像加速下载。</p>
-    </div>
-
-    <div class="mt-4 rounded-xl border border-border bg-card p-5">
       <h3 class="mb-2 font-semibold">系统要求</h3>
       <ul class="space-y-1 text-sm text-muted-foreground">
         <li>• 需要 Java 17 或更高版本（启动器内置 Java 下载功能）</li>
@@ -136,34 +111,123 @@ function assetUrl(release: typeof releases[0], platform: string): string | undef
   </section>
 </Base>
 
-<script>
-  // Tabs
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('active', 'bg-primary', 'text-primary-foreground', 'shadow-sm')
-        b.classList.add('bg-card', 'text-muted-foreground')
-      })
-      btn.classList.remove('bg-card', 'text-muted-foreground')
-      btn.classList.add('active', 'bg-primary', 'text-primary-foreground', 'shadow-sm')
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'))
-      const tab = document.getElementById('tab-' + btn.dataset.tab)
-      if (tab) tab.classList.remove('hidden')
-    })
-  })
+<!-- Download Dialog -->
+<dialog id="dl-dialog" class="w-full max-w-md rounded-xl border border-border bg-background p-0 shadow-2xl backdrop:bg-black/50 open:flex open:flex-col">
+  <div class="flex items-center justify-between border-b border-border px-5 py-4">
+    <h2 class="flex items-center gap-2 text-base font-semibold">
+      <Icon name="lucide:download" class="size-4 text-primary" />
+      下载 Qomicex
+    </h2>
+    <form method="dialog">
+      <button class="inline-flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+        <Icon name="lucide:x" class="size-4" />
+      </button>
+    </form>
+  </div>
+  <div class="space-y-4 px-5 py-4">
+    <div class="space-y-2 text-sm">
+      <div class="flex items-center gap-2">
+        <span class="text-muted-foreground">版本</span>
+        <span id="dl-version" class="font-medium"></span>
+        <span id="dl-badge" class="hidden rounded-full bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400">测试版</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-muted-foreground">平台</span>
+        <span id="dl-platform" class="font-medium"></span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-muted-foreground">文件</span>
+        <span id="dl-filename" class="break-all font-mono text-xs text-muted-foreground"></span>
+      </div>
+    </div>
+    <div class="border-t border-border pt-3">
+      <p class="mb-2 text-xs font-medium text-muted-foreground">选择下载源</p>
+      <div id="mirror-list" class="space-y-1">
+        {MIRRORS.filter(m => m.best).map((m, i) => (
+          <label class={`mirror-opt flex cursor-pointer items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors ${i === 0 ? 'bg-primary/5 ring-1 ring-primary/20' : 'hover:bg-accent'}`}>
+            <input type="radio" name="mirror" value={m.url} checked={i === 0} class="size-4 accent-primary" />
+            <div class="min-w-0 flex-1">
+              <span class="font-medium">{m.label}</span>
+              {i === 0 && <span class="ml-1.5 text-xs text-muted-foreground">(直连)</span>}
+            </div>
+            {m.label !== 'GitHub 直连' && <span class="shrink-0 rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary">镜像</span>}
+          </label>
+        ))}
+      </div>
+      <details class="group mt-1">
+        <summary class="mirror-more flex cursor-pointer list-none items-center gap-1.5 rounded-lg px-3 py-2 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+          <Icon name="lucide:chevron-down" class="size-3.5 transition-transform group-open:rotate-180" />
+          更多镜像 ({MIRRORS.filter(m => !m.best).length} 个)
+        </summary>
+        <div class="mt-1 space-y-1 pl-3">
+          {MIRRORS.filter(m => !m.best).map(m => (
+            <label class="mirror-opt flex cursor-pointer items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-accent">
+              <input type="radio" name="mirror" value={m.url} class="size-4 accent-primary" />
+              <span class="min-w-0 flex-1 font-medium">{m.label}</span>
+              <span class="shrink-0 rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium text-primary">镜像</span>
+            </label>
+          ))}
+        </div>
+      </details>
+    </div>
+  </div>
+  <div class="flex items-center justify-end gap-2 border-t border-border px-5 py-3">
+    <form method="dialog">
+      <button class="inline-flex h-9 items-center rounded-md border border-input bg-background px-4 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground">取消</button>
+    </form>
+    <button id="dl-confirm" class="inline-flex h-9 items-center gap-1.5 rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90">
+      <Icon name="lucide:download" class="size-4" />立即下载
+    </button>
+  </div>
+</dialog>
 
-  // Mirror
-  document.getElementById('apply-mirror')?.addEventListener('click', () => {
-    const mirror = (document.getElementById('mirror-select') as HTMLSelectElement).value
-    const btns = document.querySelectorAll('.dl-btn') as NodeListOf<HTMLAnchorElement>
-    btns.forEach(a => {
-      const orig = a.dataset.dl
-      if (orig) a.href = mirror ? mirror + orig : orig
-      if (mirror) {
-        a.innerHTML = a.innerHTML.replace('下载', '镜像下载')
-      } else {
-        a.innerHTML = a.innerHTML.replace('镜像下载', '下载')
-      }
+<script>
+  const dialog = document.getElementById('dl-dialog')
+  if (dialog) {
+    // Tabs
+    document.querySelectorAll('.tab-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.tab-btn').forEach(function (b) {
+          b.classList.remove('active', 'bg-primary', 'text-primary-foreground', 'shadow-sm')
+          b.classList.add('bg-card', 'text-muted-foreground', 'border-border')
+        })
+        btn.classList.remove('bg-card', 'text-muted-foreground', 'border-border')
+        btn.classList.add('active', 'bg-primary', 'text-primary-foreground', 'shadow-sm')
+        document.querySelectorAll('.tab-content').forEach(function (el) { el.classList.add('hidden') })
+        var tab = document.getElementById('tab-' + btn.dataset.tab)
+        if (tab) tab.classList.remove('hidden')
+      })
     })
-  })
+
+    // Open dialog
+    document.querySelectorAll('.dl-trigger').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.getElementById('dl-version').textContent = 'v' + btn.dataset.dlVersion
+        document.getElementById('dl-badge').className = btn.dataset.dlPrerelease === 'true'
+          ? 'rounded-full bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400'
+          : 'hidden'
+        document.getElementById('dl-platform').textContent = {
+          windows: 'Windows 10/11 64位',
+          'macos-intel': 'macOS Intel',
+          'macos-arm': 'macOS Apple Silicon',
+          linux: 'Linux'
+        }[btn.dataset.dlPlatform] || btn.dataset.dlPlatform
+        document.getElementById('dl-filename').textContent = btn.dataset.dlFilename
+        dialog.dataset.dlUrl = btn.dataset.dlUrl
+        var firstRadio = document.querySelector('input[name="mirror"]')
+        if (firstRadio) firstRadio.checked = true
+        dialog.showModal()
+      })
+    })
+
+    // Confirm
+    document.getElementById('dl-confirm').addEventListener('click', function () {
+      var mirror = document.querySelector('input[name="mirror"]:checked')
+      var origUrl = dialog.dataset.dlUrl
+      if (!origUrl) return
+      var finalUrl = mirror && mirror.value ? mirror.value + origUrl : origUrl
+      window.open(finalUrl, '_blank')
+      dialog.close()
+    })
+  }
 </script>
