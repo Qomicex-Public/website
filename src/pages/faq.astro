@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Icon } from 'astro-icon/components';
 
 const faqs = [
   { q: '启动器支持哪些 Minecraft 版本？', a: '支持从 1.6 到最新版本的所有 Minecraft 版本，包括快照版。' },
@@ -21,7 +22,7 @@ const faqs = [
         <details class="group rounded-xl border border-border bg-card">
           <summary class="flex cursor-pointer items-center justify-between p-4 font-medium transition-colors hover:text-primary">
             {faq.q}
-            <svg class="size-4 shrink-0 transition-transform group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6" /></svg>
+            <Icon name="lucide:chevron-down" class="size-4 shrink-0 transition-transform group-open:rotate-180" />
           </summary>
           <div class="border-t border-border px-4 py-3 text-sm text-muted-foreground leading-relaxed">
             {faq.a}
