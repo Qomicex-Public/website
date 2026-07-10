@@ -10,7 +10,10 @@ const tag = stable?.tagName ?? pre?.tagName ?? 'latest'
 
 const MIRROR_URL = MIRRORS.find(m => m.label === 'gh.lenmei233.top')?.url ?? ''
 
-const PLATFORMS = [
+interface Arch { label: string; file: (v: string) => string }
+interface Platform { id: string; icon: string; label: string; archs: Arch[] }
+
+const PLATFORMS: Platform[] = [
   { id: 'windows', icon: 'fa6-brands:windows', label: 'Windows', archs: [
     { label: 'x64', file: (v: string) => `Qomicex_${v}_x64-setup.msi` },
     { label: 'ARM64', file: (v: string) => `Qomicex_${v}_arm64-setup.msi` },
@@ -22,61 +25,71 @@ const PLATFORMS = [
   { id: 'linux', icon: 'lucide:terminal', label: 'Linux', archs: [
     { label: 'x64', file: (v: string) => `Qomicex_${v}_amd64.AppImage` },
     { label: 'ARM64', file: (v: string) => `Qomicex_${v}_arm64.AppImage` },
-    { label: 'LoongArch64', file: () => '' },
-    { label: 'RISC-V 64', file: () => '' },
   ]},
 ]
 
 function ghUrl(tag: string, file: string): string {
   return file && tag ? `https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/${tag}/${file}` : ''
 }
+
+const verLabel = stable?.tagName ?? pre?.tagName ?? ''
+const versionDisplay = stable?.tagName
+  ? `v${stable.tagName.replace(/^v/i, '')}`
+  : pre?.tagName
+    ? `v${pre.tagName.replace(/^v/i, '')} (测试版)`
+    : ''
 ---
 
 <Base>
-  <!-- Hero / Download -->
   <section class="relative overflow-hidden">
     <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.08)_0%,transparent_60%)]" />
-    <div class="mx-auto flex max-w-2xl flex-col items-center px-4 py-16 text-center sm:py-20">
-      <img src="/high_logo.svg" alt="Qomicex Launcher" class="mb-6 w-full max-w-sm" />
-      <p class="mb-6 max-w-sm text-sm text-muted-foreground">一个现代化的 Minecraft 启动器，拥有完善的多实例管理、快捷的模组安装、账户管理、多人联机、个性化主题设置等功能。完全开源，使用 GPL-3.0 许可协议。</p>
+    <div class="mx-auto flex max-w-lg flex-col items-center px-4 py-20 text-center sm:py-28">
+
+      <img src="/high_logo.svg" alt="Qomicex Launcher" class="mb-6 w-full max-w-xs" />
+
+      {versionDisplay && (
+        <span class="mb-4 inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
+          <Icon name="lucide:tag" class="size-3" />
+          {versionDisplay} · 基于 Tauri · 全平台
+        </span>
+      )}
+
+      <p class="mb-8 max-w-sm text-sm text-muted-foreground">一个现代化的 Minecraft 启动器，拥有完善的多实例管理、快捷的模组安装、账户管理、多人联机、个性化主题设置等功能。完全开源，使用 GPL-3.0 许可协议。</p>
 
       <!-- Platform tabs -->
-      <div class="mb-6 flex gap-1.5 rounded-xl bg-muted p-1">
+      <div class="mb-6 flex gap-1 rounded-xl bg-muted p-1">
         {PLATFORMS.map((p, i) => (
-          <label class={"relative cursor-pointer rounded-lg px-4 py-2 text-sm font-medium transition-colors " + (i === 0 ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground')}>
-            <input type="radio" name="plat" value={p.id} checked={i === 0} class="peer hidden" />
+          <button data-plat={p.id} class={"tab-btn cursor-pointer rounded-lg px-5 py-2 text-sm font-medium transition-colors " + (i === 0 ? 'bg-background text-foreground shadow-xs' : 'text-muted-foreground hover:text-foreground')}>
             <span class="flex items-center gap-1.5"><Icon name={p.icon} class="size-4" />{p.label}</span>
-          </label>
+          </button>
         ))}
       </div>
 
-      <!-- Architectures + download lines -->
+      <!-- Platform panels -->
       {PLATFORMS.map((p, pi) => {
         const tagName = stable?.tagName ?? pre?.tagName ?? ''
         const firstUrl = ghUrl(tagName, p.archs[0].file(tagName))
         return (
-        <div id={"archs-" + p.id} class={"w-full " + (pi === 0 ? '' : 'hidden')}>
-          <div class="mb-4 flex flex-wrap justify-center gap-2">
-            {p.archs.map((a, ai) => {
-              const url = ghUrl(tagName, a.file(tagName))
-              return (
-                <div class={"flex items-center gap-2 rounded-xl border p-3 transition-colors " + (ai === 0 ? 'border-primary/30 bg-primary/5' : 'border-border')}>
-                  <label class="flex cursor-pointer items-center gap-2 text-sm">
-                    <input type="radio" name={"arch-" + p.id} value={a.label} checked={ai === 0} class="size-3.5 accent-primary" />
+        <div id={"panel-" + p.id} class={"flex w-full flex-col items-center gap-4 " + (pi === 0 ? '' : 'hidden')}>
+          {p.archs.length > 1 && (
+            <div class="flex gap-2">
+              {p.archs.map((a, ai) => {
+                const url = ghUrl(tagName, a.file(tagName))
+                return (
+                  <button data-arch={a.label} class={"arch-btn cursor-pointer rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors " + (ai === 0 ? 'border-primary/40 bg-primary/5 text-primary' : 'border-border text-muted-foreground hover:text-foreground')}>
                     {a.label}
-                  </label>
-                </div>
-              )
-            })}
-          </div>
+                  </button>
+                )
+              })}
+            </div>
+          )}
 
-          <!-- Two download lines -->
-          <div class="flex flex-wrap justify-center gap-3">
-            <a href={firstUrl || `https://github.com/Qomicex-Public/Qomicex.Tauri/releases/${tag}`} target="_blank" class="inline-flex h-10 items-center gap-2 rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground shadow transition-all hover:bg-primary/90 hover:shadow-lg">
-              <Icon name="lucide:download" class="size-4" />下载线路 1
+          <div class="flex w-full flex-col gap-3">
+            <a href={firstUrl || `https://github.com/Qomicex-Public/Qomicex.Tauri/releases/${tag}`} target="_blank" class="inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-xl bg-primary text-base font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/25">
+              <Icon name="lucide:download" class="size-5" />下载线路 1（GH 直连）
             </a>
-            <a href={MIRROR_URL + firstUrl || `https://github.com/Qomicex-Public/Qomicex.Tauri/releases/${tag}`} target="_blank" class="inline-flex h-10 items-center gap-2 rounded-md border border-input bg-background px-6 text-sm font-medium shadow-sm transition-all hover:bg-accent hover:text-accent-foreground">
-              <Icon name="lucide:zap" class="size-4" />下载线路 2
+            <a href={MIRROR_URL + firstUrl || `https://github.com/Qomicex-Public/Qomicex.Tauri/releases/${tag}`} target="_blank" class="inline-flex h-14 w-full items-center justify-center gap-2.5 rounded-xl border border-input bg-background text-base font-medium shadow-xs transition-all hover:bg-accent hover:text-accent-foreground">
+              <Icon name="lucide:zap" class="size-5" />下载线路 2（镜像）
             </a>
           </div>
         </div>
@@ -84,55 +97,71 @@ function ghUrl(tag: string, file: string): string {
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="border-y border-border bg-card/50">
-    <div class="mx-auto max-w-5xl px-4 py-16">
-      <div class="grid gap-4 sm:grid-cols-4">
-        {[
-          { icon: 'lucide:layers', title: '多实例管理' },
-          { icon: 'lucide:puzzle', title: '模组加载器' },
-          { icon: 'lucide:globe', title: '内网联机' },
-          { icon: 'lucide:palette', title: '主题设置' },
-        ].map(f => (
-          <div class="rounded-xl border border-border bg-background p-4 text-center">
-            <div class="mx-auto mb-2 flex size-9 items-center justify-center rounded-lg bg-primary/10">
-              <Icon name={f.icon} class="size-4 text-primary" />
-            </div>
-            <p class="text-sm font-medium">{f.title}</p>
-          </div>
-        ))}
-      </div>
+  <!-- Slim footer bar -->
+  <footer class="border-t border-border">
+    <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-4 px-4 py-5 text-xs text-muted-foreground">
+      <span>Qomicex Launcher · GPL-3.0</span>
+      <span class="hidden sm:inline">·</span>
+      <a href="https://github.com/Qomicex-Public" target="_blank" class="inline-flex items-center gap-1 hover:text-foreground"><Icon name="fa6-brands:github" class="size-3.5" />GitHub</a>
+      <a href="https://qm.qq.com/q/rKiwzrkg8w" target="_blank" class="inline-flex items-center gap-1 hover:text-foreground"><Icon name="lucide:message-circle" class="size-3.5" />QQ 群</a>
+      <a href="/about" class="hover:text-foreground">关于</a>
     </div>
-  </section>
-
-  <!-- Community -->
-  <section class="mx-auto max-w-3xl px-4 py-14 text-center">
-    <p class="mb-6 text-sm text-muted-foreground">Qomicex 是完全开源的项目，欢迎参与贡献</p>
-    <div class="flex flex-wrap justify-center gap-3">
-      <a href="https://github.com/Qomicex-Public" target="_blank" class="inline-flex h-9 items-center gap-1.5 rounded-md border border-input bg-background px-4 text-sm font-medium shadow-sm transition-all hover:bg-accent hover:text-accent-foreground">
-        <Icon name="fa6-brands:github" class="size-4" />GitHub
-      </a>
-      <a href="https://qm.qq.com/q/rKiwzrkg8w" target="_blank" class="inline-flex h-9 items-center gap-1.5 rounded-md border border-input bg-background px-4 text-sm font-medium shadow-sm transition-all hover:bg-accent hover:text-accent-foreground">
-        <Icon name="lucide:message-circle" class="size-4" />QQ 群
-      </a>
-      <a href="https://github.com/Qomicex-Public/Qomicex.Tauri" target="_blank" class="inline-flex h-9 items-center gap-1.5 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground shadow transition-all hover:bg-primary/90">
-        <Icon name="lucide:star" class="size-4" />Star on GitHub
-      </a>
-    </div>
-  </section>
+  </footer>
 </Base>
 
 <script data-astro-rerun>
-  document.querySelectorAll('input[name="plat"]').forEach(function (radio) {
-    radio.addEventListener('change', function () {
-      document.querySelectorAll('[id^="archs-"]').forEach(function (el) { el.classList.add('hidden') })
-      var target = document.getElementById('archs-' + this.value)
-      if (target) target.classList.remove('hidden')
-      // highlight active tab
-      document.querySelectorAll('input[name="plat"]').forEach(function (r) {
-        r.parentElement.className = 'relative cursor-pointer rounded-lg px-4 py-2 text-sm font-medium transition-colors text-muted-foreground hover:text-foreground'
+  // tab switching
+  document.querySelectorAll('.tab-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var plat = this.getAttribute('data-plat')
+      document.querySelectorAll('[id^="panel-"]').forEach(function (el) { el.classList.add('hidden') })
+      document.getElementById('panel-' + plat)?.classList.remove('hidden')
+      document.querySelectorAll('.tab-btn').forEach(function (b) {
+        b.className = 'tab-btn cursor-pointer rounded-lg px-5 py-2 text-sm font-medium transition-colors text-muted-foreground hover:text-foreground'
       })
-      this.parentElement.className = 'relative cursor-pointer rounded-lg px-4 py-2 text-sm font-medium transition-colors bg-background text-foreground shadow-sm'
+      this.className = 'tab-btn cursor-pointer rounded-lg px-5 py-2 text-sm font-medium transition-colors bg-background text-foreground shadow-xs'
+    })
+  })
+
+  // arch switching (updates download links)
+  document.querySelectorAll('.arch-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      // highlight active arch
+      var parent = this.parentElement
+      parent.querySelectorAll('.arch-btn').forEach(function (b) {
+        b.className = 'arch-btn cursor-pointer rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors border-border text-muted-foreground hover:text-foreground'
+      })
+      this.className = 'arch-btn cursor-pointer rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors border-primary/40 bg-primary/5 text-primary'
+
+      // find current panel
+      var panel = this.closest('[id^="panel-"]')
+      if (!panel) return
+      var links = panel.querySelectorAll('a')
+      var label = this.getAttribute('data-arch')
+      var plat = panel.id.replace('panel-', '')
+      var platBtn = document.querySelector('.tab-btn[data-plat="' + plat + '"]')
+      if (!platBtn) return
+      // find matching platform data - we rebuild URLs client-side from known patterns
+      var archMap = {
+        windows: { 'x64': 'x64-setup.msi', 'ARM64': 'arm64-setup.msi' },
+        macos: { 'Intel (x64)': 'x64.dmg', 'Apple Silicon (ARM64)': 'aarch64.dmg' },
+        linux: { 'x64': 'amd64.AppImage', 'ARM64': 'arm64.AppImage' },
+      }
+      var suffix = archMap[plat]?.[label] || ''
+      // try to get tag from displayed version
+      var verEl = document.querySelector('.inline-flex.items-center.gap-1\\.5')
+      var tag = 'latest'
+      if (verEl) {
+        var txt = verEl.textContent || ''
+        var m = txt.match(/v?(\d+\.\d+\.\d+)/)
+        if (m) tag = 'v' + m[1]
+      }
+      var base = 'https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/' + tag + '/Qomicex_' + tag + '_' + suffix
+      var mirrorUrl = 'https://gh.lenmei233.top/'
+      if (links.length >= 2) {
+        links[0].href = suffix ? base : 'https://github.com/Qomicex-Public/Qomicex.Tauri/releases/' + tag
+        links[1].href = suffix ? mirrorUrl + base : 'https://github.com/Qomicex-Public/Qomicex.Tauri/releases/' + tag
+      }
     })
   })
 </script>
