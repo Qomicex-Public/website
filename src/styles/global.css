@@ -83,4 +83,27 @@
   .anim-stagger > *:nth-child(4) { animation-delay: 240ms; }
   .anim-stagger > *:nth-child(5) { animation-delay: 320ms; }
   .anim-stagger > *:nth-child(6) { animation-delay: 400ms; }
+
+  [data-animate] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  [data-animate].animate-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  [data-animate].animate-scale {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  [data-animate].animate-scale.animate-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .group-hover\:scale-icon:hover .icon-scale {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+  }
 }

@@ -19,5 +19,15 @@ import Footer from '../components/Footer.astro';
       <slot />
     </main>
     <Footer />
+    <script>
+      const observer = new IntersectionObserver(entries => {
+        for (const e of entries) {
+          if (e.isIntersecting) { e.target.classList.add('animate-visible'); observer.unobserve(e.target) }
+        }
+      }, { threshold: 0.1 })
+      document.addEventListener('astro:page-load', () => {
+        for (const el of document.querySelectorAll('[data-animate]')) observer.observe(el)
+      })
+    </script>
   </body>
 </html>
