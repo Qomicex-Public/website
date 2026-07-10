@@ -1,24 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getReleases } from '../lib/releases.ts';
 
-const releases = [
-  { version: '0.1.1', date: '2025-07', changes: ['修复多个 UI 问题', '添加 Vulkan 运行时检查', '优化 macOS DMG 构建'] },
-  { version: '0.1.0', date: '2025-06', changes: ['首次公开发布', '支持多版本管理', '支持 Forge/Fabric/Quilt 等加载器', '内置 Modrinth 和 CurseForge 资源浏览', 'Microsoft 账户登录', '内网穿透联机功能'] },
-];
+const releases = await getReleases()
 ---
 
 <Base title="更新日志">
   <section class="mx-auto max-w-3xl px-4 py-16">
     <h1 class="mb-8 text-3xl font-bold">更新日志</h1>
+    {releases.length === 0 && <p class="text-muted-foreground">暂无更新记录。</p>}
     <div class="space-y-4">
       {releases.map(r => (
         <div class="rounded-xl border border-border bg-card p-5">
           <div class="mb-3 flex items-baseline gap-3">
             <h2 class="text-lg font-semibold">v{r.version}</h2>
-            <span class="text-xs text-muted-foreground">{r.date}</span>
+            <span class="text-xs text-muted-foreground">{r.publishedAt.slice(0, 7)}</span>
+            {r.prerelease && <span class="rounded-full bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400">测试版</span>}
           </div>
           <ul class="space-y-1 text-sm text-muted-foreground">
-            {r.changes.map(c => <li>• {c}</li>)}
+            {r.changes.length > 0
+              ? r.changes.map(c => <li>• {c}</li>)
+              : <li class="italic opacity-60">无详细更新说明</li>
+            }
           </ul>
         </div>
       ))}

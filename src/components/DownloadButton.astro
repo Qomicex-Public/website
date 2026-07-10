@@ -1,9 +1,15 @@
 ---
+import { getReleases } from '../lib/releases.ts';
+
 const { platform, label = '下载' } = Astro.props as {
   platform: string;
   label?: string;
 };
-const downloadUrl = `https://github.com/Qomicex-Public/Qomicex.Tauri/releases/latest`;
+const releases = await getReleases()
+const stable = releases.find(r => !r.prerelease)
+const tag = stable ? `v${stable.version}` : (releases[0] ? `v${releases[0].version}` : 'latest')
+const downloadUrl = `https://github.com/Qomicex-Public/Qomicex.Tauri/releases/${tag}`
+const isPre = releases[0]?.prerelease
 ---
 
 <a

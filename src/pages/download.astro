@@ -1,11 +1,26 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getReleases } from '../lib/releases.ts';
+
+const releases = await getReleases()
+const stable = releases.find(r => !r.prerelease)
+const pre = releases.find(r => r.prerelease)
 ---
 
 <Base title="下载">
   <section class="mx-auto max-w-3xl px-4 py-16">
     <h1 class="mb-2 text-3xl font-bold">下载 Qomicex Launcher</h1>
-    <p class="mb-10 text-muted-foreground">选择你的操作系统，下载对应版本。</p>
+    <p class="mb-2 text-muted-foreground">选择你的操作系统，下载对应版本。</p>
+    <div class="mb-10 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+      <span class="rounded-full bg-primary/10 px-2.5 py-0.5 font-medium text-primary">
+        当前{stable ? ` 正式版 ` : ' '}v{stable?.version ?? pre?.version ?? '...'}
+      </span>
+      {pre && (
+        <a href="https://github.com/Qomicex-Public/Qomicex.Tauri/releases" target="_blank" class="rounded-full bg-yellow-500/10 px-2.5 py-0.5 font-medium text-yellow-600 transition-colors hover:bg-yellow-500/20 dark:text-yellow-400">
+          测试版 v{pre.version} 可用 →
+        </a>
+      )}
+    </div>
 
     <div class="space-y-3">
       {[
@@ -13,7 +28,6 @@ import Base from '../layouts/Base.astro';
         { platform: 'macOS', desc: 'macOS 11+ Intel / Apple Silicon', note: '.dmg 镜像' },
         { platform: 'Linux', desc: 'Linux x86_64', note: '.AppImage / .deb' },
       ].map(item => {
-        const urls = { Windows: 'windows', macOS: 'macos', Linux: 'linux' };
         return (
           <div class="flex items-center justify-between rounded-xl border border-border bg-card p-5">
             <div>
