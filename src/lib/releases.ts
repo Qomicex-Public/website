@@ -29,11 +29,6 @@ function parseBody(body: string): string[] {
   return body.split('\n').filter(l => l.trim().startsWith('-')).map(l => l.trim().replace(/^-\s*/, ''))
 }
 
-const FALLBACK_RELEASES: Release[] = [
-  { tagName: 'v0.1.1', version: '0.1.1', prerelease: true, publishedAt: '', htmlUrl: '', assets: [], changes: [] },
-  { tagName: 'v0.1.0', version: '0.1.0', prerelease: false, publishedAt: '', htmlUrl: '', assets: [], changes: [] },
-]
-
 let cached: Release[] | null = null
 
 export async function getReleases(): Promise<Release[]> {
@@ -42,9 +37,9 @@ export async function getReleases(): Promise<Release[]> {
     const res = await fetch('https://api.github.com/repos/Qomicex-Public/Qomicex.Tauri/releases', {
       headers: { 'Accept': 'application/vnd.github+json', 'User-Agent': 'Qomicex-Website' },
     })
-    if (!res.ok) { cached = FALLBACK_RELEASES; return cached }
+    if (!res.ok) { cached = []; return cached }
     const data: any[] = await res.json()
-    if (!Array.isArray(data) || data.length === 0) { cached = FALLBACK_RELEASES; return cached }
+    if (!Array.isArray(data) || data.length === 0) { cached = []; return cached }
     cached = data.map(r => ({
       tagName: r.tag_name,
       version: r.tag_name.replace(/^v/, ''),
@@ -59,7 +54,7 @@ export async function getReleases(): Promise<Release[]> {
       changes: parseBody(r.body || ''),
     }))
   } catch {
-    cached = FALLBACK_RELEASES
+    cached = []
   }
   return cached
 }

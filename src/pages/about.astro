@@ -1,14 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
-import { getReleases } from '../lib/releases.ts';
-import { fetchContributors } from '../lib/contributors.ts';
-
-const releases = await getReleases()
-const latestStable = releases.find(r => !r.prerelease)
-const latestPre = releases.find(r => r.prerelease)
-
-const contributors = await fetchContributors()
 
 const SERVICES = [
   { name: 'Modrinth', desc: 'Mod 和资源搜索 API', url: 'https://modrinth.com' },
@@ -34,7 +26,7 @@ const REFERENCES = [
         <img src="/logo.svg" alt="Qomicex Launcher" class="h-14 w-14 rounded-2xl" />
         <div class="min-w-0 flex-1">
           <div class="text-lg font-semibold">Qomicex Launcher</div>
-          <div class="text-sm text-muted-foreground">版本 {latestPre ? `${latestPre.version}${latestPre.prerelease ? ' (测试版)' : ''}` : latestStable?.version ?? '...'}</div>
+          <div id="about-version" class="text-sm text-muted-foreground">版本 ...</div>
         </div>
         <a href="https://github.com/Qomicex-Public/Qomicex.Tauri" target="_blank" class="inline-flex h-7 items-center gap-1.5 rounded-md px-2.5 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground">
           <Icon name="fa6-brands:github" class="size-3" />查看仓库
@@ -47,10 +39,8 @@ const REFERENCES = [
     <div class="mb-4 rounded-xl border border-border bg-card p-6">
       <h2 class="mb-3 text-base font-semibold">版本信息</h2>
       <div class="rounded-lg bg-background p-4 text-sm">
-        <div class="grid grid-cols-2 gap-3">
-          {latestStable && <div><div class="text-xs text-muted-foreground">正式版</div><div class="mt-0.5 font-medium">{latestStable.version}</div></div>}
-          {latestPre && <div><div class="text-xs text-muted-foreground">测试版</div><div class="mt-0.5 font-medium">{latestPre.version}</div></div>}
-          {!latestStable && !latestPre && <div><div class="text-xs text-muted-foreground">应用版本</div><div class="mt-0.5 font-medium">...</div></div>}
+        <div id="version-grid" class="grid grid-cols-2 gap-3">
+          <div><div class="text-xs text-muted-foreground">应用版本</div><div class="mt-0.5 font-medium">...</div></div>
           <div><div class="text-xs text-muted-foreground">许可协议</div><div class="mt-0.5 font-medium"><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank" class="text-primary underline underline-offset-2">GPL-3.0</a></div></div>
         </div>
       </div>
@@ -59,23 +49,89 @@ const REFERENCES = [
     <!-- Contributors -->
     <div class="mb-4 rounded-xl border border-border bg-card p-6">
       <h2 class="mb-3 text-base font-semibold">开发者</h2>
-      {contributors.length === 0 && <p class="text-sm text-muted-foreground">加载贡献者信息失败。</p>}
-      <div class="space-y-3">
-        {contributors.map(c => (
-          <div class="flex items-center gap-3">
-            <img src={c.avatar_url} alt={c.login} class="size-10 rounded-full object-cover" />
-            <div class="min-w-0 flex-1">
-              <div class="text-sm font-medium">{c.login}</div>
-              <div class="text-xs text-muted-foreground">{c.contributions} 次提交</div>
-            </div>
-            <a href={c.html_url} target="_blank" class="inline-flex h-7 items-center gap-1.5 rounded-md px-2.5 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground">
-              <Icon name="fa6-brands:github" class="size-3" />GitHub
-            </a>
-          </div>
+      <div id="contributors-list" class="space-y-3">
+        <p class="text-sm text-muted-foreground">加载中...</p>
+      </div>
+    </div>
+
+    <!-- Services -->
+    <div class="mb-4 rounded-xl border border-border bg-card p-6">
+      <h2 class="mb-3 text-base font-semibold">所用服务</h2>
+      <div class="space-y-2">
+        {SERVICES.map(s => (
+          <a href={s.url} target="_blank" class="flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors hover:bg-accent">
+            <span class="font-medium">{s.name}</span>
+            <span class="text-muted-foreground">{s.desc}</span>
+          </a>
         ))}
       </div>
     </div>
 
-
+    <!-- References -->
+    <div class="rounded-xl border border-border bg-card p-6">
+      <h2 class="mb-3 text-base font-semibold">参考项目</h2>
+      <div class="space-y-2">
+        {REFERENCES.map(r => (
+          <a href={r.url} target="_blank" class="flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors hover:bg-accent">
+            <span class="font-medium">{r.name}</span>
+            <span class="text-muted-foreground">{r.desc}</span>
+          </a>
+        ))}
+      </div>
+    </div>
   </section>
 </Base>
+
+<script>
+import { getReleases } from '../lib/releases.ts'
+import { fetchContributors } from '../lib/contributors.ts'
+
+getReleases().then(function (releases) {
+  var stable = releases.find(function (r) { return !r.prerelease })
+  var pre = releases.find(function (r) { return r.prerelease })
+  var versionEl = document.getElementById('about-version')
+  var grid = document.getElementById('version-grid')
+
+  if (pre) {
+    versionEl.textContent = '版本 ' + pre.version + (pre.prerelease ? ' (测试版)' : '')
+  } else if (stable) {
+    versionEl.textContent = '版本 ' + stable.version
+  }
+
+  if (grid) {
+    var html = ''
+    if (stable) {
+      html += '<div><div class="text-xs text-muted-foreground">正式版</div><div class="mt-0.5 font-medium">' + stable.version + '</div></div>'
+    }
+    if (pre) {
+      html += '<div><div class="text-xs text-muted-foreground">测试版</div><div class="mt-0.5 font-medium">' + pre.version + '</div></div>'
+    }
+    if (!stable && !pre) {
+      html += '<div><div class="text-xs text-muted-foreground">应用版本</div><div class="mt-0.5 font-medium">获取失败</div></div>'
+    }
+    html += '<div><div class="text-xs text-muted-foreground">许可协议</div><div class="mt-0.5 font-medium"><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank" class="text-primary underline underline-offset-2">GPL-3.0</a></div></div>'
+    grid.innerHTML = html
+  }
+})
+
+fetchContributors().then(function (contributors) {
+  var list = document.getElementById('contributors-list')
+  if (contributors.length === 0) {
+    list.innerHTML = '<p class="text-sm text-muted-foreground">获取贡献者信息失败。</p>'
+    return
+  }
+  list.innerHTML = ''
+  contributors.forEach(function (c) {
+    var el = document.createElement('div')
+    el.className = 'flex items-center gap-3'
+    el.innerHTML = '<img src="' + c.avatar_url + '" alt="' + c.login + '" class="size-10 rounded-full object-cover" />'
+      + '<div class="min-w-0 flex-1">'
+      + '<div class="text-sm font-medium">' + c.login + '</div>'
+      + '<div class="text-xs text-muted-foreground">' + c.contributions + ' 次提交</div>'
+      + '</div>'
+      + '<a href="' + c.html_url + '" target="_blank" class="inline-flex h-7 items-center gap-1.5 rounded-md px-2.5 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground">'
+      + 'GitHub</a>'
+    list.appendChild(el)
+  })
+})
+</script>
