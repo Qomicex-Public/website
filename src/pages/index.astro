@@ -8,6 +8,8 @@ const stable = releases.find(r => !r.prerelease)
 const pre = releases.find(r => r.prerelease)
 const stableTag = stable?.tagName ?? ''
 const preTag = pre?.tagName ?? ''
+const stableAssets = stable?.assets ?? []
+const preAssets = pre?.assets ?? []
 const hasPre = !!pre
 const verDisplay = stable ? `v${stable.version}` : pre ? `v${pre.version} (测试版)` : ''
 ---
@@ -91,11 +93,41 @@ const verDisplay = stable ? `v${stable.version}` : pre ? `v${pre.version} (测�
   </div>
 </div>
 
-<script data-astro-rerun define:vars={{ stableTag, preTag }}>
+<script data-astro-rerun define:vars={{ stableTag, preTag, stableAssets, preAssets }}>
 (function () {
+  function matchAsset(assets, plat, arch) {
+    var candidates = assets.filter(function (a) {
+      if (a.name.endsWith('.sig') || a.name.endsWith('.json')) return false
+      if (a.name.includes('update-fragment') || a.name === 'latest.json' || a.name === 'beta.json') return false
+      if (a.name === 'Qomicex.Launcher.exe') return false
+      if (plat === 'windows') {
+        if (a.platform !== 'windows') return false
+        if (arch === 'ARM64') return /arm|aarch64/i.test(a.name)
+        return /x64/i.test(a.name) && !/arm|aarch64/i.test(a.name)
+      }
+      if (plat === 'macos') {
+        if (arch === 'Apple Silicon (ARM64)') return a.platform === 'macos-arm'
+        return a.platform === 'macos-intel'
+      }
+      if (plat === 'linux') {
+        if (a.platform !== 'linux') return false
+        if (!a.name.endsWith('.AppImage')) return false
+        if (arch === 'ARM64') return /arm|aarch64/i.test(a.name)
+        return /x64|x86_64|amd64/i.test(a.name)
+      }
+      return false
+    })
+    return candidates[0] || null
+  }
+
+  function extLabel(name) {
+    var m = name.match(/\.(exe|msi|dmg|AppImage|tar\.gz)$/)
+    return m ? m[1] : ''
+  }
+
   var PLATFORMS = [
-    { id: 'windows', archs: { 'x64': 'x64-setup.msi', 'ARM64': 'arm64-setup.msi' } },
-    { id: 'macos', archs: { 'Intel (x64)': 'x64.dmg', 'Apple Silicon (ARM64)': 'aarch64.dmg' } },
+    { id: 'windows', archs: { 'x64': 'x64-setup.exe', 'ARM64': 'arm64-setup.exe' } },
+    { id: 'macos', archs: { 'Intel (x64)': '.dmg', 'Apple Silicon (ARM64)': '.dmg' } },
     { id: 'linux', archs: { 'x64': 'amd64.AppImage', 'ARM64': 'arm64.AppImage' } },
   ]
   var isPre = false
@@ -131,6 +163,8 @@ const verDisplay = stable ? `v${stable.version}` : pre ? `v${pre.version} (测�
   var thanks = document.getElementById('dl-thanks')
   var thanksClose = document.getElementById('dl-thanks-close')
   var retry = document.getElementById('dl-retry')
+
+  function getAssets() { return isPre ? preAssets : stableAssets }
 
   function openModal(isPreMode) {
     if (isPreMode === undefined) isPreMode = false
@@ -196,13 +230,13 @@ const verDisplay = stable ? `v${stable.version}` : pre ? `v${pre.version} (测�
         (label === selected ? 'border-primary/40 bg-primary/5 text-primary' : 'border-border text-muted-foreground hover:text-foreground')
       pill.textContent = label
       pill.setAttribute('data-arch', label)
-      pill.addEventListener('click', function () { selectArch(label, archMap) })
+      pill.addEventListener('click', function () { selectArch(label) })
       archContainer.appendChild(pill)
     })
     currentArch = selected
   }
 
-  function selectArch(label, archMap) {
+  function selectArch(label) {
     currentArch = label
     document.querySelectorAll('.dl-arch').forEach(function (p) {
       p.className = 'dl-arch cursor-pointer rounded-lg border px-3.5 py-2 text-xs font-medium transition-all active:scale-[0.97] ' +
@@ -219,25 +253,21 @@ const verDisplay = stable ? `v${stable.version}` : pre ? `v${pre.version} (测�
     }, 250)
   }
 
-  function getTag() { return isPre ? preTag : stableTag }
-
   function updateLink() {
-    var platData = PLATFORMS.find(function (p) { return p.id === currentPlat })
-    if (!platData) return
-    var tag = getTag()
-    var suffix = platData.archs[currentArch]
-    if (!suffix || !tag) {
-      link.href = 'https://github.com/Qomicex-Public/Qomicex.Tauri/releases/' + (tag || 'latest')
+    var assets = getAssets()
+    var match = matchAsset(assets, currentPlat, currentArch)
+    if (match) {
+      link.href = match.url
+      link.textContent = '下载 ' + currentArch + ' .' + extLabel(match.name)
+      link.classList.remove('hidden')
+    } else {
+      link.href = 'https://github.com/Qomicex-Public/Qomicex.Tauri/releases/' + (getTag() || 'latest')
       link.textContent = '下载'
       link.classList.remove('hidden')
-      return
     }
-    var url = 'https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/' + tag + '/Qomicex_' + tag + '_' + suffix
-    var label = currentPlat === 'windows' ? '.exe' : currentPlat === 'macos' ? '.dmg' : '.AppImage'
-    link.href = url
-    link.textContent = '下载 ' + currentArch + ' ' + label
-    link.classList.remove('hidden')
   }
+
+  function getTag() { return isPre ? preTag : stableTag }
 
   document.querySelectorAll('.dl-plat').forEach(function (b) {
     b.addEventListener('click', function () {
