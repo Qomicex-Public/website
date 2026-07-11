@@ -185,7 +185,7 @@ const preAssets = pre?.assets ?? []
   }
 
   var sources = [
-    { label: 'jsDelivr CDN (推荐)', id: 'jsdelivr' },
+    { label: '代理下载 (推荐)', id: 'proxy' },
     { label: '镜像源', id: 'mirror' },
     { label: 'GitHub 直连', id: 'direct' },
   ]
@@ -331,8 +331,7 @@ const preAssets = pre?.assets ?? []
     var s = sources[currentSourceIdx]
     if (s.id === 'direct') return match.url
     if (s.id === 'mirror') return 'https://gh.lenmei233.top/' + match.url
-    var tag = getTag()
-    return 'https://cdn.jsdelivr.net/gh/Qomicex-Public/Qomicex.Tauri@' + tag + '/' + match.name
+    return 'https://gh-proxy.com/' + match.url
   }
 
   function updateLink() {
