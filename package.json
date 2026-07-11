@@ -6,8 +6,9 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "node scripts/fetch-site-data.mjs && astro dev",
     "build": "astro build",
+    "prebuild": "node scripts/fetch-site-data.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

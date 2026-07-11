@@ -1,3 +1,7 @@
+---
+import { updatedAt } from '../data/last-fetch.json';
+---
+
 <footer class="border-t border-border">
   <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-4 gap-y-1 px-4 py-5 text-xs text-muted-foreground">
     <span>Qomicex Launcher · GPL-3.0</span>
@@ -6,5 +10,6 @@
     <a href="https://ifdian.net/a/QomicexLauncher" target="_blank" class="inline-flex items-center gap-1 hover:text-foreground transition-colors">爱发电</a>
     <a href="/about" class="hover:text-foreground transition-colors">关于</a>
     <a href="/legal/user-agreement" class="hover:text-foreground transition-colors">用户协议</a>
+    <span class="text-muted-foreground/60">数据更新于 {updatedAt.slice(0, 10)}</span>
   </div>
 </footer>

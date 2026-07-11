@@ -1,46 +1,28 @@
 ---
 import Base from '../layouts/Base.astro';
+import releases from '../data/releases.json';
 ---
 
 <Base title="更新日志">
   <section class="mx-auto max-w-3xl px-4 py-16">
     <h1 class="mb-8 text-3xl font-bold">更新日志</h1>
-    <div id="cl-list" class="space-y-4">
-      <p class="text-muted-foreground">加载中...</p>
+    {releases.length === 0 && <p class="text-muted-foreground">暂无更新记录。</p>}
+    <div class="space-y-4">
+      {releases.map(r => (
+        <div class="rounded-xl border border-border bg-card p-5">
+          <div class="mb-3 flex items-baseline gap-3">
+            <h2 class="text-lg font-semibold">v{r.version}</h2>
+            <span class="text-xs text-muted-foreground">{r.publishedAt.slice(0, 7)}</span>
+            {r.prerelease && <span class="rounded-full bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400">测试版</span>}
+          </div>
+          <ul class="space-y-1 text-sm text-muted-foreground">
+            {r.changes.length > 0
+              ? r.changes.map(c => <li>• {c}</li>)
+              : <li class="italic opacity-60">无详细更新说明</li>
+            }
+          </ul>
+        </div>
+      ))}
     </div>
   </section>
 </Base>
-
-<script>
-import { getReleases } from '../lib/releases.ts'
-
-getReleases().then(function (releases) {
-  var container = document.getElementById('cl-list')
-  if (releases.length === 0) {
-    container.innerHTML = '<p class="text-muted-foreground">暂无更新记录。</p>'
-    return
-  }
-  container.innerHTML = ''
-  releases.forEach(function (r) {
-    var el = document.createElement('div')
-    el.className = 'rounded-xl border border-border bg-card p-5'
-    var badges = ''
-    if (r.prerelease) {
-      badges = '<span class="rounded-full bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400">测试版</span>'
-    }
-    var changes = ''
-    if (r.changes.length > 0) {
-      changes = r.changes.map(function (c) { return '<li>• ' + c + '</li>' }).join('')
-    } else {
-      changes = '<li class="italic opacity-60">无详细更新说明</li>'
-    }
-    el.innerHTML = '<div class="mb-3 flex items-baseline gap-3">'
-      + '<h2 class="text-lg font-semibold">v' + r.version + '</h2>'
-      + '<span class="text-xs text-muted-foreground">' + (r.publishedAt ? r.publishedAt.slice(0, 7) : '') + '</span>'
-      + badges
-      + '</div>'
-      + '<ul class="space-y-1 text-sm text-muted-foreground">' + changes + '</ul>'
-    container.appendChild(el)
-  })
-})
-</script>

@@ -2,8 +2,14 @@
 import Base from '../layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
 import { MIRRORS } from '../data/mirrors.ts';
+import releases from '../data/releases.json';
 
-const MIRROR_URL = MIRRORS.find(m => m.label === 'gh.lenmei233.top')?.url ?? ''
+const stable = releases.find(r => !r.prerelease)
+const pre = releases.find(r => r.prerelease)
+const stableTag = stable?.tagName ?? ''
+const preTag = pre?.tagName ?? ''
+const hasPre = !!pre
+const verDisplay = stable ? `v${stable.version}` : pre ? `v${pre.version} (测试版)` : ''
 ---
 
 <Base>
@@ -13,19 +19,21 @@ const MIRROR_URL = MIRRORS.find(m => m.label === 'gh.lenmei233.top')?.url ?? ''
 
       <img src="/high_logo.svg" alt="Qomicex Launcher" class="mb-6 w-full max-w-xs" />
 
-      <span id="ver-badge" class="mb-4 fade-in inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
-        <Icon name="lucide:tag" class="size-3" />
-        <span id="ver-text">加载中...</span> · 基于 Tauri · 全平台
-      </span>
+      {verDisplay && (
+        <span class="mb-4 fade-in inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
+          <Icon name="lucide:tag" class="size-3" />
+          {verDisplay} · 基于 Tauri · 全平台
+        </span>
+      )}
 
       <p class="mb-8 max-w-sm text-sm text-muted-foreground">一个现代化的 Minecraft 启动器，拥有完善的多实例管理、快捷的模组安装、账户管理、多人联机、个性化主题设置等功能。完全开源，使用 GPL-3.0 许可协议。</p>
 
       <button id="dl-btn" class="inline-flex h-14 w-full max-w-xs cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-primary text-base font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/25 active:scale-[0.98]">
-        <Icon name="lucide:download" class="size-5" />下载
+        <Icon name="lucide:download" class="size-5" />{stable ? '下载正式版' : '下载'}
       </button>
       <p class="mt-3 text-xs text-muted-foreground">
         支持 Windows · macOS · Linux
-        <span id="pre-btn-wrap" class="hidden">{' · '}<button id="dl-pre-btn" class="cursor-pointer underline underline-offset-2 hover:text-foreground transition-colors">下载测试版</button></span>
+        {hasPre && <>{' · '}<button id="dl-pre-btn" class="cursor-pointer underline underline-offset-2 hover:text-foreground transition-colors">下载测试版</button></>}
       </p>
     </div>
   </section>
@@ -41,7 +49,6 @@ const MIRROR_URL = MIRRORS.find(m => m.label === 'gh.lenmei233.top')?.url ?? ''
 
     <h3 class="mb-5 text-lg font-semibold">选择平台</h3>
 
-    <!-- Platform buttons -->
     <div class="flex gap-2 mb-5" id="dl-plats">
       <button data-plat="windows" class="dl-plat flex flex-1 cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-border px-3 py-4 text-sm font-medium transition-all hover:border-primary/40 active:scale-[0.97]">
         <Icon name="fa6-brands:windows" class="size-6 text-muted-foreground" />Windows
@@ -54,20 +61,17 @@ const MIRROR_URL = MIRRORS.find(m => m.label === 'gh.lenmei233.top')?.url ?? ''
       </button>
     </div>
 
-    <!-- Architecture pills (animates in) -->
     <div id="dl-arch-section" class="mb-5 opacity-0 translate-y-2 transition-all duration-500 ease-out pointer-events-none">
       <p class="mb-2 text-xs text-muted-foreground">选择架构</p>
       <div class="flex gap-2" id="dl-archs"></div>
     </div>
 
-    <!-- Download button (animates in) -->
     <div id="dl-link-section" class="opacity-0 translate-y-2 transition-all duration-500 ease-out pointer-events-none">
       <a id="dl-link" href="#" target="_blank" class="hidden inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90">
         <Icon name="lucide:download" class="size-4" />下载
       </a>
     </div>
 
-    <!-- Thank-you view -->
     <div id="dl-thanks" class="hidden flex-col items-center py-4 text-center">
       <div class="mb-3 flex size-14 items-center justify-center rounded-full bg-green-500/10">
         <Icon name="lucide:check" class="size-7 text-green-500" />
@@ -87,234 +91,188 @@ const MIRROR_URL = MIRRORS.find(m => m.label === 'gh.lenmei233.top')?.url ?? ''
   </div>
 </div>
 
-<script>
-import { getReleases } from '../lib/releases.ts'
+<script data-astro-rerun define:vars={{ stableTag, preTag }}>
+(function () {
+  var PLATFORMS = [
+    { id: 'windows', archs: { 'x64': 'x64-setup.msi', 'ARM64': 'arm64-setup.msi' } },
+    { id: 'macos', archs: { 'Intel (x64)': 'x64.dmg', 'Apple Silicon (ARM64)': 'aarch64.dmg' } },
+    { id: 'linux', archs: { 'x64': 'amd64.AppImage', 'ARM64': 'arm64.AppImage' } },
+  ]
+  var isPre = false
 
-var STABLE_TAG = ''
-var PRE_TAG = ''
-var versionLoaded = false
-
-var PLATFORMS = [
-  { id: 'windows', archs: { 'x64': 'x64-setup.msi', 'ARM64': 'arm64-setup.msi' } },
-  { id: 'macos', archs: { 'Intel (x64)': 'x64.dmg', 'Apple Silicon (ARM64)': 'aarch64.dmg' } },
-  { id: 'linux', archs: { 'x64': 'amd64.AppImage', 'ARM64': 'arm64.AppImage' } },
-]
-var MIRROR_URL = 'https://gh.lenmei233.top/'
-var isPre = false
-
-function detect() {
-  var ua = navigator.userAgent
-  var plat = 'windows'
-  if (/mac/i.test(ua) && !/windows/i.test(ua)) plat = 'macos'
-  else if (/linux/i.test(ua)) plat = 'linux'
-  var arch
-  if (plat === 'macos') {
-    arch = (/arm|aarch64/i.test(ua)) ? 'Apple Silicon (ARM64)' : 'Intel (x64)'
-  } else {
-    arch = (/arm|aarch64/i.test(ua)) ? 'ARM64' : 'x64'
-  }
-  return { plat: plat, arch: arch }
-}
-
-var detected = detect()
-var currentPlat = detected.plat
-var currentArch = detected.arch
-
-var btn = document.getElementById('dl-btn')
-var overlay = document.getElementById('dl-overlay')
-var backdrop = document.getElementById('dl-backdrop')
-var dialog = document.getElementById('dl-dialog')
-var closeBtn = document.getElementById('dl-close')
-var archSection = document.getElementById('dl-arch-section')
-var archContainer = document.getElementById('dl-archs')
-var linkSection = document.getElementById('dl-link-section')
-var dlPlats = document.getElementById('dl-plats')
-var link = document.getElementById('dl-link')
-var thanks = document.getElementById('dl-thanks')
-var thanksClose = document.getElementById('dl-thanks-close')
-var retry = document.getElementById('dl-retry')
-var verText = document.getElementById('ver-text')
-var verBadge = document.getElementById('ver-badge')
-var preBtnWrap = document.getElementById('pre-btn-wrap')
-var preBtn = document.getElementById('dl-pre-btn')
-
-function getTag() { return isPre ? PRE_TAG : STABLE_TAG }
-
-function openModal(isPreMode) {
-  if (isPreMode === undefined) isPreMode = false
-  isPre = isPreMode
-  thanks.classList.add('hidden')
-  thanks.classList.remove('flex')
-  dlPlats.style.display = ''
-  closeBtn.style.display = ''
-  archSection.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none')
-  linkSection.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none')
-  overlay.classList.remove('opacity-0', 'pointer-events-none')
-  setTimeout(function () { dialog.classList.remove('scale-95') }, 30)
-  highlightPlat(detected.plat)
-  var platData = PLATFORMS.find(function (p) { return p.id === detected.plat })
-  if (platData) {
-    currentPlat = detected.plat
-    currentArch = detected.arch
-    renderArchs(platData.archs, detected.arch)
-    showArchAndLink()
-  }
-}
-
-function closeModal() {
-  dialog.classList.add('scale-95')
-  thanks.classList.add('hidden')
-  thanks.classList.remove('flex')
-  dlPlats.style.display = ''
-  closeBtn.style.display = ''
-  hideArchAndLink()
-  setTimeout(function () { overlay.classList.add('opacity-0', 'pointer-events-none') }, 200)
-}
-
-function hideArchAndLink() {
-  archSection.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none')
-  linkSection.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none')
-  link.classList.add('hidden')
-}
-
-function showThanks() {
-  dlPlats.style.display = 'none'
-  closeBtn.style.display = 'none'
-  archSection.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none')
-  linkSection.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none')
-  link.classList.add('hidden')
-  thanks.classList.remove('hidden')
-  thanks.classList.add('flex')
-  retry.href = link.href
-}
-
-function highlightPlat(id) {
-  document.querySelectorAll('.dl-plat').forEach(function (b) {
-    var isActive = b.getAttribute('data-plat') === id
-    b.className = 'dl-plat flex flex-1 cursor-pointer flex-col items-center gap-2 rounded-xl border-2 px-3 py-4 text-sm font-medium transition-all active:scale-[0.97] ' +
-      (isActive ? 'border-primary bg-primary/5 text-primary' : 'border-border text-muted-foreground hover:border-primary/40')
-  })
-}
-
-function renderArchs(archMap, selected) {
-  archContainer.innerHTML = ''
-  var keys = Object.keys(archMap)
-  keys.forEach(function (label) {
-    var pill = document.createElement('button')
-    pill.className = 'dl-arch cursor-pointer rounded-lg border px-3.5 py-2 text-xs font-medium transition-all active:scale-[0.97] ' +
-      (label === selected ? 'border-primary/40 bg-primary/5 text-primary' : 'border-border text-muted-foreground hover:text-foreground')
-    pill.textContent = label
-    pill.setAttribute('data-arch', label)
-    pill.addEventListener('click', function () { selectArch(label, archMap) })
-    archContainer.appendChild(pill)
-  })
-  currentArch = selected
-}
-
-function selectArch(label, archMap) {
-  currentArch = label
-  document.querySelectorAll('.dl-arch').forEach(function (p) {
-    p.className = 'dl-arch cursor-pointer rounded-lg border px-3.5 py-2 text-xs font-medium transition-all active:scale-[0.97] ' +
-      (p.getAttribute('data-arch') === label ? 'border-primary/40 bg-primary/5 text-primary' : 'border-border text-muted-foreground hover:text-foreground')
-  })
-  updateLink()
-}
-
-function showArchAndLink() {
-  archSection.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none')
-  setTimeout(function () {
-    linkSection.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none')
-    updateLink()
-  }, 250)
-}
-
-function updateLink() {
-  var platData = PLATFORMS.find(function (p) { return p.id === currentPlat })
-  if (!platData) return
-  var tag = getTag()
-  var suffix = platData.archs[currentArch]
-  if (!suffix || !tag) {
-    link.href = 'https://github.com/Qomicex-Public/Qomicex.Tauri/releases/' + (tag || 'latest')
-    link.textContent = '下载'
-    link.classList.remove('hidden')
-    return
-  }
-  var url = 'https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/' + tag + '/Qomicex_' + tag + '_' + suffix
-  var label = currentPlat === 'windows' ? '.exe' : currentPlat === 'macos' ? '.dmg' : '.AppImage'
-  link.href = url
-  link.textContent = '下载 ' + currentArch + ' ' + label
-  link.classList.remove('hidden')
-}
-
-// Platform click
-document.querySelectorAll('.dl-plat').forEach(function (b) {
-  b.addEventListener('click', function () {
-    var id = b.getAttribute('data-plat')
-    if (id === currentPlat) return
-    currentPlat = id
-    highlightPlat(id)
-    var platData = PLATFORMS.find(function (p) { return p.id === id })
-    if (!platData) return
+  function detect() {
     var ua = navigator.userAgent
+    var plat = 'windows'
+    if (/mac/i.test(ua) && !/windows/i.test(ua)) plat = 'macos'
+    else if (/linux/i.test(ua)) plat = 'linux'
     var arch
-    if (id === 'macos') {
+    if (plat === 'macos') {
       arch = (/arm|aarch64/i.test(ua)) ? 'Apple Silicon (ARM64)' : 'Intel (x64)'
     } else {
       arch = (/arm|aarch64/i.test(ua)) ? 'ARM64' : 'x64'
     }
-    hideArchAndLink()
-    setTimeout(function () {
-      renderArchs(platData.archs, arch)
+    return { plat: plat, arch: arch }
+  }
+
+  var detected = detect()
+  var currentPlat = detected.plat
+  var currentArch = detected.arch
+
+  var btn = document.getElementById('dl-btn')
+  var overlay = document.getElementById('dl-overlay')
+  var backdrop = document.getElementById('dl-backdrop')
+  var dialog = document.getElementById('dl-dialog')
+  var closeBtn = document.getElementById('dl-close')
+  var archSection = document.getElementById('dl-arch-section')
+  var archContainer = document.getElementById('dl-archs')
+  var linkSection = document.getElementById('dl-link-section')
+  var dlPlats = document.getElementById('dl-plats')
+  var link = document.getElementById('dl-link')
+  var thanks = document.getElementById('dl-thanks')
+  var thanksClose = document.getElementById('dl-thanks-close')
+  var retry = document.getElementById('dl-retry')
+
+  function openModal(isPreMode) {
+    if (isPreMode === undefined) isPreMode = false
+    isPre = isPreMode
+    thanks.classList.add('hidden')
+    thanks.classList.remove('flex')
+    dlPlats.style.display = ''
+    closeBtn.style.display = ''
+    archSection.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none')
+    linkSection.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none')
+    overlay.classList.remove('opacity-0', 'pointer-events-none')
+    setTimeout(function () { dialog.classList.remove('scale-95') }, 30)
+    highlightPlat(detected.plat)
+    var platData = PLATFORMS.find(function (p) { return p.id === detected.plat })
+    if (platData) {
+      currentPlat = detected.plat
+      currentArch = detected.arch
+      renderArchs(platData.archs, detected.arch)
       showArchAndLink()
-      currentArch = arch
-    }, 300)
+    }
+  }
+
+  function closeModal() {
+    dialog.classList.add('scale-95')
+    thanks.classList.add('hidden')
+    thanks.classList.remove('flex')
+    dlPlats.style.display = ''
+    closeBtn.style.display = ''
+    hideArchAndLink()
+    setTimeout(function () { overlay.classList.add('opacity-0', 'pointer-events-none') }, 200)
+  }
+
+  function hideArchAndLink() {
+    archSection.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none')
+    linkSection.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none')
+    link.classList.add('hidden')
+  }
+
+  function showThanks() {
+    dlPlats.style.display = 'none'
+    closeBtn.style.display = 'none'
+    archSection.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none')
+    linkSection.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none')
+    link.classList.add('hidden')
+    thanks.classList.remove('hidden')
+    thanks.classList.add('flex')
+    retry.href = link.href
+  }
+
+  function highlightPlat(id) {
+    document.querySelectorAll('.dl-plat').forEach(function (b) {
+      var isActive = b.getAttribute('data-plat') === id
+      b.className = 'dl-plat flex flex-1 cursor-pointer flex-col items-center gap-2 rounded-xl border-2 px-3 py-4 text-sm font-medium transition-all active:scale-[0.97] ' +
+        (isActive ? 'border-primary bg-primary/5 text-primary' : 'border-border text-muted-foreground hover:border-primary/40')
+    })
+  }
+
+  function renderArchs(archMap, selected) {
+    archContainer.innerHTML = ''
+    Object.keys(archMap).forEach(function (label) {
+      var pill = document.createElement('button')
+      pill.className = 'dl-arch cursor-pointer rounded-lg border px-3.5 py-2 text-xs font-medium transition-all active:scale-[0.97] ' +
+        (label === selected ? 'border-primary/40 bg-primary/5 text-primary' : 'border-border text-muted-foreground hover:text-foreground')
+      pill.textContent = label
+      pill.setAttribute('data-arch', label)
+      pill.addEventListener('click', function () { selectArch(label, archMap) })
+      archContainer.appendChild(pill)
+    })
+    currentArch = selected
+  }
+
+  function selectArch(label, archMap) {
+    currentArch = label
+    document.querySelectorAll('.dl-arch').forEach(function (p) {
+      p.className = 'dl-arch cursor-pointer rounded-lg border px-3.5 py-2 text-xs font-medium transition-all active:scale-[0.97] ' +
+        (p.getAttribute('data-arch') === label ? 'border-primary/40 bg-primary/5 text-primary' : 'border-border text-muted-foreground hover:text-foreground')
+    })
+    updateLink()
+  }
+
+  function showArchAndLink() {
+    archSection.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none')
+    setTimeout(function () {
+      linkSection.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none')
+      updateLink()
+    }, 250)
+  }
+
+  function getTag() { return isPre ? preTag : stableTag }
+
+  function updateLink() {
+    var platData = PLATFORMS.find(function (p) { return p.id === currentPlat })
+    if (!platData) return
+    var tag = getTag()
+    var suffix = platData.archs[currentArch]
+    if (!suffix || !tag) {
+      link.href = 'https://github.com/Qomicex-Public/Qomicex.Tauri/releases/' + (tag || 'latest')
+      link.textContent = '下载'
+      link.classList.remove('hidden')
+      return
+    }
+    var url = 'https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/' + tag + '/Qomicex_' + tag + '_' + suffix
+    var label = currentPlat === 'windows' ? '.exe' : currentPlat === 'macos' ? '.dmg' : '.AppImage'
+    link.href = url
+    link.textContent = '下载 ' + currentArch + ' ' + label
+    link.classList.remove('hidden')
+  }
+
+  document.querySelectorAll('.dl-plat').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var id = b.getAttribute('data-plat')
+      if (id === currentPlat) return
+      currentPlat = id
+      highlightPlat(id)
+      var platData = PLATFORMS.find(function (p) { return p.id === id })
+      if (!platData) return
+      var ua = navigator.userAgent
+      var arch
+      if (id === 'macos') {
+        arch = (/arm|aarch64/i.test(ua)) ? 'Apple Silicon (ARM64)' : 'Intel (x64)'
+      } else {
+        arch = (/arm|aarch64/i.test(ua)) ? 'ARM64' : 'x64'
+      }
+      hideArchAndLink()
+      setTimeout(function () {
+        renderArchs(platData.archs, arch)
+        showArchAndLink()
+        currentArch = arch
+      }, 300)
+    })
   })
-})
 
-// Pre-release button
-if (preBtn) {
-  preBtn.addEventListener('click', function (e) { e.preventDefault(); openModal(true) })
-}
-
-// Download click
-link.addEventListener('click', function (e) {
-  e.preventDefault()
-  window.open(link.href, '_blank')
-  showThanks()
-})
-
-thanksClose.addEventListener('click', closeModal)
-btn.addEventListener('click', function () { openModal(false) })
-closeBtn.addEventListener('click', closeModal)
-backdrop.addEventListener('click', closeModal)
-document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal() })
-
-// Fetch releases for version badge + download tags
-getReleases().then(function (releases) {
-  var stable = releases.find(function (r) { return !r.prerelease })
-  var pre = releases.find(function (r) { return r.prerelease })
-  STABLE_TAG = stable ? stable.tagName : ''
-  PRE_TAG = pre ? pre.tagName : ''
-  versionLoaded = true
-
-  var display = ''
-  if (stable) {
-    display = 'v' + stable.version
-    btn.textContent = '下载正式版'
-  }
-  if (pre && !stable) {
-    display = 'v' + pre.version + ' (测试版)'
-  }
-  if (display) {
-    verText.textContent = display
-  } else {
-    verText.textContent = '获取失败'
+  var preBtn = document.getElementById('dl-pre-btn')
+  if (preBtn) {
+    preBtn.addEventListener('click', function (e) { e.preventDefault(); openModal(true) })
   }
 
-  if (pre && stable) {
-    preBtnWrap.classList.remove('hidden')
-  } else {
-    verBadge.style.display = display ? '' : 'none'
-  }
-})
+  link.addEventListener('click', function (e) { e.preventDefault(); window.open(link.href, '_blank'); showThanks() })
+  thanksClose.addEventListener('click', closeModal)
+  btn.addEventListener('click', function () { openModal(false) })
+  closeBtn.addEventListener('click', closeModal)
+  backdrop.addEventListener('click', closeModal)
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal() })
+})()
 </script>
