@@ -7,20 +7,7 @@ import contributors from '../data/contributors.json';
 const latestStable = releases.find(r => !r.prerelease)
 const latestPre = releases.find(r => r.prerelease)
 
-const SERVICES = [
-  { name: 'Modrinth', desc: 'Mod 和资源搜索 API', url: 'https://modrinth.com' },
-  { name: 'CurseForge', desc: 'Mod 和资源搜索 API', url: 'https://www.curseforge.com' },
-  { name: 'FTB', desc: '整合包 API', url: 'https://www.feed-the-beast.com' },
-  { name: 'bangbang93', desc: '提供 BMCLAPI 下载镜像服务', url: 'https://bmclapi2.bangbang93.com' },
-  { name: 'mcmod', desc: '中文 Mod 数据库', url: 'https://www.mcmod.cn' },
-  { name: 'Minecraft 官网', desc: 'Minecraft 官方网站', url: 'https://www.minecraft.net' },
-]
 
-const REFERENCES = [
-  { name: 'HMCL', url: 'https://github.com/HMCL-dev/HMCL/tree/main', desc: '版本检测参考' },
-  { name: 'ProjBobcat', url: 'https://github.com/Corona-Studio/ProjBobcat', desc: 'ModLoader 安装器参考' },
-  { name: 'PCL', url: 'https://github.com/Meloong-Git/PCL', desc: '启动流程参考' },
-]
 ---
 
 <Base title="关于">
@@ -73,30 +60,6 @@ const REFERENCES = [
       </div>
     </div>
 
-    <!-- Services -->
-    <div class="mb-4 rounded-xl border border-border bg-card p-6">
-      <h2 class="mb-3 text-base font-semibold">所用服务</h2>
-      <div class="space-y-2">
-        {SERVICES.map(s => (
-          <a href={s.url} target="_blank" class="flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors hover:bg-accent">
-            <span class="font-medium">{s.name}</span>
-            <span class="text-muted-foreground">{s.desc}</span>
-          </a>
-        ))}
-      </div>
-    </div>
 
-    <!-- References -->
-    <div class="rounded-xl border border-border bg-card p-6">
-      <h2 class="mb-3 text-base font-semibold">参考项目</h2>
-      <div class="space-y-2">
-        {REFERENCES.map(r => (
-          <a href={r.url} target="_blank" class="flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors hover:bg-accent">
-            <span class="font-medium">{r.name}</span>
-            <span class="text-muted-foreground">{r.desc}</span>
-          </a>
-        ))}
-      </div>
-    </div>
   </section>
 </Base>
