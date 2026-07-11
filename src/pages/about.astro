@@ -77,46 +77,6 @@ const REFERENCES = [
       </div>
     </div>
 
-    <!-- Services -->
-    <div class="mb-4 rounded-xl border border-border bg-card p-6">
-      <h2 class="mb-3 text-base font-semibold">
-        <Icon name="lucide:heart" class="mr-1.5 inline size-4 align-text-bottom text-destructive" />鸣谢
-      </h2>
-      <div class="grid grid-cols-1 gap-1 sm:grid-cols-2">
-        {SERVICES.map(svc => {
-          const ext = svc.name === 'Modrinth' ? 'svg' : 'png'
-          const file = svc.name === 'Minecraft 官网' ? 'minecraft' : svc.name.toLowerCase()
-          return (
-          <a href={svc.url} target="_blank" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm transition-colors hover:bg-accent">
-            <img src={`/services/${file}.${ext}`} alt={svc.name} class="size-6 shrink-0 rounded object-contain" />
-            <div class="min-w-0 flex-1">
-              <div class="font-medium">{svc.name}</div>
-              <div class="truncate text-xs text-muted-foreground">{svc.desc}</div>
-            </div>
-            <Icon name="lucide:external-link" class="size-3 shrink-0 text-muted-foreground/50" />
-          </a>
-          )
-        })}
-      </div>
-    </div>
 
-    <!-- References -->
-    <div class="mb-4 rounded-xl border border-border bg-card p-6">
-      <h2 class="mb-3 text-base font-semibold">参考项目</h2>
-      <div class="space-y-1">
-        {REFERENCES.map(r => (
-          <a href={r.url} target="_blank" class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-accent">
-            <Icon name="fa6-brands:github" class="size-4 shrink-0 text-muted-foreground" />
-            <div class="min-w-0 flex-1">
-              <div class="font-medium">{r.name}</div>
-              <div class="truncate text-xs text-muted-foreground">{r.desc}</div>
-            </div>
-            <Icon name="lucide:external-link" class="size-3 shrink-0 text-muted-foreground/50" />
-          </a>
-        ))}
-      </div>
-    </div>
-
-    <p class="text-center text-xs text-muted-foreground">详细版本信息与依赖列表请在启动器「关于」页面查看。</p>
   </section>
 </Base>
