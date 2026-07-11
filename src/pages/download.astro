@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
 import { getReleases } from '../lib/releases.ts';
+import { platforms } from '../data/platforms.ts';
 
 const releases = await getReleases()
 const stable = releases.find(r => !r.prerelease)
@@ -43,45 +44,33 @@ const preTag = pre?.tagName ?? ''
       {hasPre && <p class="mt-3 text-xs text-muted-foreground"><button id="dl-pre-btn" class="cursor-pointer underline underline-offset-2 hover:text-foreground transition-colors">下载测试版</button></p>}
 
       <!-- Platform compat -->
-      <div class="mt-10 w-full rounded-xl border border-border bg-card p-5">
-        <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">兼容平台</h3>
-        <div class="overflow-x-auto text-sm">
-          <table class="w-full text-left text-xs">
-            <thead>
-              <tr class="border-b border-border text-muted-foreground">
-                <th class="py-2 pr-3 font-medium">平台</th>
-                <th class="py-2 pr-3 font-medium">支持架构</th>
-                <th class="py-2 pr-3 font-medium">最低系统版本</th>
-                <th class="py-2 pr-3 font-medium">测试状态</th>
-                <th class="py-2 font-medium">安装包</th>
-              </tr>
-            </thead>
-            <tbody class="text-muted-foreground">
-              <tr class="border-b border-border/50">
-                <td class="py-2.5 pr-3 font-medium text-foreground">Windows</td>
-                <td class="py-2.5 pr-3">x64, ARM64</td>
-                <td class="py-2.5 pr-3">Windows 10 1809+</td>
-                <td class="py-2.5 pr-3"><span class="text-green-600 dark:text-green-400">稳定</span></td>
-                <td class="py-2.5">.exe</td>
-              </tr>
-              <tr class="border-b border-border/50">
-                <td class="py-2.5 pr-3 font-medium text-foreground">macOS</td>
-                <td class="py-2.5 pr-3">x64, ARM64</td>
-                <td class="py-2.5 pr-3">macOS 10.15+</td>
-                <td class="py-2.5 pr-3"><span class="text-green-600 dark:text-green-400">稳定</span></td>
-                <td class="py-2.5">.dmg</td>
-              </tr>
-              <tr>
-                <td class="py-2.5 pr-3 font-medium text-foreground">Linux</td>
-                <td class="py-2.5 pr-3">x64, ARM64<br /><span class="text-muted-foreground/60">LoongArch64, RISC-V 64 实验性</span></td>
-                <td class="py-2.5 pr-3">glibc 2.28+</td>
-                <td class="py-2.5 pr-3"><span class="text-green-600 dark:text-green-400">稳定</span></td>
-                <td class="py-2.5">AppImage</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="mt-10 w-full rounded-xl border border-border bg-card p-5">
+          <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">兼容平台</h3>
+          <div class="overflow-x-auto text-sm">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="border-b border-border text-muted-foreground">
+                  <th class="py-2 pr-3 font-medium">平台</th>
+                  <th class="py-2 pr-3 font-medium">支持架构</th>
+                  <th class="py-2 pr-3 font-medium">最低系统版本</th>
+                  <th class="py-2 pr-3 font-medium">测试状态</th>
+                  <th class="py-2 font-medium">安装包</th>
+                </tr>
+              </thead>
+              <tbody class="text-muted-foreground">
+                {platforms.map((p, i) => (
+                  <tr class={i < platforms.length - 1 ? 'border-b border-border/50' : ''}>
+                    <td class="py-2.5 pr-3 font-medium text-foreground">{p.os}</td>
+                    <td class="py-2.5 pr-3">{p.arch}{p.note && <><br /><span class="text-muted-foreground/60">{p.note}</span></>}</td>
+                    <td class="py-2.5 pr-3">{p.minVersion}</td>
+                    <td class="py-2.5 pr-3"><span class="text-green-600 dark:text-green-400">{p.status}</span></td>
+                    <td class="py-2.5">{p.packageType}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
     </div>
   </section>
 </Base>

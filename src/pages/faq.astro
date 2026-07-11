@@ -1,17 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
-
-const faqs = [
-  { q: '启动器支持哪些 Minecraft 版本？', a: '支持从 1.6 到最新版本的所有 Minecraft 版本，包括快照版。' },
-  { q: '支持哪些模组加载器？', a: '支持 Forge、Fabric、Quilt、NeoForge、OptiFine，以及整合包常用的 LiteLoader、Cleanroom 等。' },
-  { q: '为什么启动器无法启动？', a: '请确保已安装 Java 17+ 和最新的显卡驱动。如果问题仍然存在，请查看启动器日志或提交 GitHub Issue。' },
-  { q: '如何迁移其他启动器的实例？', a: '目前暂不支持直接导入其他启动器的实例。你可以手动复制 .minecraft 目录下的版本文件到 Qomicex 对应目录。' },
-  { q: '启动器是免费的吗？', a: '是的，完全免费开源。项目基于 GPL-3.0 协议发布。' },
-  { q: '如何报告 Bug 或提建议？', a: '请前往 GitHub Issues 提交，或加入 QQ 群 623362446 反馈。' },
-  { q: '支持 Linux 和 macOS 吗？', a: '支持。我们为所有主流桌面平台提供构建版本。' },
-  { q: '启动器会收集我的数据吗？', a: '不会。本启动器不收集任何用户数据，所有配置仅存储在本地。' },
-];
+import { faqs } from '../data/faq.ts';
 ---
 
 <Base title="常见问题">
@@ -21,11 +11,11 @@ const faqs = [
       {faqs.map(faq => (
         <details class="group rounded-xl border border-border bg-card">
           <summary class="flex cursor-pointer items-center justify-between p-4 font-medium transition-colors hover:text-primary">
-            {faq.q}
+            {faq.question}
             <Icon name="lucide:chevron-down" class="size-4 shrink-0 transition-transform group-open:rotate-180" />
           </summary>
           <div class="border-t border-border px-4 py-3 text-sm text-muted-foreground leading-relaxed">
-            {faq.a}
+            {faq.answer}
           </div>
         </details>
       ))}

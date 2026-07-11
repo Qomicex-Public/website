@@ -2,15 +2,13 @@
 import Base from '../layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
 import { getReleases } from '../lib/releases.ts';
+import { fetchContributors } from '../lib/contributors.ts';
 
 const releases = await getReleases()
 const latestStable = releases.find(r => !r.prerelease)
 const latestPre = releases.find(r => r.prerelease)
 
-const CONTRIBUTORS = [
-  { name: 'lenmei233', role: '项目发起人 / 主要开发者', url: 'https://github.com/lenmei233' },
-  { name: 'TheMyceliumOfAntan', role: '项目发起人 / 主要开发者', url: 'https://github.com/TheMyceliumOfAntan' },
-]
+const contributors = await fetchContributors()
 
 const SERVICES = [
   { name: 'Modrinth', desc: 'Mod 和资源搜索 API', url: 'https://modrinth.com' },
@@ -61,15 +59,16 @@ const REFERENCES = [
     <!-- Contributors -->
     <div class="mb-4 rounded-xl border border-border bg-card p-6">
       <h2 class="mb-3 text-base font-semibold">开发者</h2>
+      {contributors.length === 0 && <p class="text-sm text-muted-foreground">加载贡献者信息失败。</p>}
       <div class="space-y-3">
-        {CONTRIBUTORS.map(c => (
+        {contributors.map(c => (
           <div class="flex items-center gap-3">
-            <img src={`/avatars/${c.name}.png`} alt={c.name} class="size-10 rounded-full object-cover" />
+            <img src={c.avatar_url} alt={c.login} class="size-10 rounded-full object-cover" />
             <div class="min-w-0 flex-1">
-              <div class="text-sm font-medium">{c.name}</div>
-              <div class="text-xs text-muted-foreground">{c.role}</div>
+              <div class="text-sm font-medium">{c.login}</div>
+              <div class="text-xs text-muted-foreground">{c.contributions} 次提交</div>
             </div>
-            <a href={c.url} target="_blank" class="inline-flex h-7 items-center gap-1.5 rounded-md px-2.5 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground">
+            <a href={c.html_url} target="_blank" class="inline-flex h-7 items-center gap-1.5 rounded-md px-2.5 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground">
               <Icon name="fa6-brands:github" class="size-3" />GitHub
             </a>
           </div>

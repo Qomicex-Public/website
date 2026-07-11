@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
-import { getReleases, MIRRORS } from '../lib/releases.ts';
+import { getReleases } from '../lib/releases.ts';
+import { MIRRORS } from '../data/mirrors.ts';
 
 const releases = await getReleases()
 const stable = releases.find(r => !r.prerelease)
