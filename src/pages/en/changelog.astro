@@ -13,12 +13,12 @@ import releases from '../../data/releases.json';
           <div class="mb-3 flex items-baseline gap-3">
             <h2 class="text-lg font-semibold">v{r.version}</h2>
             <span class="text-xs text-muted-foreground">{r.publishedAt.slice(0, 7)}</span>
-            {r.prerelease && <span class="rounded-full bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400">测试版</span>}
+            {r.prerelease && <span class="rounded-full bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400">Preview</span>}
           </div>
           <ul class="space-y-1 text-sm text-muted-foreground">
             {r.changes.length > 0
               ? r.changes.map(c => <li>• {c}</li>)
-              : <li class="italic opacity-60">无详细更新说明</li>
+              : <li class="italic opacity-60">No detailed changelog.</li>
             }
           </ul>
         </div>

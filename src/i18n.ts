@@ -32,6 +32,21 @@ const zh = {
 
   'partners.title': '集成支持',
   'partners.desc': '与主流 Minecraft 资源平台深度集成',
+
+  'dlmodal.platform': '选择平台',
+  'dlmodal.arch': '选择架构',
+  'dlmodal.type': '选择安装包类型',
+  'dlmodal.source': '下载源',
+  'dlmodal.download': '下载',
+  'dlmodal.started': '下载已开始',
+  'dlmodal.retry': '如果下载未自动开始，',
+  'dlmodal.retryLink': '点击此处重试',
+  'dlmodal.after': '下载完成后，打开安装程序即可开始使用。',
+  'dlmodal.guide': '安装指南',
+  'dlmodal.gotIt': '知道了',
+  'dlmodal.sourceProxy': '代理下载 (推荐)',
+  'dlmodal.sourceMirror': '镜像源',
+  'dlmodal.sourceDirect': 'GitHub 直连',
 }
 
 const en: Record<string, string> = {
@@ -44,7 +59,7 @@ const en: Record<string, string> = {
   'nav.download': 'Download',
   'nav.docs': 'Docs',
   'nav.about': 'About',
-  'nav.afdian': 'Afdian',
+  'nav.afdian': 'Donate',
 
   'hero.desc': 'A modern Minecraft launcher with',
 
@@ -66,6 +81,21 @@ const en: Record<string, string> = {
 
   'partners.title': 'Integrations',
   'partners.desc': 'Deep integration with major Minecraft resource platforms',
+
+  'dlmodal.platform': 'Select Platform',
+  'dlmodal.arch': 'Select Architecture',
+  'dlmodal.type': 'Select Package Type',
+  'dlmodal.source': 'Download Source',
+  'dlmodal.download': 'Download',
+  'dlmodal.started': 'Download Started',
+  'dlmodal.retry': 'If download does not start, ',
+  'dlmodal.retryLink': 'click here to retry',
+  'dlmodal.after': 'After download, open the installer to get started.',
+  'dlmodal.guide': 'Install Guide',
+  'dlmodal.gotIt': 'Got it',
+  'dlmodal.sourceProxy': 'Proxy Download (Recommended)',
+  'dlmodal.sourceMirror': 'Mirror',
+  'dlmodal.sourceDirect': 'GitHub Direct',
 }
 
 export function t(key: string, lang: Lang): string {

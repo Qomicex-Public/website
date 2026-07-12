@@ -118,7 +118,7 @@ const partners = [
       <Icon name="lucide:x" class="size-5" />
     </button>
 
-    <h3 class="mb-5 text-lg font-semibold">选择平台</h3>
+    <h3 class="mb-5 text-lg font-semibold">{t('dlmodal.platform', lang)}</h3>
 
     <div class="flex gap-2 mb-5" id="dl-plats">
       <button data-plat="windows" class="dl-plat flex flex-1 cursor-pointer flex-col items-center gap-2 rounded-xl border-2 border-border px-3 py-4 text-sm font-medium transition-all hover:border-primary/40 active:scale-[0.97]">
@@ -133,24 +133,24 @@ const partners = [
     </div>
 
     <div id="dl-arch-section" class="mb-5 opacity-0 translate-y-2 transition-all duration-500 ease-out pointer-events-none">
-      <p class="mb-2 text-xs text-muted-foreground">选择架构</p>
+      <p class="mb-2 text-xs text-muted-foreground">{t('dlmodal.arch', lang)}</p>
       <div class="flex gap-2" id="dl-archs"></div>
     </div>
 
     <div id="dl-type-section" class="mb-5 opacity-0 translate-y-2 transition-all duration-500 ease-out pointer-events-none">
-      <p class="mb-2 text-xs text-muted-foreground">选择安装包类型</p>
+      <p class="mb-2 text-xs text-muted-foreground">{t('dlmodal.type', lang)}</p>
       <div class="flex gap-2" id="dl-types"></div>
     </div>
 
     <!-- Download source -->
     <div id="dl-source-section" class="mb-5">
-      <p class="mb-2 text-xs text-muted-foreground">下载源</p>
+      <p class="mb-2 text-xs text-muted-foreground">{t('dlmodal.source', lang)}</p>
       <div class="flex gap-2" id="dl-sources"></div>
     </div>
 
     <div id="dl-link-section" class="opacity-0 translate-y-2 transition-all duration-500 ease-out pointer-events-none">
       <a id="dl-link" href="#" target="_blank" class="hidden inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90">
-        <Icon name="lucide:download" class="size-4" />下载
+        <Icon name="lucide:download" class="size-4" />{t('dlmodal.download', lang)}
       </a>
     </div>
 
@@ -158,22 +158,22 @@ const partners = [
       <div class="mb-3 flex size-14 items-center justify-center rounded-full bg-green-500/10">
         <Icon name="lucide:check" class="size-7 text-green-500" />
       </div>
-      <p class="mb-1 text-base font-semibold">下载已开始</p>
-      <p class="mb-1 text-xs text-muted-foreground">如果下载未自动开始，<a id="dl-retry" href="#" class="text-primary underline underline-offset-2">点击此处重试</a></p>
-      <p class="mb-5 text-xs text-muted-foreground">下载完成后，打开安装程序即可开始使用。</p>
+      <p class="mb-1 text-base font-semibold">{t('dlmodal.started', lang)}</p>
+      <p class="mb-1 text-xs text-muted-foreground">{t('dlmodal.retry', lang)}<a id="dl-retry" href="#" class="text-primary underline underline-offset-2">{t('dlmodal.retryLink', lang)}</a></p>
+      <p class="mb-5 text-xs text-muted-foreground">{t('dlmodal.after', lang)}</p>
       <div class="flex w-full gap-2">
         <a href="/docs/install" class="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-border bg-background px-4 py-2.5 text-sm font-medium transition-colors hover:bg-accent">
-          <Icon name="lucide:book-open" class="size-4" />安装指南
+          <Icon name="lucide:book-open" class="size-4" />{t('dlmodal.guide', lang)}
         </a>
         <button id="dl-thanks-close" class="flex flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-xl bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
-          知道了
+          {t('dlmodal.gotIt', lang)}
         </button>
       </div>
     </div>
   </div>
 </div>
 
-<script data-astro-rerun define:vars={{ stableTag, preTag, stableAssets, preAssets }}>
+<script data-astro-rerun define:vars={{ stableTag, preTag, stableAssets, preAssets, srcProxy: t('dlmodal.sourceProxy', lang), srcMirror: t('dlmodal.sourceMirror', lang), srcDirect: t('dlmodal.sourceDirect', lang) }}>
 (function () {
   function matchAsset(assets, plat, arch, pkgType) {
     var candidates = assets.filter(function (a) {
@@ -231,9 +231,9 @@ const partners = [
   }
 
   var sources = [
-    { label: '代理下载 (推荐)', id: 'proxy' },
-    { label: '镜像源', id: 'mirror' },
-    { label: 'GitHub 直连', id: 'direct' },
+    { label: srcProxy, id: 'proxy' },
+    { label: srcMirror, id: 'mirror' },
+    { label: srcDirect, id: 'direct' },
   ]
 
   // lazily re-acquired state
