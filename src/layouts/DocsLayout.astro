@@ -1,25 +1,33 @@
 ---
 import Base from './Base.astro';
 import { Icon } from 'astro-icon/components';
-import { docGroups, flatDocs } from '../data/docs.ts';
+import { getCollection } from 'astro:content';
 
 const { current, title } = Astro.props as { current: string; title?: string }
-const all = flatDocs()
+const allDocs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order)
+const all = allDocs.map(d => ({ id: d.id, title: d.data.title }))
 const idx = all.findIndex(d => d.id === current)
 const prev = idx > 0 ? all[idx - 1] : null
 const next = idx < all.length - 1 ? all[idx + 1] : null
 const pageTitle = title ?? all.find(d => d.id === current)?.title ?? '文档'
+
+const groups = Object.entries(
+  allDocs.reduce((acc, d) => {
+    ;(acc[d.data.category] ??= []).push({ id: d.id, title: d.data.title })
+    return acc
+  }, {} as Record<string, { id: string; title: string }[]>),
+)
 ---
 
 <Base title={pageTitle + ' - 文档'}>
   <div class="mx-auto flex max-w-5xl gap-8 px-4 py-10">
     <nav class="hidden w-52 shrink-0 md:block">
       <div class="sticky top-4 max-h-[calc(100vh-3rem)] space-y-4 overflow-y-auto">
-        {docGroups.map(group => (
+        {groups.map(([cat, items]) => (
           <div>
-            <p class="mb-1 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{group.category}</p>
+            <p class="mb-1 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{cat}</p>
             <ul class="space-y-0.5">
-              {group.items.map(item => (
+              {items.map(item => (
                 <li>
                   <a href={`/docs/${item.id}/`} class={"block rounded-md px-3 py-1.5 text-sm transition-colors " + (item.id === current ? 'bg-accent font-medium text-accent-foreground' : 'hover:bg-accent hover:text-accent-foreground')}>
                     {item.title}
