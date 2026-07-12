@@ -99,8 +99,8 @@ const partners = [
   <!-- Partners / Integration -->
   <section class="border-t border-border/40">
     <div class="mx-auto max-w-5xl px-4 py-16 text-center sm:py-24" data-animate>
-      <h2 class="mb-3 text-lg font-semibold sm:text-xl">集成支持</h2>
-      <p class="mb-10 text-sm text-muted-foreground">与主流 Minecraft 资源平台深度集成</p>
+      <h2 class="mb-3 text-lg font-semibold sm:text-xl">{t('partners.title', lang)}</h2>
+      <p class="mb-10 text-sm text-muted-foreground">{t('partners.desc', lang)}</p>
       <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-12">
         {partners.map(p => (
           <img src={p.img} alt={p.name} class="h-8 w-auto opacity-50 grayscale transition-all hover:opacity-90 hover:grayscale-0 sm:h-10" loading="lazy" />

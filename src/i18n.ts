@@ -29,6 +29,9 @@ const zh = {
   'docs.back': '返回文档首页',
   'docs.viewTutorial': '查看详细教程',
   'docs.description': '了解如何使用 QML启动器 的所有功能。',
+
+  'partners.title': '集成支持',
+  'partners.desc': '与主流 Minecraft 资源平台深度集成',
 }
 
 const en: Record<string, string> = {
@@ -60,6 +63,9 @@ const en: Record<string, string> = {
   'docs.back': 'Back to docs home',
   'docs.viewTutorial': 'View tutorial',
   'docs.description': 'Learn about all features of QML Launcher.',
+
+  'partners.title': 'Integrations',
+  'partners.desc': 'Deep integration with major Minecraft resource platforms',
 }
 
 export function t(key: string, lang: Lang): string {
