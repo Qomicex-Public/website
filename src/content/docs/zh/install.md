@@ -2,6 +2,7 @@
 title: 下载与安装
 category: 快速开始
 order: 1
+lang: zh
 ---
 
 从[下载页面](/download)获取对应系统的安装包。

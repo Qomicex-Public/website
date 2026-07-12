@@ -1,9 +1,9 @@
 ---
-import Base from '../layouts/Base.astro';
+import Base from '../../layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
-import { MIRRORS } from '../data/mirrors.ts';
-import releases from '../data/releases.json';
-import { t, langFromPath } from '../i18n';
+import { MIRRORS } from '../../data/mirrors.ts';
+import releases from '../../data/releases.json';
+import { t, langFromPath } from '../../i18n';
 
 const lang = langFromPath(Astro.url.pathname)
 const stable = releases.find(r => !r.prerelease)

@@ -2,6 +2,7 @@
 title: 资源中心
 category: 核心功能
 order: 6
+lang: zh
 ---
 
 资源中心是一个一站式资源浏览器，让你无需离开启动器即可搜索和安装各种 Minecraft 资源。

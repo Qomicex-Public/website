@@ -2,6 +2,7 @@
 title: 设置 Java
 category: 快速开始
 order: 2
+lang: zh
 ---
 
 Qomicex 需要 Java 17 或更高版本。首次启动时启动器会自动检测系统中的 Java。你也可以在设置中手动配置：

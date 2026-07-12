@@ -1,132 +1,79 @@
 ---
-import Base from '../layouts/Base.astro';
+import Base from '../../layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
-import { MIRRORS } from '../data/mirrors.ts';
-import releases from '../data/releases.json';
-import { t, langFromPath } from '../i18n';
+import { platforms } from '../../data/platforms.ts';
+import releases from '../../data/releases.json';
 
-const lang = langFromPath(Astro.url.pathname)
 const stable = releases.find(r => !r.prerelease)
 const pre = releases.find(r => r.prerelease)
+const hasPre = !!pre
 const stableTag = stable?.tagName ?? ''
 const preTag = pre?.tagName ?? ''
 const stableAssets = stable?.assets ?? []
 const preAssets = pre?.assets ?? []
-const hasPre = !!pre
-const verDisplay = stable ? `v${stable.version}` : pre ? `v${pre.version} (测试版)` : ''
-
-const features = [
-  { img: '/screenshots/home.png', title: '极简主界面', desc: '清晰直观的布局，让一切操作都触手可及。', reversed: false },
-  { img: '/screenshots/instances.png', title: '多实例管理', desc: '同时管理多个游戏实例，版本隔离、模组配置互不干扰。', reversed: true },
-  { img: '/screenshots/accounts.png', title: '账户管理', desc: '支持多个 Minecraft 账户快捷切换，账号信息本地加密存储。', reversed: false },
-  { img: '/screenshots/download-instance.png', title: '版本列表', desc: '快速浏览并筛选可用的 Minecraft 版本，支持稳定版、测试版及不同加载器类型。', reversed: true },
-  { img: '/screenshots/resource-center.png', title: '资源中心', desc: '一站式获取模组、整合包、资源包，支持 CurseForge 和 Modrinth。', reversed: false },
-  { img: '/screenshots/download-management.png', title: '高速下载', desc: '多线程分片下载，最大程度利用带宽，极速安装。', reversed: true },
-  { img: '/screenshots/instance-detail.png', title: '实例详情', desc: '细粒度管理每个实例的版本、模组、设置，掌控一切。', reversed: false },
-]
-
-const partners = [
-  { img: '/services/curseforge.png', name: 'CurseForge' },
-  { img: '/services/modrinth.svg', name: 'Modrinth' },
-  { img: '/services/ftb.png', name: 'FTB' },
-  { img: '/services/mcmod.png', name: 'MC百科' },
-  { img: '/services/bangbang93.png', name: 'BangBang93' },
-]
 ---
 
-<Base>
-  <section class="hero-section relative flex min-h-screen items-center justify-center overflow-hidden">
-    <div class="hero-bg">
-      <div class="hero-grid"></div>
-      <div class="hero-glow hero-glow-1"></div>
-      <div class="hero-glow hero-glow-2"></div>
-    </div>
-    <div class="relative z-10 mx-auto flex max-w-lg flex-col items-center px-4 py-24 text-center sm:py-32">
+<Base title="下载">
+  <section class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.08)_0%,transparent_60%)]" />
+    <div class="mx-auto flex max-w-lg flex-col items-center px-4 py-16 text-center sm:py-20">
 
-      <img src="/high_logo.svg" alt="QML启动器" class="mb-6 w-full max-w-xs" />
+      <h1 class="mb-1 text-2xl font-bold">下载 Qomicex Launcher</h1>
+      <p class="mb-6 text-sm text-muted-foreground">选择你的平台与架构，开始下载。</p>
 
-      {verDisplay && (
-        <span class="mb-4 inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-green-400">
-          <Icon name="lucide:tag" class="size-3" />
-          {verDisplay} · {lang === 'en' ? 'All Platforms' : '全平台'}
-        </span>
-      )}
+      <div class="mb-6 flex w-full gap-3">
+        {stable && (
+          <div class="flex-1 rounded-xl border border-border bg-card p-4 text-left">
+            <div class="mb-1 flex items-center gap-1.5 text-xs text-muted-foreground"><Icon name="lucide:verified" class="size-3" />正式版</div>
+            <div class="text-lg font-semibold">v{stable.version}</div>
+            <div class="text-xs text-muted-foreground">{stable.publishedAt?.slice(0, 10) ?? ''}</div>
+          </div>
+        )}
+        {pre && (
+          <div class="flex-1 rounded-xl border border-yellow-500/20 bg-yellow-500/5 p-4 text-left">
+            <div class="mb-1 flex items-center gap-1.5 text-xs text-yellow-600 dark:text-yellow-400"><Icon name="lucide:beaker" class="size-3" />测试版</div>
+            <div class="text-lg font-semibold">v{pre.version}</div>
+            <div class="text-xs text-muted-foreground">{pre.publishedAt?.slice(0, 10) ?? ''}</div>
+          </div>
+        )}
+      </div>
 
-      <p class="hero-desc mb-8 max-w-sm text-sm text-slate-300">
-        {t('hero.desc', lang)}
-        <span class="carousel-word" id="carousel-word">{lang === 'en' ? 'Multi-instance' : '多实例管理'}</span>
-      </p>
-
-      <button id="dl-btn" class="inline-flex h-14 w-full max-w-xs cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-green-500 text-base font-semibold text-white shadow-lg shadow-green-500/30 transition-all hover:bg-green-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-green-400/40 active:scale-[0.98]">
-        <Icon name="lucide:download" class="size-5" />{stable ? t('dl.stable', lang) : t('dl.download', lang)}
+      <button id="dl-btn" class="inline-flex h-14 w-full max-w-xs cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-primary text-base font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/25 active:scale-[0.98]">
+        <Icon name="lucide:download" class="size-5" />{stable ? '下载正式版' : '下载'}
       </button>
+      {hasPre && <p class="mt-3 text-xs text-muted-foreground"><button id="dl-pre-btn" class="cursor-pointer underline underline-offset-2 hover:text-foreground transition-colors">下载测试版</button></p>}
 
-      <div class="mt-5 flex items-center gap-3 text-xs text-slate-400 sm:gap-4">
-        <span class="inline-flex items-center gap-1.5"><Icon name="fa6-brands:windows" class="size-3.5" />Windows</span>
-        <span class="inline-flex items-center gap-1.5"><Icon name="fa6-brands:apple" class="size-3.5" />macOS</span>
-        <span class="inline-flex items-center gap-1.5"><Icon name="lucide:terminal" class="size-3.5" />Linux</span>
-        {hasPre && <>
-          <span class="text-slate-500">|</span>
-          <button id="dl-pre-btn" class="cursor-pointer text-slate-400 underline underline-offset-2 transition-colors hover:text-white">{t('dl.pre', lang)}</button>
-        </>}
-      </div>
-    </div>
-  </section>
-
-  <!-- Features full-bleed blocks -->
-  <section class="relative">
-    {features.map((f, i) => (
-      <div class={`relative ${i % 2 === 1 ? 'bg-gradient-to-r from-transparent via-primary/[0.015] to-transparent' : ''}`}>
-        <div class="mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 py-20 sm:flex-row sm:py-28 lg:gap-16">
-          <div class={`w-full sm:w-1/2 ${f.reversed ? 'sm:order-2' : ''}`}>
-            <div data-animate class="mb-4">
-              <span class="inline-flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                <Icon name={['lucide:layout-dashboard', 'lucide:layers', 'lucide:users', 'lucide:file-stack', 'lucide:package', 'lucide:zap', 'lucide:sliders'][i]} class="size-5" />
-              </span>
-            </div>
-            <h2 data-animate class="mb-3 text-2xl font-bold tracking-tight sm:text-3xl" style="transition-delay:80ms">{f.title}</h2>
-            <p data-animate class="mb-5 text-sm leading-relaxed text-muted-foreground sm:text-base" style="transition-delay:160ms">{f.desc}</p>
-            <div data-animate class="flex flex-wrap gap-2" style="transition-delay:240ms">
-              {[
-                ['多实例隔离', '高速下载', '一键配置'],
-                ['版本独立', '模组隔离', '快速切换'],
-                ['加密存储', '快速切换', '多账户'],
-                ['版本隔离', '加载器筛选', '稳定版/测试版'],
-                ['模组', '整合包', '资源包', '插件'],
-                ['分片下载', '断点续传', '带宽优化'],
-                ['版本管理', '模组管理', '启动参数'],
-              ][i].map(tag => (
-                <span class="rounded-full border border-border bg-background px-2.5 py-1 text-[11px] text-muted-foreground">{tag}</span>
+      <div class="mt-10 w-full rounded-xl border border-border bg-card p-5">
+        <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">兼容平台</h3>
+        <div class="overflow-x-auto text-sm">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="border-b border-border text-muted-foreground">
+                <th class="py-2 pr-3 font-medium">平台</th>
+                <th class="py-2 pr-3 font-medium">支持架构</th>
+                <th class="py-2 pr-3 font-medium">最低系统版本</th>
+                <th class="py-2 pr-3 font-medium">测试状态</th>
+                <th class="py-2 font-medium">安装包</th>
+              </tr>
+            </thead>
+            <tbody class="text-muted-foreground">
+              {platforms.map((p, i) => (
+                <tr class={i < platforms.length - 1 ? 'border-b border-border/50' : ''}>
+                  <td class="py-2.5 pr-3 font-medium text-foreground">{p.os}</td>
+                  <td class="py-2.5 pr-3">{p.arch}{p.note && <><br /><span class="text-muted-foreground/60">{p.note}</span></>}</td>
+                  <td class="py-2.5 pr-3">{p.minVersion}</td>
+                  <td class="py-2.5 pr-3"><span class="text-green-600 dark:text-green-400">{p.status}</span></td>
+                  <td class="py-2.5">{p.packageType}</td>
+                </tr>
               ))}
-            </div>
-          </div>
-          <div class={`w-full sm:w-1/2 ${f.reversed ? 'sm:order-1' : ''}`} data-animate style="transition-delay:380ms">
-            <div class="relative">
-              <div class="absolute -inset-1 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent opacity-60 blur-sm" />
-              <img src={f.img} alt={f.title} class="relative w-full rounded-xl border border-border/40 shadow-2xl" loading="lazy" />
-            </div>
-          </div>
+            </tbody>
+          </table>
         </div>
-        {i < features.length - 1 && <div class="mx-auto h-px max-w-5xl bg-gradient-to-r from-transparent via-border/50 to-transparent" />}
-      </div>
-    ))}
-  </section>
-
-  <!-- Partners / Integration -->
-  <section class="border-t border-border/40">
-    <div class="mx-auto max-w-5xl px-4 py-16 text-center sm:py-24" data-animate>
-      <h2 class="mb-3 text-lg font-semibold sm:text-xl">集成支持</h2>
-      <p class="mb-10 text-sm text-muted-foreground">与主流 Minecraft 资源平台深度集成</p>
-      <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-12">
-        {partners.map(p => (
-          <img src={p.img} alt={p.name} class="h-8 w-auto opacity-50 grayscale transition-all hover:opacity-90 hover:grayscale-0 sm:h-10" loading="lazy" />
-        ))}
       </div>
     </div>
   </section>
 </Base>
 
-<!-- Download Modal -->
 <div id="dl-overlay" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[12vh] opacity-0 pointer-events-none transition-opacity duration-300">
   <div class="fixed inset-0 bg-black/60 backdrop-blur-xs" id="dl-backdrop"></div>
   <div id="dl-dialog" class="relative w-full max-w-sm rounded-2xl border border-border bg-background p-6 shadow-2xl scale-95 transition-all duration-300">
@@ -509,48 +456,5 @@ const partners = [
   acquire()
   renderSources($.currentSourceIdx)
   document.addEventListener('astro:page-load', acquire)
-
-  // --- carousel ---
-  var lang = document.documentElement.lang.startsWith('en') ? 'en' : 'zh'
-  var carouselWords = {
-    zh: ['多实例管理', '快捷的模组安装', '账户管理', '多人联机', '个性化主题设置'],
-    en: ['Multi-instance', 'Quick Mod Install', 'Account Management', 'Multiplayer', 'Custom Themes'],
-  }
-  var features = carouselWords[lang]
-  var carouselIdx = 0
-  var carouselTimer = null
-
-  function showWord(text, instant) {
-    var el = document.getElementById('carousel-word')
-    if (!el) return
-    el.textContent = ''
-    var chars = text.split('')
-    chars.forEach(function (ch, i) {
-      var span = document.createElement('span')
-      span.textContent = ch
-      if (!instant) {
-        span.className = 'char-bounce'
-        span.style.animationDelay = (i * 0.045).toFixed(3) + 's'
-      }
-      el.appendChild(span)
-    })
-  }
-
-  function nextWord() {
-    carouselIdx = (carouselIdx + 1) % features.length
-    showWord(features[carouselIdx])
-  }
-
-  function initCarousel() {
-    if (carouselTimer) clearInterval(carouselTimer)
-    showWord(features[0], true)
-    carouselTimer = setInterval(nextWord, 3000)
-  }
-
-  initCarousel()
-  document.addEventListener('astro:page-load', function () {
-    if (carouselTimer) clearInterval(carouselTimer)
-    initCarousel()
-  })
 })()
 </script>

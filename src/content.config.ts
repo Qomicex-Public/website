@@ -7,6 +7,7 @@ const docs = defineCollection({
     title: z.string(),
     category: z.string(),
     order: z.number(),
+    lang: z.enum(['zh', 'en']).default('zh'),
   }),
 })
 

@@ -2,6 +2,7 @@
 title: 添加账户
 category: 快速开始
 order: 3
+lang: zh
 ---
 
 点击侧边栏的「账户」进入账户管理页面。Qomicex 支持三种登录方式：

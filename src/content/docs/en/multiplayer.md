@@ -1,7 +1,8 @@
 ---
-title: 联机功能
+title: '[EN] 联机功能'
 category: 核心功能
 order: 8
+lang: en
 ---
 
 Qomicex 集成了基于 EasyTier 的内网穿透联机功能，让你无需公网 IP 或端口转发即可与好友畅玩。

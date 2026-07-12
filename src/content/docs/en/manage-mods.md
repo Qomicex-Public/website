@@ -1,7 +1,8 @@
 ---
-title: 管理模组与资源
+title: '[EN] 管理模组与资源'
 category: 核心功能
 order: 5
+lang: en
 ---
 
 在实例详情页可以管理该实例的所有资源文件。

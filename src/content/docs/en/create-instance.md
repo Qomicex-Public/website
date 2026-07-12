@@ -1,7 +1,8 @@
 ---
-title: 创建实例
+title: '[EN] 创建实例'
 category: 快速开始
 order: 4
+lang: en
 ---
 
 游戏实例是 Qomicex 的核心概念，每个实例代表一个独立的 Minecraft 安装。

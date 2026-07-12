@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import { Icon } from 'astro-icon/components';
+import releases from '../../data/releases.json';
+import contributors from '../../data/contributors.json';
+
+const latestStable = releases.find(r => !r.prerelease)
+const latestPre = releases.find(r => r.prerelease)
+
+
+---
+
+<Base title="About">
+  <section data-animate class="mx-auto max-w-3xl px-4 py-16">
+    <!-- App Info -->
+    <div class="mb-4 rounded-xl border border-border bg-card p-6">
+      <div class="flex items-center gap-4">
+        <img src="/logo.svg" alt="Qomicex Launcher" class="h-14 w-14 rounded-2xl" />
+        <div class="min-w-0 flex-1">
+          <div class="text-lg font-semibold">Qomicex Launcher</div>
+          <div class="text-sm text-muted-foreground">版本 {latestPre ? `${latestPre.version}${latestPre.prerelease ? ' (测试版)' : ''}` : latestStable?.version ?? '...'}</div>
+        </div>
+        <a href="https://github.com/Qomicex-Public/Qomicex.Tauri" target="_blank" class="inline-flex h-7 items-center gap-1.5 rounded-md px-2.5 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground">
+          <Icon name="fa6-brands:github" class="size-3" />查看仓库
+        </a>
+      </div>
+      <p class="mt-3 text-sm leading-relaxed text-muted-foreground">一个现代化的 Minecraft 启动器，拥有完善的多实例管理、快捷的模组安装、账户管理、多人联机、个性化主题设置等功能。完全开源，使用 GPL-3.0 许可协议。</p>
+    </div>
+
+    <!-- Version Info -->
+    <div class="mb-4 rounded-xl border border-border bg-card p-6">
+      <h2 class="mb-3 text-base font-semibold">版本信息</h2>
+      <div class="rounded-lg bg-background p-4 text-sm">
+        <div class="grid grid-cols-2 gap-3">
+          {latestStable && <div><div class="text-xs text-muted-foreground">正式版</div><div class="mt-0.5 font-medium">{latestStable.version}</div></div>}
+          {latestPre && <div><div class="text-xs text-muted-foreground">测试版</div><div class="mt-0.5 font-medium">{latestPre.version}</div></div>}
+          {!latestStable && !latestPre && <div><div class="text-xs text-muted-foreground">应用版本</div><div class="mt-0.5 font-medium">...</div></div>}
+          <div><div class="text-xs text-muted-foreground">许可协议</div><div class="mt-0.5 font-medium"><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank" class="text-primary underline underline-offset-2">GPL-3.0</a></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contributors -->
+    <div class="mb-4 rounded-xl border border-border bg-card p-6">
+      <h2 class="mb-3 text-base font-semibold">开发者</h2>
+      {contributors.length === 0 && <p class="text-sm text-muted-foreground">暂无贡献者信息。</p>}
+      <div class="space-y-3">
+        {contributors.map(c => (
+          <div class="flex items-center gap-3">
+            <img src={c.avatar_url} alt={c.login} class="size-10 rounded-full object-cover" />
+            <div class="min-w-0 flex-1">
+              <div class="text-sm font-medium">{c.login}</div>
+              <div class="text-xs text-muted-foreground">{c.contributions} 次提交</div>
+            </div>
+            <a href={c.html_url} target="_blank" class="inline-flex h-7 items-center gap-1.5 rounded-md px-2.5 text-xs font-medium transition-colors hover:bg-accent hover:text-accent-foreground">
+              <Icon name="fa6-brands:github" class="size-3" />GitHub
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+
+
+  </section>
+</Base>

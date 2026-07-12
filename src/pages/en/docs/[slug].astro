@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content'
-import DocsLayout from '../../layouts/DocsLayout.astro'
-import { langFromPath } from '../../i18n'
+import DocsLayout from '../../../layouts/DocsLayout.astro'
+import { langFromPath } from '../../../i18n'
 
 const lang = langFromPath(Astro.url.pathname)
 
@@ -11,7 +11,7 @@ export async function getStaticPaths() {
   for (const doc of docs) {
     const parts = doc.id.split('/')
     const docLang = parts[0]
-    if (docLang !== 'en') continue // zh at root paths
+    if (docLang !== 'en') continue
     const slug = parts.slice(1).join('/')
     paths.push({
       params: { slug },

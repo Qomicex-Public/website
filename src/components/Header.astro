@@ -1,18 +1,23 @@
 ---
-export const links = [
-  { href: '/', label: '首页' },
-  { href: '/download', label: '下载' },
-  { href: '/docs/', label: '文档' },
-  { href: '/about', label: '关于' },
-  { href: 'https://ifdian.net/a/QomicexLauncher', label: '爱发电', external: true },
+import { t, type Lang } from '../i18n';
+
+const lang = Astro.props.lang as Lang
+const links = [
+  { href: lang === 'en' ? '/en/' : '/', label: t('nav.home', lang) },
+  { href: lang === 'en' ? '/en/download/' : '/download', label: t('nav.download', lang) },
+  { href: lang === 'en' ? '/en/docs/' : '/docs/', label: t('nav.docs', lang) },
+  { href: lang === 'en' ? '/en/about/' : '/about', label: t('nav.about', lang) },
+  { href: 'https://afdian.com/a/QomicexLauncher', label: t('nav.afdian', lang), external: true },
 ];
+const otherLang: Lang = lang === 'en' ? 'zh' : 'en'
+const switchUrl = otherLang === 'en' ? '/en' + Astro.url.pathname : Astro.url.pathname.replace(/^\/en/, '') || '/'
 ---
 
 <header class="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-sm">
   <div class="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
-    <a href="/" class="flex items-center gap-2 text-lg font-bold">
-      <img src="/logo.svg" alt="Qomicex" class="h-7 w-auto" />
-      Qomicex Launcher
+    <a href={lang === 'en' ? '/en/' : '/'} class="flex items-center gap-2 text-lg font-bold">
+      <img src="/logo.svg" alt="QML" class="h-7 w-auto" />
+      {lang === 'en' ? 'QML Launcher' : 'QML启动器'}
     </a>
     <nav>
       <ul class="flex items-center gap-1">
@@ -23,6 +28,11 @@ export const links = [
             </a>
           </li>
         ))}
+        <li>
+          <a href={switchUrl} class="ml-1 rounded-md border border-border px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">
+            {otherLang === 'en' ? 'EN' : '中'}
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
