@@ -173,7 +173,7 @@ const partners = [
   </div>
 </div>
 
-<script data-astro-rerun define:vars={{ stableTag, preTag, stableAssets, preAssets, srcProxy: t('dlmodal.sourceProxy', lang), srcMirror: t('dlmodal.sourceMirror', lang), srcDirect: t('dlmodal.sourceDirect', lang) }}>
+<script data-astro-rerun define:vars={{ lang, stableTag, preTag, stableAssets, preAssets, srcProxy: t('dlmodal.sourceProxy', lang), srcMirror: t('dlmodal.sourceMirror', lang), srcDirect: t('dlmodal.sourceDirect', lang) }}>
 (function () {
   function matchAsset(assets, plat, arch, pkgType) {
     var candidates = assets.filter(function (a) {
@@ -435,16 +435,19 @@ const partners = [
     return 'https://gh-proxy.com/' + match.url
   }
 
+  function dlText(s) {
+    return (lang === 'en' ? 'Download ' : '下载 ') + s
+  }
   function updateLink() {
     var assets = getAssets()
     var match = matchAsset(assets, $.currentPlat, $.currentArch, $.currentType)
     if (match) {
       $.link.href = assetUrl(match)
-      $.link.textContent = '下载 ' + $.currentArch + ' (' + $.currentType + ')'
+      $.link.textContent = dlText($.currentArch + ' (' + $.currentType + ')')
       $.link.classList.remove('hidden')
     } else {
       $.link.href = 'https://github.com/Qomicex-Public/Qomicex.Tauri/releases/' + (getTag() || 'latest')
-      $.link.textContent = '下载 ' + $.currentType
+      $.link.textContent = dlText($.currentType)
       $.link.classList.remove('hidden')
     }
   }
