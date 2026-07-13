@@ -7,7 +7,7 @@ const links = [
   { href: lang === 'en' ? '/en/download/' : '/download', label: t('nav.download', lang) },
   { href: lang === 'en' ? '/en/docs/' : '/docs/', label: t('nav.docs', lang) },
   { href: lang === 'en' ? '/en/about/' : '/about', label: t('nav.about', lang) },
-  { href: lang === 'en' ? 'https://www.patreon.com/cw/JunSi_233' : 'https://afdian.com/a/QomicexLauncher', label: t('nav.afdian', lang), external: true },
+  { href: 'https://afdian.com/a/QomicexLauncher', label: t('nav.afdian', lang), external: true },
 ];
 const otherLang: Lang = lang === 'en' ? 'zh' : 'en'
 const switchUrl = otherLang === 'en' ? '/en' + Astro.url.pathname : Astro.url.pathname.replace(/^\/en/, '') || '/'
