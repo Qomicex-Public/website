@@ -39,6 +39,24 @@ const zhUrl = lang === 'zh' ? canonical : `https://www.qomicex.top${Astro.url.pa
     <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'zh_CN'} />
     {lang === 'zh' && <meta property="og:locale:alternate" content="en_US" />}
     <Analytics />
+    <style is:global>
+      .admonition {
+        margin: 1.5em 0;
+        padding: 1em 1.25em;
+        border-left: 4px solid;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: hsl(var(--foreground));
+      }
+      .admonition > :first-child { margin-top: 0; }
+      .admonition > :last-child { margin-bottom: 0; }
+      .admonition.note    { background: hsl(220 70% 50% / 0.12); border-color: hsl(220 70% 50%); }
+      .admonition.tip     { background: hsl(142 71% 48% / 0.12); border-color: hsl(142 71% 48%); }
+      .admonition.warning { background: hsl(40 90% 50% / 0.12); border-color: hsl(40 90% 50%); }
+      .admonition.danger,
+      .admonition.caution { background: hsl(0 84% 60% / 0.12); border-color: hsl(0 84% 60%); }
+    </style>
     <script>
       if (location.pathname === '/' && navigator.language.startsWith('en')) {
         location.replace('/en/')
@@ -62,6 +80,51 @@ const zhUrl = lang === 'zh' ? canonical : `https://www.qomicex.top${Astro.url.pa
       }
       observeAnimate()
       document.addEventListener('astro:page-load', observeAnimate)
+    </script>
+    <script is:inline>
+      function initImageViewer() {
+        var imgs = document.querySelectorAll('main img')
+        if (!imgs.length) return
+        var overlay = document.createElement('div')
+        overlay.id = 'img-overlay'
+        overlay.innerHTML = '<img alt="">'
+        overlay.addEventListener('click', function(e) {
+          if (e.target === overlay) hideImg()
+        })
+        document.body.appendChild(overlay)
+        for (var i = 0; i < imgs.length; i++) {
+          imgs[i].style.cursor = 'zoom-in'
+          imgs[i].addEventListener('click', function() {
+            showImg(this.getAttribute('src'))
+          })
+        }
+      }
+      function showImg(src) {
+        var overlay = document.getElementById('img-overlay')
+        if (!overlay) return
+        overlay.querySelector('img').setAttribute('src', src)
+        overlay.style.display = 'flex'
+        document.body.style.overflow = 'hidden'
+      }
+      function hideImg() {
+        var overlay = document.getElementById('img-overlay')
+        if (!overlay) return
+        overlay.style.display = 'none'
+        document.body.style.overflow = ''
+        overlay.querySelector('img').removeAttribute('src')
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') hideImg()
+      })
+      function init() {
+        initImageViewer()
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init)
+      } else {
+        init()
+      }
+      document.addEventListener('astro:page-load', init)
     </script>
   </body>
 </html>

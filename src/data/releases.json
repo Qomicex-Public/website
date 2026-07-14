@@ -1,5 +1,1138 @@
 [
   {
+    "tagName": "v0.1.0-alpha260713.build8",
+    "version": "0.1.0-alpha260713.build8",
+    "prerelease": true,
+    "publishedAt": "2026-07-13T12:37:46Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-alpha260713.build8",
+    "assets": [
+      {
+        "name": "beta.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/beta.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build8-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher-0.1.0-alpha260713.build8-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build8-1.aarch64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher-0.1.0-alpha260713.build8-1.aarch64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build8-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher-0.1.0-alpha260713.build8-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build8-1.x86_64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher-0.1.0-alpha260713.build8-1.x86_64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher.app.tar.gz",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher.app.tar.gz.sig",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build8_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_0.1.0-alpha260713.build8_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build8_aarch64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_0.1.0-alpha260713.build8_aarch64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build8_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_0.1.0-alpha260713.build8_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build8_amd64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_0.1.0-alpha260713.build8_amd64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build8_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_0.1.0-alpha260713.build8_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build8_amd64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_0.1.0-alpha260713.build8_amd64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build8_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_0.1.0-alpha260713.build8_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build8_arm64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_0.1.0-alpha260713.build8_arm64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build8_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_0.1.0-alpha260713.build8_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build8_arm64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_0.1.0-alpha260713.build8_arm64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build8_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_0.1.0-alpha260713.build8_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build8_x64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_0.1.0-alpha260713.build8_x64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-alpha260713.build8_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/qomicex-launcher_v0.1.0-alpha260713.build8_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "update-fragment-darwin-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/update-fragment-darwin-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-darwin-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/update-fragment-darwin-x86_64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-linux-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/update-fragment-linux-aarch64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-linux-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/update-fragment-linux-x86_64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-windows-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/update-fragment-windows-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-windows-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build8/update-fragment-windows-x86_64.json",
+        "platform": "windows"
+      }
+    ],
+    "changes": [
+      "**更新检查走 gh-proxy 加速**：检查更新时自动测速选择最快 gh-proxy 镜像，更新 JSON 和安装包下载均走代理，全部失败回退直连",
+      "**MCIM 镜像回退策略**：Modrinth/CurseForge 镜像 404 时自动回退官方源",
+      "修复 release 构建下 beta 频道检查更新因 CSP 拦截导致 \\\failed to fetch\\ 的问题",
+      "MCIM 镜像 404 时静默降级，不再弹错误提示"
+    ]
+  },
+  {
+    "tagName": "v0.1.0-alpha260713.build7",
+    "version": "0.1.0-alpha260713.build7",
+    "prerelease": true,
+    "publishedAt": "2026-07-13T09:22:21Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-alpha260713.build7",
+    "assets": [
+      {
+        "name": "beta.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/beta.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build7-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher-0.1.0-alpha260713.build7-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build7-1.aarch64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher-0.1.0-alpha260713.build7-1.aarch64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build7-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher-0.1.0-alpha260713.build7-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build7-1.x86_64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher-0.1.0-alpha260713.build7-1.x86_64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher.app.tar.gz",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher.app.tar.gz.sig",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build7_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_0.1.0-alpha260713.build7_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build7_aarch64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_0.1.0-alpha260713.build7_aarch64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build7_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_0.1.0-alpha260713.build7_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build7_amd64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_0.1.0-alpha260713.build7_amd64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build7_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_0.1.0-alpha260713.build7_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build7_amd64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_0.1.0-alpha260713.build7_amd64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build7_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_0.1.0-alpha260713.build7_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build7_arm64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_0.1.0-alpha260713.build7_arm64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build7_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_0.1.0-alpha260713.build7_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build7_arm64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_0.1.0-alpha260713.build7_arm64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build7_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_0.1.0-alpha260713.build7_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build7_x64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_0.1.0-alpha260713.build7_x64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-alpha260713.build7_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/qomicex-launcher_v0.1.0-alpha260713.build7_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "update-fragment-darwin-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/update-fragment-darwin-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-darwin-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/update-fragment-darwin-x86_64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-linux-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/update-fragment-linux-aarch64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-linux-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/update-fragment-linux-x86_64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-windows-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/update-fragment-windows-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-windows-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build7/update-fragment-windows-x86_64.json",
+        "platform": "windows"
+      }
+    ],
+    "changes": [
+      "**CurseForge 前置模组自动下载**：安装 CurseForge 资源时，自动解析并下载 required 依赖（递归上限 8 层），支持前置版本选择",
+      "**CurseForge 本地模组识别**：实例 mod 列表现在能正确识别 CurseForge 模组，显示名称和图标，可切换版本和查看详情",
+      "修复 CurseForge 模组图标不显示的问题",
+      "修复 fingerprint API 端点和响应解析错误",
+      "修复 CurseForge 依赖识别错误的 relationType（RequiredDependency = 3）",
+      "CurseForge API 调用统一走 ModApiMirror 镜像支持",
+      "优化各处 JSON 反序列化类型处理"
+    ]
+  },
+  {
+    "tagName": "v0.1.0-alpha260713.build6",
+    "version": "0.1.0-alpha260713.build6",
+    "prerelease": true,
+    "publishedAt": "2026-07-13T08:31:09Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-alpha260713.build6",
+    "assets": [
+      {
+        "name": "beta.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/beta.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build6-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher-0.1.0-alpha260713.build6-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build6-1.aarch64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher-0.1.0-alpha260713.build6-1.aarch64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build6-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher-0.1.0-alpha260713.build6-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build6-1.x86_64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher-0.1.0-alpha260713.build6-1.x86_64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher.app.tar.gz",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher.app.tar.gz.sig",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build6_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_0.1.0-alpha260713.build6_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build6_aarch64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_0.1.0-alpha260713.build6_aarch64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build6_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_0.1.0-alpha260713.build6_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build6_amd64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_0.1.0-alpha260713.build6_amd64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build6_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_0.1.0-alpha260713.build6_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build6_amd64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_0.1.0-alpha260713.build6_amd64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build6_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_0.1.0-alpha260713.build6_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build6_arm64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_0.1.0-alpha260713.build6_arm64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build6_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_0.1.0-alpha260713.build6_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build6_arm64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_0.1.0-alpha260713.build6_arm64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build6_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_0.1.0-alpha260713.build6_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build6_x64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_0.1.0-alpha260713.build6_x64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-alpha260713.build6_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/qomicex-launcher_v0.1.0-alpha260713.build6_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "update-fragment-darwin-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/update-fragment-darwin-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-darwin-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/update-fragment-darwin-x86_64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-linux-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/update-fragment-linux-aarch64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-linux-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/update-fragment-linux-x86_64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-windows-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/update-fragment-windows-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-windows-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build6/update-fragment-windows-x86_64.json",
+        "platform": "windows"
+      }
+    ],
+    "changes": [
+      "优化更新器网络请求预检逻辑，添加兼容性容错处理"
+    ]
+  },
+  {
+    "tagName": "v0.1.0-alpha260713.build5",
+    "version": "0.1.0-alpha260713.build5",
+    "prerelease": true,
+    "publishedAt": "2026-07-13T08:04:21Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-alpha260713.build5",
+    "assets": [
+      {
+        "name": "beta.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/beta.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build5-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher-0.1.0-alpha260713.build5-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build5-1.aarch64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher-0.1.0-alpha260713.build5-1.aarch64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build5-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher-0.1.0-alpha260713.build5-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build5-1.x86_64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher-0.1.0-alpha260713.build5-1.x86_64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher.app.tar.gz",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher.app.tar.gz.sig",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build5_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_0.1.0-alpha260713.build5_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build5_aarch64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_0.1.0-alpha260713.build5_aarch64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build5_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_0.1.0-alpha260713.build5_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build5_amd64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_0.1.0-alpha260713.build5_amd64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build5_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_0.1.0-alpha260713.build5_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build5_amd64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_0.1.0-alpha260713.build5_amd64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build5_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_0.1.0-alpha260713.build5_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build5_arm64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_0.1.0-alpha260713.build5_arm64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build5_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_0.1.0-alpha260713.build5_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build5_arm64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_0.1.0-alpha260713.build5_arm64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build5_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_0.1.0-alpha260713.build5_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build5_x64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_0.1.0-alpha260713.build5_x64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-alpha260713.build5_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/qomicex-launcher_v0.1.0-alpha260713.build5_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "update-fragment-darwin-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/update-fragment-darwin-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-darwin-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/update-fragment-darwin-x86_64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-linux-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/update-fragment-linux-aarch64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-linux-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/update-fragment-linux-x86_64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-windows-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/update-fragment-windows-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-windows-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build5/update-fragment-windows-x86_64.json",
+        "platform": "windows"
+      }
+    ],
+    "changes": [
+      "修复更新下载失败问题，改用更稳定的直接下载方案"
+    ]
+  },
+  {
+    "tagName": "v0.1.0-alpha260713.build4",
+    "version": "0.1.0-alpha260713.build4",
+    "prerelease": true,
+    "publishedAt": "2026-07-13T07:05:27Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-alpha260713.build4",
+    "assets": [
+      {
+        "name": "beta.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/beta.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build4-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher-0.1.0-alpha260713.build4-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build4-1.aarch64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher-0.1.0-alpha260713.build4-1.aarch64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build4-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher-0.1.0-alpha260713.build4-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build4-1.x86_64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher-0.1.0-alpha260713.build4-1.x86_64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher.app.tar.gz",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher.app.tar.gz.sig",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build4_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_0.1.0-alpha260713.build4_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build4_aarch64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_0.1.0-alpha260713.build4_aarch64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build4_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_0.1.0-alpha260713.build4_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build4_amd64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_0.1.0-alpha260713.build4_amd64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build4_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_0.1.0-alpha260713.build4_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build4_amd64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_0.1.0-alpha260713.build4_amd64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build4_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_0.1.0-alpha260713.build4_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build4_arm64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_0.1.0-alpha260713.build4_arm64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build4_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_0.1.0-alpha260713.build4_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build4_arm64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_0.1.0-alpha260713.build4_arm64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build4_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_0.1.0-alpha260713.build4_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build4_x64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_0.1.0-alpha260713.build4_x64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-alpha260713.build4_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/qomicex-launcher_v0.1.0-alpha260713.build4_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "update-fragment-darwin-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/update-fragment-darwin-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-darwin-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/update-fragment-darwin-x86_64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-linux-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/update-fragment-linux-aarch64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-linux-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/update-fragment-linux-x86_64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-windows-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/update-fragment-windows-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-windows-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build4/update-fragment-windows-x86_64.json",
+        "platform": "windows"
+      }
+    ],
+    "changes": []
+  },
+  {
+    "tagName": "v0.1.0-alpha260713.build3",
+    "version": "0.1.0-alpha260713.build3",
+    "prerelease": true,
+    "publishedAt": "2026-07-12T18:57:57Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-alpha260713.build3",
+    "assets": [
+      {
+        "name": "beta.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/beta.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build3-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher-0.1.0-alpha260713.build3-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build3-1.aarch64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher-0.1.0-alpha260713.build3-1.aarch64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build3-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher-0.1.0-alpha260713.build3-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build3-1.x86_64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher-0.1.0-alpha260713.build3-1.x86_64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher.app.tar.gz",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher.app.tar.gz.sig",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build3_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_0.1.0-alpha260713.build3_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build3_aarch64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_0.1.0-alpha260713.build3_aarch64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build3_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_0.1.0-alpha260713.build3_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build3_amd64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_0.1.0-alpha260713.build3_amd64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build3_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_0.1.0-alpha260713.build3_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build3_amd64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_0.1.0-alpha260713.build3_amd64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build3_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_0.1.0-alpha260713.build3_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build3_arm64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_0.1.0-alpha260713.build3_arm64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build3_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_0.1.0-alpha260713.build3_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build3_arm64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_0.1.0-alpha260713.build3_arm64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build3_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_0.1.0-alpha260713.build3_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build3_x64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_0.1.0-alpha260713.build3_x64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-alpha260713.build3_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/qomicex-launcher_v0.1.0-alpha260713.build3_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "update-fragment-darwin-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/update-fragment-darwin-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-darwin-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/update-fragment-darwin-x86_64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-linux-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/update-fragment-linux-aarch64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-linux-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/update-fragment-linux-x86_64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-windows-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/update-fragment-windows-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-windows-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build3/update-fragment-windows-x86_64.json",
+        "platform": "windows"
+      }
+    ],
+    "changes": [
+      "优化更新器错误显示，添加详细错误日志便于排查"
+    ]
+  },
+  {
+    "tagName": "v0.1.0-alpha260713.build2",
+    "version": "0.1.0-alpha260713.build2",
+    "prerelease": true,
+    "publishedAt": "2026-07-12T18:27:48Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-alpha260713.build2",
+    "assets": [
+      {
+        "name": "beta.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/beta.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build2-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher-0.1.0-alpha260713.build2-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build2-1.aarch64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher-0.1.0-alpha260713.build2-1.aarch64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build2-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher-0.1.0-alpha260713.build2-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build2-1.x86_64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher-0.1.0-alpha260713.build2-1.x86_64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher.app.tar.gz",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher.app.tar.gz.sig",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build2_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_0.1.0-alpha260713.build2_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build2_aarch64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_0.1.0-alpha260713.build2_aarch64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build2_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_0.1.0-alpha260713.build2_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build2_amd64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_0.1.0-alpha260713.build2_amd64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build2_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_0.1.0-alpha260713.build2_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build2_amd64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_0.1.0-alpha260713.build2_amd64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build2_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_0.1.0-alpha260713.build2_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build2_arm64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_0.1.0-alpha260713.build2_arm64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build2_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_0.1.0-alpha260713.build2_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build2_arm64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_0.1.0-alpha260713.build2_arm64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build2_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_0.1.0-alpha260713.build2_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build2_x64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_0.1.0-alpha260713.build2_x64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-alpha260713.build2_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/qomicex-launcher_v0.1.0-alpha260713.build2_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "update-fragment-darwin-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/update-fragment-darwin-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-darwin-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/update-fragment-darwin-x86_64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-linux-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/update-fragment-linux-aarch64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-linux-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/update-fragment-linux-x86_64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-windows-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/update-fragment-windows-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-windows-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build2/update-fragment-windows-x86_64.json",
+        "platform": "windows"
+      }
+    ],
+    "changes": [
+      "修复更新器因版本号前缀零导致的更新失败问题"
+    ]
+  },
+  {
+    "tagName": "v0.1.0-alpha260713.build1",
+    "version": "0.1.0-alpha260713.build1",
+    "prerelease": true,
+    "publishedAt": "2026-07-12T18:06:39Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-alpha260713.build1",
+    "assets": [
+      {
+        "name": "beta.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/beta.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build1-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher-0.1.0-alpha260713.build1-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build1-1.aarch64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher-0.1.0-alpha260713.build1-1.aarch64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build1-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher-0.1.0-alpha260713.build1-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-alpha260713.build1-1.x86_64.rpm.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher-0.1.0-alpha260713.build1-1.x86_64.rpm.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher.app.tar.gz",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher.app.tar.gz.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher.app.tar.gz.sig",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build1_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_0.1.0-alpha260713.build1_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build1_aarch64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_0.1.0-alpha260713.build1_aarch64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build1_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_0.1.0-alpha260713.build1_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build1_amd64.AppImage.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_0.1.0-alpha260713.build1_amd64.AppImage.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build1_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_0.1.0-alpha260713.build1_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build1_amd64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_0.1.0-alpha260713.build1_amd64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build1_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_0.1.0-alpha260713.build1_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build1_arm64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_0.1.0-alpha260713.build1_arm64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build1_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_0.1.0-alpha260713.build1_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build1_arm64.deb.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_0.1.0-alpha260713.build1_arm64.deb.sig",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build1_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_0.1.0-alpha260713.build1_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-alpha260713.build1_x64-setup.exe.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_0.1.0-alpha260713.build1_x64-setup.exe.sig",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-alpha260713.build1_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/qomicex-launcher_v0.1.0-alpha260713.build1_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "update-fragment-darwin-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/update-fragment-darwin-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-darwin-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/update-fragment-darwin-x86_64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-linux-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/update-fragment-linux-aarch64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-linux-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/update-fragment-linux-x86_64.json",
+        "platform": "linux"
+      },
+      {
+        "name": "update-fragment-windows-aarch64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/update-fragment-windows-aarch64.json",
+        "platform": "windows"
+      },
+      {
+        "name": "update-fragment-windows-x86_64.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-alpha260713.build1/update-fragment-windows-x86_64.json",
+        "platform": "windows"
+      }
+    ],
+    "changes": []
+  },
+  {
     "tagName": "v0.1.0-alpha260712.build1",
     "version": "0.1.0-alpha260712.build1",
     "prerelease": true,

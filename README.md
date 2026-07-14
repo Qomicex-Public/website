@@ -42,15 +42,27 @@ order: 1              # 排序序号（越小越靠前）
 
 - 有序/无序列表使用标准 Markdown 语法（`1.` / `-`）
 - 代码使用反引号 `` `code` ``
-- 如需使用信息框、卡片网格等自定义样式，直接写 HTML：
+- 提示框使用 admonition 语法：
 
-  ```html
-  <div class="rounded-lg border border-yellow-500/20 bg-yellow-500/5 px-4 py-3">
-  **提示：**一些提示内容。
-  </div>
+  ```markdown
+  ::: note
+  仅供参考的信息。
+  :::
+
+  ::: tip
+  实用小技巧。
+  :::
+
+  ::: warning
+  注意这里有坑。
+  :::
+
+  ::: danger
+  搞不好会出大事。
+  :::
   ```
 
-  可用的样式类见 `src/layouts/DocsLayout.astro` 中的 CSS 规则。
+  支持 `note`、`tip`、`warning`、`danger`、`caution` 五种类型。
 
 ### 文档结构
 

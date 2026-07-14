@@ -27,7 +27,7 @@ const groups = Object.entries(
 ---
 
 <Base title={pageTitle + ' - ' + t('docs.title', lang)}>
-  <div class="mx-auto flex max-w-5xl gap-8 px-4 py-10">
+  <div class="mx-auto flex max-w-6xl gap-8 px-4 py-10">
     <nav class="hidden w-52 shrink-0 md:block">
       <div class="sticky top-4 max-h-[calc(100vh-3rem)] space-y-4 overflow-y-auto">
         {groups.map(([cat, items]) => (
@@ -73,7 +73,12 @@ const groups = Object.entries(
 
       <h1 class="mb-6 text-2xl font-bold">{pageTitle}</h1>
 
-      <div class="space-y-3 text-sm leading-relaxed text-muted-foreground [&_strong]:text-foreground [&_code]:rounded [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-xs [&_code]:font-mono [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-2 [&_ol]:ml-5 [&_ul]:ml-5 [&_li]:leading-relaxed [&_h4]:text-foreground [&_h4]:font-semibold [&_h4]:text-sm [&_img]:rounded-lg [&_img]:border [&_img]:border-border">
+      <details id="toc-mobile" class="mb-6 xl:hidden">
+        <summary class="cursor-pointer select-none rounded-lg border border-border bg-card px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground">{t('docs.toc', lang)}</summary>
+        <div class="mt-2 space-y-1 rounded-lg border border-border bg-card px-4 py-3 text-sm"></div>
+      </details>
+
+      <div id="article-content" class="space-y-3 text-sm leading-relaxed text-muted-foreground [&_strong]:text-foreground [&_code]:rounded [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-xs [&_code]:font-mono [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-2 [&_ol]:ml-5 [&_ol]:list-decimal [&_ul]:ml-5 [&_ul]:list-disc [&_li]:leading-relaxed [&_h1]:text-foreground [&_h1]:text-xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-foreground [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_h3]:text-foreground [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:mb-2 [&_h4]:text-foreground [&_h4]:font-semibold [&_h4]:text-sm [&_img]:rounded-lg [&_img]:border [&_img]:border-border">
         <slot />
       </div>
 
@@ -90,5 +95,105 @@ const groups = Object.entries(
         ) : <div />}
       </div>
     </article>
+
+    <nav id="toc-desktop" class="hidden w-56 shrink-0 xl:block">
+      <div class="sticky top-4 max-h-[calc(100vh-3rem)] overflow-y-auto">
+        <p class="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t('docs.toc', lang)}</p>
+      </div>
+    </nav>
   </div>
+
+  <script is:inline>
+    function buildToc() {
+      var article = document.getElementById('article-content')
+      if (!article) return
+      var headings = article.querySelectorAll('h1, h2, h3')
+      if (headings.length < 2) return
+
+      var toc = [], current = null, i, h
+      for (i = 0; i < headings.length; i++) {
+        h = headings[i]
+        if (!h.id) continue
+        if (h.tagName === 'H1' || h.tagName === 'H2') {
+          current = { id: h.id, text: h.textContent, children: [] }
+          toc.push(current)
+        } else if (h.tagName === 'H3' && current) {
+          current.children.push({ id: h.id, text: h.textContent })
+        }
+      }
+      if (toc.length === 0) return
+
+      function render(items) {
+        var html = ''
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i]
+          html += '<div><a href="#' + item.id + '" class="block rounded px-3 py-1 text-sm transition-colors hover:bg-accent hover:text-accent-foreground toc-link">' + item.text + '</a>'
+          if (item.children.length) {
+            html += '<div class="ml-3 border-l border-border pl-3">' + render(item.children) + '</div>'
+          }
+          html += '</div>'
+        }
+        return html
+      }
+
+      var desktop = document.getElementById('toc-desktop')
+      if (desktop) {
+        var container = desktop.querySelector('.sticky')
+        if (container) {
+          var label = container.firstElementChild
+          container.innerHTML = ''
+          container.appendChild(label)
+          var list = document.createElement('div')
+          list.className = 'mt-2 space-y-0.5'
+          list.innerHTML = render(toc)
+          container.appendChild(list)
+        }
+      }
+
+      var mobile = document.getElementById('toc-mobile')
+      if (mobile) {
+        var container = mobile.querySelector('div')
+        if (container) container.innerHTML = render(toc)
+      }
+
+      var links = document.querySelectorAll('.toc-link')
+      for (i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function(e) {
+          e.preventDefault()
+          var id = this.getAttribute('href').slice(1)
+          var target = document.getElementById(id)
+          if (target) target.scrollIntoView({ behavior: 'smooth' })
+        })
+      }
+
+      var observer = new IntersectionObserver(function(entries) {
+        var active = null
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting) {
+            var id = entries[i].target.id
+            var tocLink = document.querySelector('.toc-link[href="#' + id + '"]')
+            if (tocLink) active = tocLink
+          }
+        }
+        if (active) {
+          var prev = document.querySelectorAll('.toc-link.active')
+          for (var i = 0; i < prev.length; i++) prev[i].classList.remove('active')
+          active.classList.add('active')
+        }
+      }, { rootMargin: '-64px 0px -50% 0px' })
+
+      for (i = 0; i < headings.length; i++) observer.observe(headings[i])
+    }
+
+    function init() {
+      buildToc()
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init)
+    } else {
+      init()
+    }
+    document.addEventListener('astro:page-load', init)
+  </script>
 </Base>

@@ -161,6 +161,32 @@
     70%  { transform: translateY(1px); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
   }
+  #img-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: hsl(0 0% 0% / 0.8);
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+    backdrop-filter: blur(4px);
+  }
+  #img-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 40px hsl(0 0% 0% / 0.5);
+    cursor: default;
+  }
+
+  .toc-link.active {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    font-weight: 500;
+  }
+
   .char-exit {
     display: inline-block;
     animation: charExit 0.2s cubic-bezier(0.4, 0, 1, 1) both;
@@ -168,4 +194,6 @@
   @keyframes charExit {
     to { opacity: 0; transform: translateY(-12px) scale(0.85); }
   }
+
+
 }

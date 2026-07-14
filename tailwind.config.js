@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{astro,html,js,ts}"],
+  safelist: [{ pattern: /^admonition/ }, { pattern: /^(note|tip|warning|danger|caution)$/ }],
   theme: {
     extend: {
       colors: {

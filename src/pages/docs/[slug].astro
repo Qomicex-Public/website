@@ -11,7 +11,7 @@ export async function getStaticPaths() {
   for (const doc of docs) {
     const parts = doc.id.split('/')
     const docLang = parts[0]
-    if (docLang !== 'en') continue // zh at root paths
+    if (docLang !== 'zh') continue
     const slug = parts.slice(1).join('/')
     paths.push({
       params: { slug },
