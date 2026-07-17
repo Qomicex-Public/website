@@ -55,6 +55,9 @@ const zh = {
   'versions.changes': '更新说明',
   'versions.noChanges': '无详细更新说明',
   'versions.prerelease': '预发布',
+
+  'stats.downloads': '总下载 {n} 次',
+  'stats.usage': '总使用 {n} 次',
 }
 
 const en: Record<string, string> = {
@@ -112,10 +115,15 @@ const en: Record<string, string> = {
   'versions.changes': 'Changelog',
   'versions.noChanges': 'No detailed changelog',
   'versions.prerelease': 'Pre-release',
+
+  'stats.downloads': 'Total {n} downloads',
+  'stats.usage': 'Total {n} launches',
 }
 
-export function t(key: string, lang: Lang): string {
-  return (lang === 'en' ? en : zh)[key] ?? key
+export function t(key: string, lang: Lang, params?: Record<string, string | number>): string {
+  let s = (lang === 'en' ? en : zh)[key] ?? key
+  if (params) for (const [k, v] of Object.entries(params)) s = s.replace(`{${k}}`, String(v))
+  return s
 }
 
 const featureDataZh = [

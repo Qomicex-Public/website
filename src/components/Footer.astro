@@ -1,5 +1,6 @@
 ---
 import { updatedAt } from '../data/last-fetch.json';
+import stats from '../data/stats.json';
 import { t, type Lang } from '../i18n';
 
 const lang = Astro.props.lang as Lang
@@ -14,6 +15,8 @@ const base = lang === 'en' ? '/en' : ''
     <a href="https://afdian.com/a/QomicexLauncher" target="_blank" class="inline-flex items-center gap-1 hover:text-foreground transition-colors">{t('footer.afdian', lang)}</a>
     <a href={`${base}/about`} class="hover:text-foreground transition-colors">{t('footer.about', lang)}</a>
     <a href={`${base}/legal/user-agreement`} class="hover:text-foreground transition-colors">{t('footer.agreement', lang)}</a>
+    <span class="text-muted-foreground/60">{t('stats.downloads', lang, { n: stats.totalInstallerDownloads })}</span>
+    <span class="text-muted-foreground/60">{t('stats.usage', lang, { n: stats.updateCheckCount })}</span>
     <span class="text-muted-foreground/60">{t('footer.dataUpdated', lang)} {updatedAt.slice(0, 10)}</span>
   </div>
 </footer>

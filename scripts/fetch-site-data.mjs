@@ -51,10 +51,34 @@ const normalized = (releases || []).map(r => ({
   changes: (r.body || '').split('\n').filter(l => l.trim().startsWith('-')).map(l => l.trim().replace(/^-\s*/, '')),
 }))
 
+let totalInstallerDownloads = 0
+let updateCheckCount = 0
+let releaseCheckCount = 0
+
+if (releases) {
+  try {
+    const ghapi = await fetchJSON('http://ghapi.qomicex.top/?format=json')
+    if (ghapi && typeof ghapi.total === 'number') totalInstallerDownloads = ghapi.total
+  } catch {}
+
+  for (const r of releases) {
+    for (const a of (r.assets || [])) {
+      if (a.name === 'beta.json') updateCheckCount += (a.download_count || 0)
+      if (a.name === 'release.json') releaseCheckCount += (a.download_count || 0)
+    }
+  }
+}
+
 writeFileSync(resolve(DATA_DIR, 'releases.json'), JSON.stringify(normalized, null, 2))
 writeFileSync(resolve(DATA_DIR, 'contributors.json'), JSON.stringify(contributors || [], null, 2))
 writeFileSync(resolve(DATA_DIR, 'last-fetch.json'), JSON.stringify({
   updatedAt: new Date().toISOString(),
 }))
+writeFileSync(resolve(DATA_DIR, 'stats.json'), JSON.stringify({
+  totalInstallerDownloads,
+  updateCheckCount,
+  releaseCheckCount,
+  updatedAt: new Date().toISOString(),
+}))
 
-console.log(`✓ Fetched ${normalized.length} releases, ${(contributors || []).length} contributors`)
+console.log(`✓ Fetched ${normalized.length} releases, ${(contributors || []).length} contributors, downloads: ${totalInstallerDownloads}`)
