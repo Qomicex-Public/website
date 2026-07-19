@@ -72,7 +72,7 @@ import Base from '../../layouts/Base.astro';
           <li class="text-justify"><strong>游戏实例管理</strong>：创建、配置和管理多个独立的 Minecraft 游戏实例，支持版本隔离。</li>
           <li class="text-justify"><strong>下载中心</strong>：从多种源下载 Minecraft 游戏版本、加载器（Forge、Fabric、NeoForge、Quilt 等）以及 Java 运行时。</li>
           <li class="text-justify"><strong>资源中心</strong>：浏览、搜索和下载来自 Modrinth 和 CurseForge 等平台的模组、资源包、整合包等资源。</li>
-          <li class="text-justify"><strong>账户管理</strong>：支持 Microsoft 账户（OAuth）、Yggdrasil 认证服务器（外置登录）、统一通行证以及离线模式的账户管理。</li>
+          <li class="text-justify"><strong>账户管理</strong>：支持 Microsoft 账户（OAuth）、Yggdrasil 认证服务器（外置登录）、第三方统一通行证以及离线模式的账户管理。</li>
           <li class="text-justify"><strong>联机模块</strong>：基于 EasyTier 技术的局域网联机和组网功能。</li>
           <li class="text-justify"><strong>设置与更新</strong>：应用设置管理、自动更新检查与安装。</li>
         </ul>
@@ -88,7 +88,7 @@ import Base from '../../layouts/Base.astro';
         <ul class="ml-6 mb-3 space-y-1.5">
           <li class="text-justify"><strong>Microsoft 账户</strong>：通过 Microsoft OAuth 2.0 协议进行身份验证。此过程由 Microsoft 平台完成，本软件仅接收授权后的访问令牌。</li>
           <li class="text-justify"><strong>Yggdrasil 外置登录</strong>：允许用户连接自定义的 AuthlibInjector 兼容认证服务器。</li>
-          <li class="text-justify"><strong>统一通行证</strong>：本软件提供的简化认证方式。</li>
+          <li class="text-justify"><strong>统一通行证</strong>：接入第三方 Yggdrasil 认证服务（如 <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">login.mc-user.com</code>），由社区服主提供注册和认证。</li>
           <li class="text-justify"><strong>离线模式</strong>：无需网络认证，仅需用户名即可使用。</li>
         </ul>
         <p class="mb-3 text-justify"><strong>4.2 账户信息安全</strong>。您的账户凭据（包括访问令牌）将存储于本地计算机的加密文件中。我们不会将您的凭据上传至任何非必要的第三方服务器。凭据的加密与机器码绑定，设备变更可能导致已存储的凭据无法访问。</p>
