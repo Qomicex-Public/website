@@ -2,280 +2,249 @@
 import Base from '../../layouts/Base.astro';
 ---
 
-<Base title="用户协议" desc="Qomicex Launcher 用户协议 - 请仔细阅读本协议的所有条款">
-  <div class="mx-auto max-w-3xl px-4 py-16">
-    <header class="text-center pb-8 mb-10 border-b-2 border-border">
-      <h1 class="text-3xl font-bold text-foreground">Qomicex Launcher 用户协议</h1>
-      <p class="mt-2 text-sm text-muted-foreground">
-        最后更新：2026 年 7 月 15 日 &nbsp;|&nbsp; 版本：v1.0
+<Base title="用户协议">
+  <section class="mx-auto max-w-3xl px-4 py-16">
+    <div class="mb-10 text-center">
+      <h1 class="mb-2 text-3xl font-bold">Qomicex Launcher 用户协议</h1>
+      <p class="text-sm text-muted-foreground">最后更新：2026 年 7 月 15 日 &nbsp;|&nbsp; 版本：v1.0</p>
+      <p class="mt-2 text-xs text-muted-foreground/70">
+        <span class="mr-4">生效日期：2026 年 7 月 15 日</span>
+        <span>适用法律：中华人民共和国法律</span>
       </p>
-      <p class="mt-3 text-xs text-muted-foreground/70">
-        <span>生效日期：2026 年 7 月 15 日</span>
-        <span class="mx-2 hidden sm:inline">|</span>
-        <span class="block sm:inline mt-1 sm:mt-0">适用法律：中华人民共和国法律</span>
-      </p>
-    </header>
+    </div>
 
-    <nav class="rounded-xl border border-border bg-card p-7 mb-10">
-      <h2 class="text-base font-semibold mb-4 text-foreground">目录</h2>
-      <ol class="list-none columns-2 gap-8 text-sm">
-        <li class="mb-1.5"><a href="#chap1" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第一章</span>序言与接受</a></li>
-        <li class="mb-1.5"><a href="#chap2" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第二章</span>定义</a></li>
-        <li class="mb-1.5"><a href="#chap3" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第三章</span>服务说明</a></li>
-        <li class="mb-1.5"><a href="#chap4" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第四章</span>用户账户</a></li>
-        <li class="mb-1.5"><a href="#chap5" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第五章</span>用户行为规范</a></li>
-        <li class="mb-1.5"><a href="#chap6" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第六章</span>第三方服务</a></li>
-        <li class="mb-1.5"><a href="#chap7" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第七章</span>知识产权</a></li>
-        <li class="mb-1.5"><a href="#chap8" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第八章</span>隐私说明</a></li>
-        <li class="mb-1.5"><a href="#chap9" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第九章</span>免责声明</a></li>
-        <li class="mb-1.5"><a href="#chap10" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第十章</span>责任限制</a></li>
-        <li class="mb-1.5"><a href="#chap11" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第十一章</span>协议终止</a></li>
-        <li class="mb-1.5"><a href="#chap12" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第十二章</span>法律管辖与争议解决</a></li>
-        <li class="mb-1.5"><a href="#chap13" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第十三章</span>协议变更</a></li>
-        <li class="mb-1.5"><a href="#chap14" class="text-muted-foreground no-underline hover:text-primary hover:underline"><span class="text-primary font-semibold mr-1">第十四章</span>联系方式</a></li>
-        <li class="list-none mt-2"><a href="#appendix" class="text-muted-foreground no-underline hover:text-primary hover:underline">附则</a></li>
+    <div class="mb-10 rounded-lg border bg-card p-6">
+      <h2 class="mb-4 text-base font-semibold">目录</h2>
+      <ol class="list-inside list-decimal space-y-1.5 text-sm text-muted-foreground">
+        <li><a href="#chap1" class="text-primary underline underline-offset-2">序言与接受</a></li>
+        <li><a href="#chap2" class="text-primary underline underline-offset-2">定义</a></li>
+        <li><a href="#chap3" class="text-primary underline underline-offset-2">服务说明</a></li>
+        <li><a href="#chap4" class="text-primary underline underline-offset-2">用户账户</a></li>
+        <li><a href="#chap5" class="text-primary underline underline-offset-2">用户行为规范</a></li>
+        <li><a href="#chap6" class="text-primary underline underline-offset-2">第三方服务</a></li>
+        <li><a href="#chap7" class="text-primary underline underline-offset-2">知识产权</a></li>
+        <li><a href="#chap8" class="text-primary underline underline-offset-2">隐私说明</a></li>
+        <li><a href="#chap9" class="text-primary underline underline-offset-2">免责声明</a></li>
+        <li><a href="#chap10" class="text-primary underline underline-offset-2">责任限制</a></li>
+        <li><a href="#chap11" class="text-primary underline underline-offset-2">协议终止</a></li>
+        <li><a href="#chap12" class="text-primary underline underline-offset-2">法律管辖与争议解决</a></li>
+        <li><a href="#chap13" class="text-primary underline underline-offset-2">协议变更</a></li>
+        <li><a href="#chap14" class="text-primary underline underline-offset-2">联系方式</a></li>
+        <li><a href="#appendix" class="text-primary underline underline-offset-2">附则</a></li>
       </ol>
-    </nav>
+    </div>
 
-    <div class="space-y-6">
-      <section id="chap1" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第一章</span> 序言与接受
-        </h2>
-        <p class="mb-3 text-justify"><strong>1.1</strong> 欢迎使用 Qomicex Launcher（以下简称"本软件"或"QML"）。本软件是一款开源的 Minecraft 游戏启动器，由 Qomicex 开发团队（以下简称"我们"或"开发者"）开发并维护。</p>
-        <p class="mb-3 text-justify"><strong>1.2</strong> 请您仔细阅读本用户协议（以下简称"本协议"）。您使用、下载、安装或运行本软件的任何行为，即表示您已阅读、理解并同意受本协议的约束。若您不同意本协议的任何条款，请立即停止使用本软件。</p>
-        <p class="mb-3 text-justify"><strong>1.3</strong> 本软件根据 <strong>GNU General Public License v3.0（GPLv3）</strong> 开源许可证发布。本协议中的任何条款均不应被解释为限制您在 GPLv3 下享有的权利。</p>
+    <div class="space-y-6 text-sm text-muted-foreground leading-relaxed">
+      <section id="chap1">
+        <h2 class="text-lg font-semibold text-foreground">第一章 序言与接受</h2>
+        <p><strong>1.1</strong> 欢迎使用 Qomicex Launcher（以下简称"本软件"或"QML"）。本软件是一款开源的 Minecraft 游戏启动器，由 Qomicex 开发团队（以下简称"我们"或"开发者"）开发并维护。</p>
+        <p><strong>1.2</strong> 请您仔细阅读本用户协议（以下简称"本协议"）。您使用、下载、安装或运行本软件的任何行为，即表示您已阅读、理解并同意受本协议的约束。若您不同意本协议的任何条款，请立即停止使用本软件。</p>
+        <p><strong>1.3</strong> 本软件根据 <strong>GNU General Public License v3.0（GPLv3）</strong> 开源许可证发布。本协议中的任何条款均不应被解释为限制您在 GPLv3 下享有的权利。</p>
       </section>
 
-      <section id="chap2" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第二章</span> 定义
-        </h2>
-        <p class="mb-3">除非本协议另有明确规定，下列术语具有以下含义：</p>
-        <ul class="ml-6 mb-3 space-y-1.5">
-          <li class="text-justify"><strong>"本软件" 或 "QML"</strong>：指 Qomicex Launcher，包括其可执行文件、源代码、文档以及通过本软件提供的所有功能和服务。</li>
-          <li class="text-justify"><strong>"服务"</strong>：指本软件向您提供的全部功能，包括但不限于游戏实例管理、资源下载、账户管理、联机功能等。</li>
-          <li class="text-justify"><strong>"用户" 或 "您"</strong>：指使用本软件的自然人或法人。</li>
-          <li class="text-justify"><strong>"用户内容"</strong>：指您通过本软件存储、管理或处理的任何数据，包括但不限于游戏存档、资源包、模组、截图、设置偏好等。</li>
-          <li class="text-justify"><strong>"第三方服务"</strong>：指本软件所集成或引用的、由第三方运营的服务或 API，包括但不限于 Modrinth、CurseForge、FTB、Microsoft 身份验证服务等。</li>
-          <li class="text-justify"><strong>"Minecraft"</strong>：指由 Mojang Studios（现为 Microsoft 旗下）开发的沙盒游戏。</li>
+      <section id="chap2">
+        <h2 class="text-lg font-semibold text-foreground">第二章 定义</h2>
+        <p>除非本协议另有明确规定，下列术语具有以下含义：</p>
+        <ul class="list-inside list-disc space-y-1.5">
+          <li><strong>"本软件" 或 "QML"</strong>：指 Qomicex Launcher，包括其可执行文件、源代码、文档以及通过本软件提供的所有功能和服务。</li>
+          <li><strong>"服务"</strong>：指本软件向您提供的全部功能，包括但不限于游戏实例管理、资源下载、账户管理、联机功能等。</li>
+          <li><strong>"用户" 或 "您"</strong>：指使用本软件的自然人或法人。</li>
+          <li><strong>"用户内容"</strong>：指您通过本软件存储、管理或处理的任何数据，包括但不限于游戏存档、资源包、模组、截图、设置偏好等。</li>
+          <li><strong>"第三方服务"</strong>：指本软件所集成或引用的、由第三方运营的服务或 API，包括但不限于 Modrinth、CurseForge、FTB、Microsoft 身份验证服务等。</li>
+          <li><strong>"Minecraft"</strong>：指由 Mojang Studios（现为 Microsoft 旗下）开发的沙盒游戏。</li>
         </ul>
       </section>
 
-      <section id="chap3" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第三章</span> 服务说明
-        </h2>
-        <p class="mb-3 text-justify"><strong>3.1 服务概述</strong>。本软件是一款跨平台的 Minecraft 游戏启动器，旨在为用户提供便捷的游戏管理体验。当前版本为 <strong>v0.1.x</strong>，处于测试阶段。</p>
-        <p class="mb-3"><strong>3.2 核心功能</strong>。本软件提供的主要功能包括但不限于：</p>
-        <ul class="ml-6 mb-3 space-y-1.5">
-          <li class="text-justify"><strong>游戏实例管理</strong>：创建、配置和管理多个独立的 Minecraft 游戏实例，支持版本隔离。</li>
-          <li class="text-justify"><strong>下载中心</strong>：从多种源下载 Minecraft 游戏版本、加载器（Forge、Fabric、NeoForge、Quilt 等）以及 Java 运行时。</li>
-          <li class="text-justify"><strong>资源中心</strong>：浏览、搜索和下载来自 Modrinth 和 CurseForge 等平台的模组、资源包、整合包等资源。</li>
-          <li class="text-justify"><strong>账户管理</strong>：支持 Microsoft 账户（OAuth）、Yggdrasil 认证服务器（外置登录）、第三方统一通行证以及离线模式的账户管理。</li>
-          <li class="text-justify"><strong>联机模块</strong>：基于 EasyTier 技术的局域网联机和组网功能。</li>
-          <li class="text-justify"><strong>设置与更新</strong>：应用设置管理、自动更新检查与安装。</li>
+      <section id="chap3">
+        <h2 class="text-lg font-semibold text-foreground">第三章 服务说明</h2>
+        <p><strong>3.1 服务概述</strong>。本软件是一款跨平台的 Minecraft 游戏启动器，旨在为用户提供便捷的游戏管理体验。当前版本为 <strong>v0.1.x</strong>，处于测试阶段。</p>
+        <p><strong>3.2 核心功能</strong>。本软件提供的主要功能包括但不限于：</p>
+        <ul class="list-inside list-disc space-y-1.5">
+          <li><strong>游戏实例管理</strong>：创建、配置和管理多个独立的 Minecraft 游戏实例，支持版本隔离。</li>
+          <li><strong>下载中心</strong>：从多种源下载 Minecraft 游戏版本、加载器（Forge、Fabric、NeoForge、Quilt 等）以及 Java 运行时。</li>
+          <li><strong>资源中心</strong>：浏览、搜索和下载来自 Modrinth 和 CurseForge 等平台的模组、资源包、整合包等资源。</li>
+          <li><strong>账户管理</strong>：支持 Microsoft 账户（OAuth）、Yggdrasil 认证服务器（外置登录）、统一通行证以及离线模式的账户管理。</li>
+          <li><strong>联机模块</strong>：基于 EasyTier 技术的局域网联机和组网功能。</li>
+          <li><strong>设置与更新</strong>：应用设置管理、自动更新检查与安装。</li>
         </ul>
-        <p class="mb-3 text-justify"><strong>3.3 服务状态</strong>。本软件目前处于测试阶段，可能包含错误或缺陷。我们将尽商业上合理的努力改善服务质量，但不对服务的持续可用性、无错误性或适用性作出任何保证。</p>
-        <p class="mb-3 text-justify"><strong>3.4 支持的平台</strong>。本软件支持以下操作系统：Windows（x64 / ARM64）、macOS（x64 / ARM64）、Linux（x64 / ARM64 / LoongArch64 / RISC-V 64）。不同平台上的功能体验可能存在差异。</p>
+        <p><strong>3.3 服务状态</strong>。本软件目前处于测试阶段，可能包含错误或缺陷。我们将尽商业上合理的努力改善服务质量，但不对服务的持续可用性、无错误性或适用性作出任何保证。</p>
+        <p><strong>3.4 支持的平台</strong>。本软件支持以下操作系统：Windows（x64 / ARM64）、macOS（x64 / ARM64）、Linux（x64 / ARM64 / LoongArch64 / RISC-V 64）。不同平台上的功能体验可能存在差异。</p>
       </section>
 
-      <section id="chap4" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第四章</span> 用户账户
-        </h2>
-        <p class="mb-3"><strong>4.1 账户类型</strong>。本软件支持以下账户类型：</p>
-        <ul class="ml-6 mb-3 space-y-1.5">
-          <li class="text-justify"><strong>Microsoft 账户</strong>：通过 Microsoft OAuth 2.0 协议进行身份验证。此过程由 Microsoft 平台完成，本软件仅接收授权后的访问令牌。</li>
-          <li class="text-justify"><strong>Yggdrasil 外置登录</strong>：允许用户连接自定义的 AuthlibInjector 兼容认证服务器。</li>
-          <li class="text-justify"><strong>统一通行证</strong>：接入第三方 Yggdrasil 认证服务（如 <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">login.mc-user.com</code>），由社区服主提供注册和认证。</li>
-          <li class="text-justify"><strong>离线模式</strong>：无需网络认证，仅需用户名即可使用。</li>
+      <section id="chap4">
+        <h2 class="text-lg font-semibold text-foreground">第四章 用户账户</h2>
+        <p><strong>4.1 账户类型</strong>。本软件支持以下账户类型：</p>
+        <ul class="list-inside list-disc space-y-1.5">
+          <li><strong>Microsoft 账户</strong>：通过 Microsoft OAuth 2.0 协议进行身份验证。此过程由 Microsoft 平台完成，本软件仅接收授权后的访问令牌。</li>
+          <li><strong>Yggdrasil 外置登录</strong>：允许用户连接自定义的 AuthlibInjector 兼容认证服务器。</li>
+          <li><strong>统一通行证</strong>：本软件提供的简化认证方式。</li>
+          <li><strong>离线模式</strong>：无需网络认证，仅需用户名即可使用。</li>
         </ul>
-        <p class="mb-3 text-justify"><strong>4.2 账户信息安全</strong>。您的账户凭据（包括访问令牌）将存储于本地计算机的加密文件中。我们不会将您的凭据上传至任何非必要的第三方服务器。凭据的加密与机器码绑定，设备变更可能导致已存储的凭据无法访问。</p>
-        <p class="mb-3 text-justify"><strong>4.3 用户责任</strong>。您有责任妥善保管您的账户凭据。对于因您泄露凭据或共享账户而导致的任何损失或法律责任，我们不承担任何责任。</p>
+        <p><strong>4.2 账户信息安全</strong>。您的账户凭据（包括访问令牌）将存储于本地计算机的加密文件中。我们不会将您的凭据上传至任何非必要的第三方服务器。凭据的加密与机器码绑定，设备变更可能导致已存储的凭据无法访问。</p>
+        <p><strong>4.3 用户责任</strong>。您有责任妥善保管您的账户凭据。对于因您泄露凭据或共享账户而导致的任何损失或法律责任，我们不承担任何责任。</p>
 
         <div class="admonition danger">
           <strong>重要提示：</strong> 本软件不会以任何形式收集或存储您的 Microsoft 账户密码。Microsoft OAuth 流程完全在 Microsoft 平台上进行。
         </div>
       </section>
 
-      <section id="chap5" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第五章</span> 用户行为规范
-        </h2>
-        <p class="mb-3 text-justify"><strong>5.1 合法使用</strong>。您同意仅将本软件用于合法目的，并遵守所有适用的法律法规。您不得利用本软件从事任何违法活动。</p>
-        <p class="mb-3"><strong>5.2 禁止行为</strong>。在使用本软件时，您不得：</p>
-        <ul class="ml-6 mb-3 space-y-1.5">
-          <li class="text-justify">对本软件进行逆向工程、反编译或反汇编，除非适用的法律或 GPLv3 许可证明确允许；</li>
-          <li class="text-justify">将本软件用于任何侵犯第三方知识产权的行为；</li>
-          <li class="text-justify">利用本软件传播恶意软件、病毒或任何具有破坏性的代码；</li>
-          <li class="text-justify">以任何方式干扰或破坏本软件的正常运行；</li>
-          <li class="text-justify">违反 Mojang Studios 发布的《Minecraft 最终用户许可协议》（Minecraft EULA）；</li>
-          <li class="text-justify">将本软件用于任何商业目的，除非事先获得我们的书面许可。</li>
+      <section id="chap5">
+        <h2 class="text-lg font-semibold text-foreground">第五章 用户行为规范</h2>
+        <p><strong>5.1 合法使用</strong>。您同意仅将本软件用于合法目的，并遵守所有适用的法律法规。您不得利用本软件从事任何违法活动。</p>
+        <p><strong>5.2 禁止行为</strong>。在使用本软件时，您不得：</p>
+        <ul class="list-inside list-disc space-y-1.5">
+          <li>对本软件进行逆向工程、反编译或反汇编，除非适用的法律或 GPLv3 许可证明确允许；</li>
+          <li>将本软件用于任何侵犯第三方知识产权的行为；</li>
+          <li>利用本软件传播恶意软件、病毒或任何具有破坏性的代码；</li>
+          <li>以任何方式干扰或破坏本软件的正常运行；</li>
+          <li>违反 Mojang Studios 发布的《Minecraft 最终用户许可协议》（Minecraft EULA）；</li>
+          <li>将本软件用于任何商业目的，除非事先获得我们的书面许可。</li>
         </ul>
-        <p class="mb-3 text-justify"><strong>5.3 开源合规</strong>。本软件基于 GPLv3 许可证发布。您在行使 GPLv3 所授予的权利时，必须遵守该许可证的全部条款和条件。若本协议的任何条款与 GPLv3 存在冲突，以 GPLv3 为准。</p>
+        <p><strong>5.3 开源合规</strong>。本软件基于 GPLv3 许可证发布。您在行使 GPLv3 所授予的权利时，必须遵守该许可证的全部条款和条件。若本协议的任何条款与 GPLv3 存在冲突，以 GPLv3 为准。</p>
       </section>
 
-      <section id="chap6" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第六章</span> 第三方服务
-        </h2>
-        <p class="mb-3 text-justify"><strong>6.1 概述</strong>。本软件集成了多项第三方服务和 API，以便为您提供丰富的功能。这些第三方服务由各自的运营方独立维护。</p>
-        <p class="mb-3"><strong>6.2 第三方服务列表</strong>。本软件当前使用的第三方服务包括：</p>
-        <ul class="ml-6 mb-3 space-y-1.5">
-          <li class="text-justify"><strong>Modrinth API</strong>（<code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">https://api.modrinth.com/v2/</code>）：用于搜索和获取模组、资源包、整合包等资源信息。</li>
-          <li class="text-justify"><strong>CurseForge API</strong>（<code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">https://api.curseforge.com</code>）：用于搜索和获取 CurseForge 平台上的资源信息。</li>
-          <li class="text-justify"><strong>FTB API</strong>（<code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">https://api.feed-the-beast.com</code>）：用于获取 FTB 整合包信息。</li>
-          <li class="text-justify"><strong>Microsoft 身份验证服务</strong>：用于 Microsoft 账户的 OAuth 登录流程。</li>
-          <li class="text-justify"><strong>mclo.gs</strong>（<code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">https://api.mclo.gs/1/log</code>）：用于用户主动触发的崩溃日志分享。</li>
-          <li class="text-justify"><strong>mcmod.cn</strong>：用于获取模组的中文数据索引。</li>
-          <li class="text-justify"><strong>GitHub API</strong>（<code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">https://api.github.com</code>）：用于检查应用更新。</li>
-          <li class="text-justify"><strong>BMCLAPI / MCIM 镜像</strong>：用于加速 Minecraft 游戏文件和相关资源的下载。</li>
+      <section id="chap6">
+        <h2 class="text-lg font-semibold text-foreground">第六章 第三方服务</h2>
+        <p><strong>6.1 概述</strong>。本软件集成了多项第三方服务和 API，以便为您提供丰富的功能。这些第三方服务由各自的运营方独立维护。</p>
+        <p><strong>6.2 第三方服务列表</strong>。本软件当前使用的第三方服务包括：</p>
+        <ul class="list-inside list-disc space-y-1.5">
+          <li><strong>Modrinth API</strong>（<code class="rounded bg-muted px-1.5 py-0.5 text-xs">https://api.modrinth.com/v2/</code>）：用于搜索和获取模组、资源包、整合包等资源信息。</li>
+          <li><strong>CurseForge API</strong>（<code class="rounded bg-muted px-1.5 py-0.5 text-xs">https://api.curseforge.com</code>）：用于搜索和获取 CurseForge 平台上的资源信息。</li>
+          <li><strong>FTB API</strong>（<code class="rounded bg-muted px-1.5 py-0.5 text-xs">https://api.feed-the-beast.com</code>）：用于获取 FTB 整合包信息。</li>
+          <li><strong>Microsoft 身份验证服务</strong>：用于 Microsoft 账户的 OAuth 登录流程。</li>
+          <li><strong>mclo.gs</strong>（<code class="rounded bg-muted px-1.5 py-0.5 text-xs">https://api.mclo.gs/1/log</code>）：用于用户主动触发的崩溃日志分享。</li>
+          <li><strong>mcmod.cn</strong>：用于获取模组的中文数据索引。</li>
+          <li><strong>GitHub API</strong>（<code class="rounded bg-muted px-1.5 py-0.5 text-xs">https://api.github.com</code>）：用于检查应用更新。</li>
+          <li><strong>BMCLAPI / MCIM 镜像</strong>：用于加速 Minecraft 游戏文件和相关资源的下载。</li>
         </ul>
-        <p class="mb-3 text-justify"><strong>6.3 第三方服务免责</strong>。我们不对任何第三方服务的内容、可用性、准确性或合法性承担责任。您在使用第三方服务时应遵守该服务各自的条款与政策。任何因第三方服务引起的问题或争议，应由您与该第三方服务运营方自行解决。</p>
-        <p class="mb-3 text-justify"><strong>6.4 API 使用限制</strong>。第三方 API 可能设有访问频率限制或其他使用限制。我们不对因第三方 API 限制而导致的功能异常承担责任。</p>
+        <p><strong>6.3 第三方服务免责</strong>。我们不对任何第三方服务的内容、可用性、准确性或合法性承担责任。您在使用第三方服务时应遵守该服务各自的条款与政策。任何因第三方服务引起的问题或争议，应由您与该第三方服务运营方自行解决。</p>
+        <p><strong>6.4 API 使用限制</strong>。第三方 API 可能设有访问频率限制或其他使用限制。我们不对因第三方 API 限制而导致的功能异常承担责任。</p>
       </section>
 
-      <section id="chap7" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第七章</span> 知识产权
-        </h2>
-        <p class="mb-3 text-justify"><strong>7.1 本软件的知识产权</strong>。Qomicex Launcher 的源代码、文档和其他相关材料均受版权法和国际版权条约的保护。本软件根据 <strong>GNU General Public License v3.0（GPLv3）</strong> 开源许可证发布，您有权在遵守 GPLv3 条款的前提下使用、复制、修改和分发本软件。</p>
-        <p class="mb-3 text-justify"><strong>7.2 用户内容</strong>。您通过本软件创建、存储或管理的用户内容（包括但不限于游戏存档、截图、模组配置等）的知识产权归您或相应的权利人所有。您授予我们在提供本软件服务所必需的范围内使用这些内容的非独占、免许可费的许可。</p>
-        <p class="mb-3 text-justify"><strong>7.3 Minecraft 知识产权</strong>。Minecraft 游戏及相关品牌、标识、素材的知识产权归 Mojang Studios 及/或 Microsoft Corporation 所有。本软件与 Mojang Studios 及 Microsoft Corporation 无任何关联、赞助或授权关系。</p>
-        <p class="mb-3 text-justify"><strong>7.4 第三方资源</strong>。您通过本软件下载或访问的模组、资源包、整合包等资源的知识产权归其各自的创作者或权利人所有。您在使用这些资源时应遵守相应的许可条款。</p>
+      <section id="chap7">
+        <h2 class="text-lg font-semibold text-foreground">第七章 知识产权</h2>
+        <p><strong>7.1 本软件的知识产权</strong>。Qomicex Launcher 的源代码、文档和其他相关材料均受版权法和国际版权条约的保护。本软件根据 <strong>GNU General Public License v3.0（GPLv3）</strong> 开源许可证发布，您有权在遵守 GPLv3 条款的前提下使用、复制、修改和分发本软件。</p>
+        <p><strong>7.2 用户内容</strong>。您通过本软件创建、存储或管理的用户内容（包括但不限于游戏存档、截图、模组配置等）的知识产权归您或相应的权利人所有。您授予我们在提供本软件服务所必需的范围内使用这些内容的非独占、免许可费的许可。</p>
+        <p><strong>7.3 Minecraft 知识产权</strong>。Minecraft 游戏及相关品牌、标识、素材的知识产权归 Mojang Studios 及/或 Microsoft Corporation 所有。本软件与 Mojang Studios 及 Microsoft Corporation 无任何关联、赞助或授权关系。</p>
+        <p><strong>7.4 第三方资源</strong>。您通过本软件下载或访问的模组、资源包、整合包等资源的知识产权归其各自的创作者或权利人所有。您在使用这些资源时应遵守相应的许可条款。</p>
       </section>
 
-      <section id="chap8" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第八章</span> 隐私说明
-        </h2>
+      <section id="chap8">
+        <h2 class="text-lg font-semibold text-foreground">第八章 隐私说明</h2>
 
         <div class="admonition note">
           <strong>核心原则：本软件不包含任何遥测、分析或自动数据收集功能。</strong> 我们尊重您的隐私。
         </div>
 
-        <p class="mb-3 text-justify"><strong>8.1 本地存储的数据</strong>。本软件在您的本地计算机上存储以下数据：</p>
-        <ul class="ml-6 mb-3 space-y-1.5">
-          <li class="text-justify"><strong>应用设置</strong>：存储于 <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">&#123;数据目录&#125;/QML/settings.json</code>，包括界面偏好、下载设置、Java 路径等。</li>
-          <li class="text-justify"><strong>账户凭据</strong>：存储于 <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">&#123;数据目录&#125;/data/accounts.dat</code>，使用加密方式存储，与机器码绑定。</li>
-          <li class="text-justify"><strong>浏览器本地存储（localStorage）</strong>：包括更新频道偏好、更新推迟信息、管理的实例目录列表、视图模式偏好等。</li>
-          <li class="text-justify"><strong>Java 运行时信息</strong>：扫描到的系统 Java 安装信息缓存。</li>
-          <li class="text-justify"><strong>下载任务</strong>：未完成的下载任务信息缓存。</li>
+        <p><strong>8.1 本地存储的数据</strong>。本软件在您的本地计算机上存储以下数据：</p>
+        <ul class="list-inside list-disc space-y-1.5">
+          <li><strong>应用设置</strong>：存储于 <code class="rounded bg-muted px-1.5 py-0.5 text-xs">&#123;数据目录&#125;/QML/settings.json</code>，包括界面偏好、下载设置、Java 路径等。</li>
+          <li><strong>账户凭据</strong>：存储于 <code class="rounded bg-muted px-1.5 py-0.5 text-xs">&#123;数据目录&#125;/data/accounts.dat</code>，使用加密方式存储，与机器码绑定。</li>
+          <li><strong>浏览器本地存储（localStorage）</strong>：包括更新频道偏好、更新推迟信息、管理的实例目录列表、视图模式偏好等。</li>
+          <li><strong>Java 运行时信息</strong>：扫描到的系统 Java 安装信息缓存。</li>
+          <li><strong>下载任务</strong>：未完成的下载任务信息缓存。</li>
         </ul>
-        <p class="mb-3 text-justify">上述数据 <strong>全部存储在您的本地设备上</strong>，不会自动发送至任何远程服务器。</p>
+        <p>上述数据 <strong>全部存储在您的本地设备上</strong>，不会自动发送至任何远程服务器。</p>
 
-        <p class="mb-3 text-justify"><strong>8.2 崩溃日志上传</strong>。当您选择使用崩溃分析功能时，崩溃日志的内容会被发送至 <strong>mclo.gs</strong> 第三方服务以生成分享链接。这是 <strong>用户主动触发的行为</strong>，并非自动上传。上传前本软件会向您展示即将上传的内容。</p>
+        <p><strong>8.2 崩溃日志上传</strong>。当您选择使用崩溃分析功能时，崩溃日志的内容会被发送至 <strong>mclo.gs</strong> 第三方服务以生成分享链接。这是 <strong>用户主动触发的行为</strong>，并非自动上传。上传前本软件会向您展示即将上传的内容。</p>
 
-        <p class="mb-3"><strong>8.3 网络请求</strong>。本软件在正常使用过程中会向以下类型的服务器发起网络请求：</p>
-        <ul class="ml-6 mb-3 space-y-1.5">
-          <li class="text-justify"><strong>Minecraft 资源服务器</strong>：下载游戏文件、库文件和资源文件。</li>
-          <li class="text-justify"><strong>第三方 API 服务</strong>（Modrinth、CurseForge、FTB 等）：搜索和获取资源信息。</li>
-          <li class="text-justify"><strong>Microsoft 身份验证服务</strong>：处理账户登录流程。</li>
-          <li class="text-justify"><strong>GitHub API</strong>：检查应用更新。</li>
-          <li class="text-justify"><strong>镜像服务器</strong>（BMCLAPI、MCIM 等）：加速下载。</li>
-          <li class="text-justify"><strong>自定义认证服务器</strong>：根据您的配置连接 Yggdrasil 认证服务器。</li>
+        <p><strong>8.3 网络请求</strong>。本软件在正常使用过程中会向以下类型的服务器发起网络请求：</p>
+        <ul class="list-inside list-disc space-y-1.5">
+          <li><strong>Minecraft 资源服务器</strong>：下载游戏文件、库文件和资源文件。</li>
+          <li><strong>第三方 API 服务</strong>（Modrinth、CurseForge、FTB 等）：搜索和获取资源信息。</li>
+          <li><strong>Microsoft 身份验证服务</strong>：处理账户登录流程。</li>
+          <li><strong>GitHub API</strong>：检查应用更新。</li>
+          <li><strong>镜像服务器</strong>（BMCLAPI、MCIM 等）：加速下载。</li>
+          <li><strong>自定义认证服务器</strong>：根据您的配置连接 Yggdrasil 认证服务器。</li>
         </ul>
-        <p class="mb-3 text-justify">以上请求均基于您主动触发的操作，不包含隐形的数据上报。</p>
+        <p>以上请求均基于您主动触发的操作，不包含隐形的数据上报。</p>
 
-        <p class="mb-3 text-justify"><strong>8.4 数据保留与删除</strong>。您可以通过重置应用设置或手动删除数据目录来清除所有本地数据。停用本软件后，本地存储的数据将继续存在于您的设备上，直至您主动删除。</p>
+        <p><strong>8.4 数据保留与删除</strong>。您可以通过重置应用设置或手动删除数据目录来清除所有本地数据。停用本软件后，本地存储的数据将继续存在于您的设备上，直至您主动删除。</p>
 
-        <p class="mb-3"><strong>8.5 第三方隐私政策</strong>。本软件集成的第三方服务有其独立的隐私政策。我们建议您查阅以下隐私政策：</p>
-        <ul class="ml-6 mb-3 space-y-1.5">
-          <li><a href="https://privacy.microsoft.com" target="_blank" class="text-primary underline underline-offset-2 hover:opacity-85">Microsoft 隐私声明</a></li>
-          <li><a href="https://modrinth.com/legal/privacy" target="_blank" class="text-primary underline underline-offset-2 hover:opacity-85">Modrinth 隐私政策</a></li>
-          <li><a href="https://www.overwolf.com/legal/privacy" target="_blank" class="text-primary underline underline-offset-2 hover:opacity-85">CurseForge 隐私政策</a></li>
-          <li><a href="https://aternos.gmbh/en/mclogs/privacy" target="_blank" class="text-primary underline underline-offset-2 hover:opacity-85">mclo.gs 隐私政策</a></li>
+        <p><strong>8.5 第三方隐私政策</strong>。本软件集成的第三方服务有其独立的隐私政策。我们建议您查阅以下隐私政策：</p>
+        <ul class="list-inside list-disc space-y-1.5">
+          <li><a href="https://privacy.microsoft.com" class="text-primary underline underline-offset-2" target="_blank">Microsoft 隐私声明</a></li>
+          <li><a href="https://modrinth.com/legal/privacy" class="text-primary underline underline-offset-2" target="_blank">Modrinth 隐私政策</a></li>
+          <li><a href="https://www.overwolf.com/legal/privacy" class="text-primary underline underline-offset-2" target="_blank">CurseForge 隐私政策</a></li>
+          <li><a href="https://aternos.gmbh/en/mclogs/privacy" class="text-primary underline underline-offset-2" target="_blank">mclo.gs 隐私政策</a></li>
         </ul>
       </section>
 
-      <section id="chap9" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第九章</span> 免责声明
-        </h2>
+      <section id="chap9">
+        <h2 class="text-lg font-semibold text-foreground">第九章 免责声明</h2>
 
         <div class="admonition warning">
           <strong>免责声明：</strong> 本软件按"现状"和"可用"基础提供，不附带任何明示或暗示的保证。
         </div>
 
-        <p class="mb-3">在法律允许的最大范围内，我们明确声明不承担任何形式的保证，包括但不限于：</p>
-        <ul class="ml-6 mb-3 space-y-1.5">
-          <li class="text-justify">本软件将满足您的全部需求或期望；</li>
-          <li class="text-justify">本软件的操作不会中断、及时、安全或无错误；</li>
-          <li class="text-justify">通过本软件获得的任何信息或内容的准确性、可靠性或完整性；</li>
-          <li class="text-justify">本软件中的缺陷将被纠正。</li>
+        <p><strong>9.1 无保证</strong>。在法律允许的最大范围内，我们明确声明不承担任何形式的保证，包括但不限于：</p>
+        <ul class="list-inside list-disc space-y-1.5">
+          <li>本软件将满足您的全部需求或期望；</li>
+          <li>本软件的操作不会中断、及时、安全或无错误；</li>
+          <li>通过本软件获得的任何信息或内容的准确性、可靠性或完整性；</li>
+          <li>本软件中的缺陷将被纠正。</li>
         </ul>
 
-        <p class="mb-3 text-justify"><strong>9.2 与 Mojang/Microsoft 无关</strong>。本软件是一款独立的第三方工具，与 Mojang Studios、Microsoft Corporation 或其关联公司无任何关联、赞助、认可或授权关系。Minecraft 是 Mojang AB 的商标。</p>
-        <p class="mb-3 text-justify"><strong>9.3 模组与第三方资源</strong>。您通过本软件下载、安装或使用的任何模组、资源包、整合包或其他第三方资源，均非由我们提供或保证。对于这些资源的质量、安全性、合法性或适用性，我们不承担任何责任。</p>
-        <p class="mb-3 text-justify"><strong>9.4 测试版本</strong>。本软件目前处于测试阶段，可能存在未发现的缺陷或兼容性问题。您自愿承担使用测试版本的全部风险。</p>
+        <p><strong>9.2 与 Mojang/Microsoft 无关</strong>。本软件是一款独立的第三方工具，与 Mojang Studios、Microsoft Corporation 或其关联公司无任何关联、赞助、认可或授权关系。Minecraft 是 Mojang AB 的商标。</p>
+
+        <p><strong>9.3 模组与第三方资源</strong>。您通过本软件下载、安装或使用的任何模组、资源包、整合包或其他第三方资源，均非由我们提供或保证。对于这些资源的质量、安全性、合法性或适用性，我们不承担任何责任。</p>
+
+        <p><strong>9.4 测试版本</strong>。本软件目前处于测试阶段，可能存在未发现的缺陷或兼容性问题。您自愿承担使用测试版本的全部风险。</p>
       </section>
 
-      <section id="chap10" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第十章</span> 责任限制
-        </h2>
-        <p class="mb-3 text-justify"><strong>10.1</strong> 在法律允许的最大范围内，我们及我们的贡献者、许可方或关联方，在任何情况下均不对因使用或无法使用本软件而引起的任何间接的、附带的、特殊的、后果性的或惩罚性的损害赔偿承担责任，包括但不限于数据丢失、业务中断、利润损失、商誉损失或软件故障。</p>
-        <p class="mb-3 text-justify"><strong>10.2</strong> 即使我们已被告知可能发生此类损害，上述责任限制仍然适用。某些司法管辖区不允许排除或限制某些保证或责任，因此上述限制可能不适用于您。在此类情况下，我们的责任将限制在适用法律允许的最小范围内。</p>
-        <p class="mb-3 text-justify"><strong>10.3</strong> 无论基于何种法律理论（合同、侵权、严格责任或其他），我们的累计赔偿责任总额不超过您在索赔发生前六个月内为使用本软件所支付的任何费用（如有）。</p>
+      <section id="chap10">
+        <h2 class="text-lg font-semibold text-foreground">第十章 责任限制</h2>
+        <p><strong>10.1</strong> 在法律允许的最大范围内，我们及我们的贡献者、许可方或关联方，在任何情况下均不对因使用或无法使用本软件而引起的任何间接的、附带的、特殊的、后果性的或惩罚性的损害赔偿承担责任，包括但不限于数据丢失、业务中断、利润损失、商誉损失或软件故障。</p>
+        <p><strong>10.2</strong> 即使我们已被告知可能发生此类损害，上述责任限制仍然适用。某些司法管辖区不允许排除或限制某些保证或责任，因此上述限制可能不适用于您。在此类情况下，我们的责任将限制在适用法律允许的最小范围内。</p>
+        <p><strong>10.3</strong> 无论基于何种法律理论（合同、侵权、严格责任或其他），我们的累计赔偿责任总额不超过您在索赔发生前六个月内为使用本软件所支付的任何费用（如有）。</p>
       </section>
 
-      <section id="chap11" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第十一章</span> 协议终止
-        </h2>
-        <p class="mb-3 text-justify"><strong>11.1 自愿终止</strong>。您可以随时停止使用本软件并删除本软件的所有副本，无需另行通知。</p>
-        <p class="mb-3 text-justify"><strong>11.2 违约终止</strong>。如果您违反本协议的任何条款，我们授予您的所有权利将自动终止，无需另行通知。终止后，您必须立即停止使用本软件并删除所有副本。</p>
-        <p class="mb-3 text-justify"><strong>11.3 终止效力</strong>。本协议终止后，以下条款仍然有效：第七章（知识产权）、第八章（隐私说明）、第九章（免责声明）、第十章（责任限制）、第十二章（法律管辖与争议解决）以及第十三章（协议变更）。</p>
+      <section id="chap11">
+        <h2 class="text-lg font-semibold text-foreground">第十一章 协议终止</h2>
+        <p><strong>11.1 自愿终止</strong>。您可以随时停止使用本软件并删除本软件的所有副本，无需另行通知。</p>
+        <p><strong>11.2 违约终止</strong>。如果您违反本协议的任何条款，我们授予您的所有权利将自动终止，无需另行通知。终止后，您必须立即停止使用本软件并删除所有副本。</p>
+        <p><strong>11.3 终止效力</strong>。本协议终止后，以下条款仍然有效：第七章（知识产权）、第八章（隐私说明）、第九章（免责声明）、第十章（责任限制）、第十二章（法律管辖与争议解决）以及第十三章（协议变更）。</p>
       </section>
 
-      <section id="chap12" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第十二章</span> 法律管辖与争议解决
-        </h2>
-        <p class="mb-3 text-justify"><strong>12.1 适用法律</strong>。本协议的订立、效力、解释、履行及争议解决，均适用 <strong>中华人民共和国法律</strong>（为本协议之目的，不包括香港特别行政区、澳门特别行政区和台湾地区的法律）。</p>
-        <p class="mb-3 text-justify"><strong>12.2 争议解决</strong>。因本协议引起的或与本协议有关的任何争议，双方应首先通过友好协商解决。协商不成的，任何一方均可将争议提交至 <strong>开发者所在地有管辖权的人民法院</strong> 诉讼解决。</p>
-        <p class="mb-3 text-justify"><strong>12.3 可分割性</strong>。如果本协议的任何条款被认定为无效或不可执行，其余条款仍然完全有效。</p>
+      <section id="chap12">
+        <h2 class="text-lg font-semibold text-foreground">第十二章 法律管辖与争议解决</h2>
+        <p><strong>12.1 适用法律</strong>。本协议的订立、效力、解释、履行及争议解决，均适用 <strong>中华人民共和国法律</strong>（为本协议之目的，不包括香港特别行政区、澳门特别行政区和台湾地区的法律）。</p>
+        <p><strong>12.2 争议解决</strong>。因本协议引起的或与本协议有关的任何争议，双方应首先通过友好协商解决。协商不成的，任何一方均可将争议提交至 <strong>开发者所在地有管辖权的人民法院</strong> 诉讼解决。</p>
+        <p><strong>12.3 可分割性</strong>。如果本协议的任何条款被认定为无效或不可执行，其余条款仍然完全有效。</p>
       </section>
 
-      <section id="chap13" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第十三章</span> 协议变更
-        </h2>
-        <p class="mb-3 text-justify"><strong>13.1</strong> 我们保留随时修改本协议的权利。当本协议发生实质性变更时，我们将在本软件的下一次更新中通知您，或在网站上公布最新版本。</p>
-        <p class="mb-3 text-justify"><strong>13.2</strong> 修改后的协议将在发布后立即生效。您在协议变更后继续使用本软件，即表示您接受修改后的协议。如果您不同意修改后的协议，您应停止使用本软件。</p>
-        <p class="mb-3 text-justify"><strong>13.3</strong> 我们建议您定期查阅本协议，以了解最新的条款和条件。本协议页面将始终标注"最后更新"日期。</p>
+      <section id="chap13">
+        <h2 class="text-lg font-semibold text-foreground">第十三章 协议变更</h2>
+        <p><strong>13.1</strong> 我们保留随时修改本协议的权利。当本协议发生实质性变更时，我们将在本软件的下一次更新中通知您，或在网站上公布最新版本。</p>
+        <p><strong>13.2</strong> 修改后的协议将在发布后立即生效。您在协议变更后继续使用本软件，即表示您接受修改后的协议。如果您不同意修改后的协议，您应停止使用本软件。</p>
+        <p><strong>13.3</strong> 我们建议您定期查阅本协议，以了解最新的条款和条件。本协议页面将始终标注"最后更新"日期。</p>
       </section>
 
-      <section id="chap14" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">第十四章</span> 联系方式
-        </h2>
-        <p class="mb-3">如您对本协议或本软件有任何疑问、意见或投诉，您可以通过以下方式与我们联系：</p>
-        <ul class="ml-6 mb-3 space-y-1.5">
-          <li><strong>GitHub Issues</strong>：<a href="https://github.com/Qomicex-Public/Qomicex.Tauri/issues" target="_blank" class="text-primary underline underline-offset-2 hover:opacity-85">https://github.com/Qomicex-Public/Qomicex.Tauri/issues</a></li>
+      <section id="chap14">
+        <h2 class="text-lg font-semibold text-foreground">第十四章 联系方式</h2>
+        <p>如您对本协议或本软件有任何疑问、意见或投诉，您可以通过以下方式与我们联系：</p>
+        <ul class="list-inside list-disc space-y-1.5">
+          <li><strong>GitHub Issues</strong>：<a href="https://github.com/Qomicex-Public/Qomicex.Tauri/issues" class="text-primary underline underline-offset-2" target="_blank">https://github.com/Qomicex-Public/Qomicex.Tauri/issues</a></li>
           <li><strong>QQ 群组</strong>：请访问我们的 GitHub 仓库获取最新群组信息</li>
-          <li><strong>项目主页</strong>：<a href="https://github.com/Qomicex-Public/Qomicex.Tauri" target="_blank" class="text-primary underline underline-offset-2 hover:opacity-85">https://github.com/Qomicex-Public/Qomicex.Tauri</a></li>
-          <li><strong>项目官网</strong>：<a href="https://www.qomicex.top/" target="_blank" class="text-primary underline underline-offset-2 hover:opacity-85">https://www.qomicex.top/</a></li>
+          <li><strong>项目主页</strong>：<a href="https://github.com/Qomicex-Public/Qomicex.Tauri" class="text-primary underline underline-offset-2" target="_blank">https://github.com/Qomicex-Public/Qomicex.Tauri</a></li>
+          <li><strong>项目官网</strong>：<a href="https://www.qomicex.top/" class="text-primary underline underline-offset-2" target="_blank">https://www.qomicex.top/</a></li>
         </ul>
-        <p class="mb-3">我们将在合理时间内回复您的咨询。</p>
+        <p class="mt-3">我们将在合理时间内回复您的咨询。</p>
       </section>
 
-      <section id="appendix" class="rounded-xl border border-border bg-card p-8">
-        <h2 class="text-lg font-bold text-foreground mb-5 pb-2.5 border-b border-border">
-          <span class="text-primary mr-2">附则</span>
-        </h2>
-        <p class="mb-3 text-justify"><strong>1. 完整协议</strong>。本协议构成您与我们之间就使用本软件所达成的完整协议，取代双方之前就此主题达成的任何口头或书面协议或谅解。</p>
-        <p class="mb-3 text-justify"><strong>2. 弃权</strong>。我们未能执行本协议的任何条款，不应被视为对该条款或权利的放弃。</p>
-        <p class="mb-3 text-justify"><strong>3. 不可抗力</strong>。因自然灾害、战争、政府行为、互联网故障等不可抗力因素导致无法履行本协议的，受影响方不承担违约责任。</p>
-        <p class="mb-3 text-justify"><strong>4. 不设第三方受益人</strong>。除本协议双方外，任何第三方不得作为本协议的受益人执行本协议的任何条款。</p>
-        <p class="mb-3 text-justify"><strong>5. 生效日期</strong>。本协议自 <strong>2026 年 7 月 15 日</strong> 起生效。</p>
+      <section id="appendix">
+        <h2 class="text-lg font-semibold text-foreground">附则</h2>
+        <p><strong>1. 完整协议</strong>。本协议构成您与我们之间就使用本软件所达成的完整协议，取代双方之前就此主题达成的任何口头或书面协议或谅解。</p>
+        <p><strong>2. 弃权</strong>。我们未能执行本协议的任何条款，不应被视为对该条款或权利的放弃。</p>
+        <p><strong>3. 不可抗力</strong>。因自然灾害、战争、政府行为、互联网故障等不可抗力因素导致无法履行本协议的，受影响方不承担违约责任。</p>
+        <p><strong>4. 不设第三方受益人</strong>。除本协议双方外，任何第三方不得作为本协议的受益人执行本协议的任何条款。</p>
+        <p><strong>5. 生效日期</strong>。本协议自 <strong>2026 年 7 月 15 日</strong> 起生效。</p>
       </section>
-
-      <footer class="text-center pt-10 text-sm text-muted-foreground">
-        <p>Qomicex Launcher &copy; 2026 Qomicex 开发团队。基于 <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank" class="text-primary underline underline-offset-2 hover:opacity-85">GNU General Public License v3.0</a> 发布。</p>
-        <p class="mt-1">Minecraft 是 Mojang AB 的商标。本软件与 Mojang Studios 或 Microsoft Corporation 无关联。</p>
-      </footer>
     </div>
-  </div>
+
+    <div class="mt-10 border-t pt-6 text-center text-xs text-muted-foreground">
+      <p>Qomicex Launcher &copy; 2026 Qomicex 开发团队。基于 <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" class="text-primary underline underline-offset-2" target="_blank">GNU General Public License v3.0</a> 发布。</p>
+      <p class="mt-1">Minecraft 是 Mojang AB 的商标。本软件与 Mojang Studios 或 Microsoft Corporation 无关联。</p>
+    </div>
+  </section>
 </Base>
