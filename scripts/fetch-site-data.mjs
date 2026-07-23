@@ -37,7 +37,7 @@ function detectPlatform(name) {
 const releases = await fetchJSON(`https://api.github.com/repos/${REPO}/releases`, 'releases.json')
 const contributors = await fetchJSON(`https://api.github.com/repos/${REPO}/contributors`, 'contributors.json')
 
-const normalized = (releases || []).map(r => ({
+const normalized = (releases || []).filter(r => !r.prerelease || r.tag_name.toLowerCase().includes('beta')).map(r => ({
   tagName: r.tag_name,
   version: r.tag_name.replace(/^v/, ''),
   prerelease: r.prerelease,
