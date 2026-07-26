@@ -23,12 +23,6 @@ async function fetchJSON(url, fallbackFile) {
   return null
 }
 
-function parseShieldsNumber(s) {
-  const n = s.replace(/,/g, '')
-  if (n.endsWith('k')) return Math.round(parseFloat(n) * 1000)
-  return parseInt(n, 10) || 0
-}
-
 function detectPlatform(name) {
   const n = name.toLowerCase()
   if (n.includes('windows') || n.includes('win') || n.includes('.msi') || n.includes('.exe')) return 'windows'
@@ -71,7 +65,7 @@ if (releases) {
     const res = await fetch('https://img.shields.io/github/downloads/Qomicex-Public/Qomicex.Tauri/total.json')
     if (res.ok) {
       const shields = await res.json()
-      if (shields?.message) updateCheckCount = parseShieldsNumber(shields.message)
+      if (shields?.message) updateCheckCount = shields.message
     }
   } catch {}
 }
