@@ -1,5 +1,503 @@
 [
   {
+    "tagName": "v0.1.0-beta7.0",
+    "version": "0.1.0-beta7.0",
+    "prerelease": true,
+    "publishedAt": "2026-07-26T07:57:33Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-beta7.0",
+    "assets": [
+      {
+        "name": "latest.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/latest.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-beta7.0-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/qomicex-launcher-0.1.0-beta7.0-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-beta7.0-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/qomicex-launcher-0.1.0-beta7.0-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta7.0_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/qomicex-launcher_0.1.0-beta7.0_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta7.0_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/qomicex-launcher_0.1.0-beta7.0_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta7.0_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/qomicex-launcher_0.1.0-beta7.0_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta7.0_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/qomicex-launcher_0.1.0-beta7.0_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta7.0_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/qomicex-launcher_0.1.0-beta7.0_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta7.0_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/qomicex-launcher_0.1.0-beta7.0_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta7.0_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/qomicex-launcher_v0.1.0-beta7.0_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta7.0_arm64.dmg.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/qomicex-launcher_v0.1.0-beta7.0_arm64.dmg.sig",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta7.0_x86_64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/qomicex-launcher_v0.1.0-beta7.0_x86_64.dmg",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta7.0_x86_64.dmg.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta7.0/qomicex-launcher_v0.1.0-beta7.0_x86_64.dmg.sig",
+        "platform": "macos-intel"
+      }
+    ],
+    "changes": [
+      "--",
+      "重构启动器 UI，统一动画、图标颜色、Tab 组件和设计规范，布局更合理",
+      "重做启动器动画系统",
+      "支持资源详情多翻译接口（MC百科等）",
+      "外观设置支持圆角控制，默认 8px 匹配 Windows 11",
+      "启动器前端支持自定义 FPS 限制",
+      "版本隔离路径不匹配导致本地资源无法获取（Create+ 等实例）",
+      "圆角设置不生效",
+      "主题切换和各项设置持久化修复"
+    ]
+  },
+  {
+    "tagName": "v0.1.0-beta6.0",
+    "version": "0.1.0-beta6.0",
+    "prerelease": true,
+    "publishedAt": "2026-07-25T16:59:08Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-beta6.0",
+    "assets": [
+      {
+        "name": "latest.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/latest.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-beta6.0-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/qomicex-launcher-0.1.0-beta6.0-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-beta6.0-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/qomicex-launcher-0.1.0-beta6.0-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta6.0_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/qomicex-launcher_0.1.0-beta6.0_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta6.0_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/qomicex-launcher_0.1.0-beta6.0_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta6.0_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/qomicex-launcher_0.1.0-beta6.0_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta6.0_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/qomicex-launcher_0.1.0-beta6.0_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta6.0_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/qomicex-launcher_0.1.0-beta6.0_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta6.0_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/qomicex-launcher_0.1.0-beta6.0_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta6.0_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/qomicex-launcher_v0.1.0-beta6.0_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta6.0_arm64.dmg.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/qomicex-launcher_v0.1.0-beta6.0_arm64.dmg.sig",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta6.0_x86_64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/qomicex-launcher_v0.1.0-beta6.0_x86_64.dmg",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta6.0_x86_64.dmg.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta6.0/qomicex-launcher_v0.1.0-beta6.0_x86_64.dmg.sig",
+        "platform": "macos-intel"
+      }
+    ],
+    "changes": [
+      "--",
+      "**Windows Fluent 标题栏**：替换默认标题栏为 Windows Fluent 风格",
+      "全局禁用右键菜单和图片拖拽",
+      "修复 Java 下载时文件被自身占用导致解压失败（释放 stream 后才能解压）",
+      "修复 Java 下载日志写入 + 添加无效 Java 前端反馈",
+      "移除日志内置预览，改为系统默认方式打开",
+      "ErrorHandlingMiddleware 按状态码分级记录日志",
+      "添加 ILogger 到 JavaDownloadService"
+    ]
+  },
+  {
+    "tagName": "v0.1.0-beta5.0",
+    "version": "0.1.0-beta5.0",
+    "prerelease": true,
+    "publishedAt": "2026-07-25T12:19:04Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-beta5.0",
+    "assets": [
+      {
+        "name": "latest.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/latest.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-beta5.0-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/qomicex-launcher-0.1.0-beta5.0-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-beta5.0-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/qomicex-launcher-0.1.0-beta5.0-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta5.0_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/qomicex-launcher_0.1.0-beta5.0_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta5.0_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/qomicex-launcher_0.1.0-beta5.0_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta5.0_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/qomicex-launcher_0.1.0-beta5.0_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta5.0_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/qomicex-launcher_0.1.0-beta5.0_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta5.0_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/qomicex-launcher_0.1.0-beta5.0_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta5.0_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/qomicex-launcher_0.1.0-beta5.0_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta5.0_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/qomicex-launcher_v0.1.0-beta5.0_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta5.0_arm64.dmg.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/qomicex-launcher_v0.1.0-beta5.0_arm64.dmg.sig",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta5.0_x86_64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/qomicex-launcher_v0.1.0-beta5.0_x86_64.dmg",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta5.0_x86_64.dmg.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta5.0/qomicex-launcher_v0.1.0-beta5.0_x86_64.dmg.sig",
+        "platform": "macos-intel"
+      }
+    ],
+    "changes": [
+      "--",
+      "**下载器迁移**：迁移到 Qomicex.Downloader.Refactor，修复 HEAD 探测卡死问题",
+      "**下载进度日志**：下载器 LogProgress 输出到 Trace.WriteLine，便于诊断",
+      "修复删除实例时同步删除版本文件夹，防止扫描重新发现",
+      "修复启动修复流程从当前设置读取镜像源，而非使用启动时快照",
+      "修复联机扫描逻辑：不阻塞启动、LAN 广播验证、NAT 检测快速重试",
+      "修复下载失败时输出 URL 和路径，方便排查",
+      "修复 Forge library 404 URLs 及 CTS ObjectDisposedException",
+      "修复 installer jar 用 ZipArchive 预验证，损坏时自动重新下载",
+      "修复 loaderJarTask 等待顺序：先 await 完成再获取缺失库",
+      "修复游戏退出时递增 playTime 和更新 lastPlayed",
+      "修复自定义下载任务无安装日志问题",
+      "更新 Qomicex.Downloader.Refactor 子模块",
+      "添加 Phase 4 挂起诊断日志 + 零字节 installer jar 处理"
+    ]
+  },
+  {
+    "tagName": "v0.1.0-beta4.0",
+    "version": "0.1.0-beta4.0",
+    "prerelease": true,
+    "publishedAt": "2026-07-24T14:55:46Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-beta4.0",
+    "assets": [
+      {
+        "name": "latest.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/latest.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-beta4.0-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/qomicex-launcher-0.1.0-beta4.0-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-beta4.0-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/qomicex-launcher-0.1.0-beta4.0-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta4.0_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/qomicex-launcher_0.1.0-beta4.0_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta4.0_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/qomicex-launcher_0.1.0-beta4.0_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta4.0_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/qomicex-launcher_0.1.0-beta4.0_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta4.0_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/qomicex-launcher_0.1.0-beta4.0_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta4.0_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/qomicex-launcher_0.1.0-beta4.0_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta4.0_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/qomicex-launcher_0.1.0-beta4.0_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta4.0_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/qomicex-launcher_v0.1.0-beta4.0_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta4.0_arm64.dmg.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/qomicex-launcher_v0.1.0-beta4.0_arm64.dmg.sig",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta4.0_x86_64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/qomicex-launcher_v0.1.0-beta4.0_x86_64.dmg",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta4.0_x86_64.dmg.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta4.0/qomicex-launcher_v0.1.0-beta4.0_x86_64.dmg.sig",
+        "platform": "macos-intel"
+      }
+    ],
+    "changes": [
+      "--",
+      "修复 .exe 安装器使用 spawn+exit 方式启动，避免进程残留",
+      "修复安装阶段并行等待问题，确保所有阶段完成后才判定失败",
+      "修复下载批次失败后自动独立重试失败文件，避免单文件拖垮整个批次",
+      "修复后端加载时 titlebar 可见性，使用 toast 提示设置保存结果",
+      "更新器支持 Markdown changelog 展示，设置页新增更新对话框入口",
+      "BMCLAPI 禁用分段下载，避免部分 CDN 兼容性问题",
+      "BMCLAPI 延迟错峰 29 秒，降低并发压力",
+      "BMCLAPI 非致命错误不计数、自动重试",
+      "大文件超时调整、下载日志增强",
+      "429 退避时间调整为 10 秒",
+      "文件级重试增加重试延迟"
+    ]
+  },
+  {
+    "tagName": "v0.1.0-beta3.0.0",
+    "version": "0.1.0-beta3.0.0",
+    "prerelease": true,
+    "publishedAt": "2026-07-24T13:54:07Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-beta3.0.0",
+    "assets": [
+      {
+        "name": "latest.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/latest.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-beta3.0.0-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/qomicex-launcher-0.1.0-beta3.0.0-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-beta3.0.0-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/qomicex-launcher-0.1.0-beta3.0.0-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta3.0.0_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/qomicex-launcher_0.1.0-beta3.0.0_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta3.0.0_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/qomicex-launcher_0.1.0-beta3.0.0_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta3.0.0_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/qomicex-launcher_0.1.0-beta3.0.0_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta3.0.0_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/qomicex-launcher_0.1.0-beta3.0.0_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta3.0.0_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/qomicex-launcher_0.1.0-beta3.0.0_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta3.0.0_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/qomicex-launcher_0.1.0-beta3.0.0_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta3.0.0_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/qomicex-launcher_v0.1.0-beta3.0.0_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta3.0.0_arm64.dmg.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/qomicex-launcher_v0.1.0-beta3.0.0_arm64.dmg.sig",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta3.0.0_x86_64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/qomicex-launcher_v0.1.0-beta3.0.0_x86_64.dmg",
+        "platform": "macos-intel"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta3.0.0_x86_64.dmg.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta3.0.0/qomicex-launcher_v0.1.0-beta3.0.0_x86_64.dmg.sig",
+        "platform": "macos-intel"
+      }
+    ],
+    "changes": [
+      "--",
+      "**整合包安装**：接入整合包安装功能，支持在线整合包一键安装",
+      "修复 Forge 版本号中 - 替换为 _ 以正确识别预发布版本",
+      "修复 1.7.10 Forge natives classifier 路径问题（更新 Core.AOT 子模块）",
+      "修复私有节点获取 UA 改为 QML/{version} 格式以获取专属节点",
+      "抽取 getLoadersForVersion 统一 loader 展示逻辑",
+      "DMG 添加 /Applications 符号链接，支持拖拽安装",
+      "修复 macos-x64 job 中 arm64 产物 DMG 文件名错误"
+    ]
+  },
+  {
+    "tagName": "v0.1.0-beta2.0",
+    "version": "0.1.0-beta2.0",
+    "prerelease": true,
+    "publishedAt": "2026-07-23T19:12:41Z",
+    "htmlUrl": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/tag/v0.1.0-beta2.0",
+    "assets": [
+      {
+        "name": "latest.json",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta2.0/latest.json"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-beta2.0-1.aarch64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta2.0/qomicex-launcher-0.1.0-beta2.0-1.aarch64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher-0.1.0-beta2.0-1.x86_64.rpm",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta2.0/qomicex-launcher-0.1.0-beta2.0-1.x86_64.rpm",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta2.0_aarch64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta2.0/qomicex-launcher_0.1.0-beta2.0_aarch64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta2.0_amd64.AppImage",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta2.0/qomicex-launcher_0.1.0-beta2.0_amd64.AppImage",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta2.0_amd64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta2.0/qomicex-launcher_0.1.0-beta2.0_amd64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta2.0_arm64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta2.0/qomicex-launcher_0.1.0-beta2.0_arm64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta2.0_arm64.deb",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta2.0/qomicex-launcher_0.1.0-beta2.0_arm64.deb",
+        "platform": "linux"
+      },
+      {
+        "name": "qomicex-launcher_0.1.0-beta2.0_x64-setup.exe",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta2.0/qomicex-launcher_0.1.0-beta2.0_x64-setup.exe",
+        "platform": "windows"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta2.0_arm64.dmg",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta2.0/qomicex-launcher_v0.1.0-beta2.0_arm64.dmg",
+        "platform": "macos-arm"
+      },
+      {
+        "name": "qomicex-launcher_v0.1.0-beta2.0_arm64.dmg.sig",
+        "url": "https://github.com/Qomicex-Public/Qomicex.Tauri/releases/download/v0.1.0-beta2.0/qomicex-launcher_v0.1.0-beta2.0_arm64.dmg.sig",
+        "platform": "macos-arm"
+      }
+    ],
+    "changes": [
+      "--",
+      "**联机节点 API 更换**：更换联机节点获取 API，提升连接稳定性",
+      "修复 alpha 许可证激活后渠道选择仅显示 Alpha",
+      "修复 alpha 渠道更新检查范围（仅检查 alpha，不包含 beta/stable）",
+      "修复端口扫描和进程参数读取的两个问题",
+      "修复后端启动失败/loading 页面位置偏移（移出 Layout 容器）",
+      "重构更新检查为 API 驱动架构，简化前端更新逻辑"
+    ]
+  },
+  {
     "tagName": "v0.1.0-beta1.0",
     "version": "0.1.0-beta1.0",
     "prerelease": true,
@@ -61,6 +559,28 @@
         "platform": "macos-arm"
       }
     ],
-    "changes": []
+    "changes": [
+      "--",
+      "**公告系统**：新增公告 API 代理及仪表盘公告卡片",
+      "**许可证验证**：集成许可证验证机制，支持构建时开关",
+      "**完整 CI/CD**：新增结构化版本输入的 release workflow，支持跨平台构建",
+      "**tauri-updater**：集成 tauri-plugin-updater，配置签名密钥和自动更新",
+      "**后端 API 扩展**：扩展后端端点及前端组件优化",
+      "修复 CurseForge 搜索分页、classId 和 ProjectUrl 路径问题",
+      "修复 CurseForge CDN 下载缺少 x-api-key header",
+      "修复 Java 版本解析、类型检测及 JSON 枚举序列化",
+      "修复 UI 删除操作后清除选中状态、截图改为后端 API 加载",
+      "修复 Forge/NeoForge 实例原版版本识别错误",
+      "修复版本隔离路径和资源安装弹窗预选版本",
+      "修复对话框关闭回退和背景模糊渲染问题",
+      "修复 UI 滚动布局在 merge 后错乱",
+      "统一实例详情标签批量选择和悬浮工具条",
+      "统一页面滚动布局（flex-1 min-h-0 模式）",
+      "修复 macOS 签名参数语法、env 缩进、release job 权限",
+      "为全部平台添加诊断和手动签名步骤",
+      "清理旧 Backend 和 Core 子模块",
+      "更新 Core.AOT 子模块，适配破坏性更新",
+      "更新 README 和 .gitignore"
+    ]
   }
 ]
