@@ -23,6 +23,12 @@ async function fetchJSON(url, fallbackFile) {
   return null
 }
 
+function parseShieldsNumber(s) {
+  const n = s.replace(/,/g, '')
+  if (n.endsWith('k')) return Math.round(parseFloat(n) * 1000)
+  return parseInt(n, 10) || 0
+}
+
 function detectPlatform(name) {
   const n = name.toLowerCase()
   if (n.includes('windows') || n.includes('win') || n.includes('.msi') || n.includes('.exe')) return 'windows'
@@ -61,12 +67,13 @@ if (releases) {
     if (ghapi && typeof ghapi.total === 'number') totalInstallerDownloads = ghapi.total
   } catch {}
 
-  for (const r of releases) {
-    for (const a of (r.assets || [])) {
-      if (a.name === 'latest.json' || a.name === 'alpha.json') updateCheckCount += (a.download_count || 0)
-      if (a.name === 'release.json') releaseCheckCount += (a.download_count || 0)
+  try {
+    const res = await fetch('https://img.shields.io/github/downloads/Qomicex-Public/Qomicex.Tauri/total.json')
+    if (res.ok) {
+      const shields = await res.json()
+      if (shields?.message) updateCheckCount = parseShieldsNumber(shields.message)
     }
-  }
+  } catch {}
 }
 
 writeFileSync(resolve(DATA_DIR, 'releases.json'), JSON.stringify(normalized, null, 2))
