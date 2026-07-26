@@ -63,7 +63,7 @@ if (releases) {
 
   for (const r of releases) {
     for (const a of (r.assets || [])) {
-      if (a.name === 'latest.json') updateCheckCount += (a.download_count || 0)
+      if (a.name === 'latest.json' || a.name === 'alpha.json') updateCheckCount += (a.download_count || 0)
       if (a.name === 'release.json') releaseCheckCount += (a.download_count || 0)
     }
   }
