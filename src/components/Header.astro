@@ -5,7 +5,7 @@ const lang = Astro.props.lang as Lang
 const links = [
   { href: lang === 'en' ? '/en/' : '/', label: t('nav.home', lang) },
   { href: lang === 'en' ? '/en/download/' : '/download', label: t('nav.download', lang) },
-  { href: lang === 'en' ? '/en/docs/' : '/docs/', label: t('nav.docs', lang) },
+  { href: 'https://docs.qomicex.top', label: t('nav.docs', lang), external: true },
   { href: lang === 'en' ? '/en/versions/' : '/versions', label: t('nav.versions', lang) },
   { href: lang === 'en' ? '/en/about/' : '/about', label: t('nav.about', lang) },
   { href: 'https://afdian.com/a/QomicexLauncher', label: t('nav.afdian', lang), external: true },

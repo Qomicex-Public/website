@@ -1,31 +1,18 @@
 ---
-import { getCollection, render } from 'astro:content'
-import DocsLayout from '../../../layouts/DocsLayout.astro'
-import { langFromPath } from '../../../i18n'
-
-const lang = langFromPath(Astro.url.pathname)
+import Base from '../../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs')
-  const paths = []
-  for (const doc of docs) {
-    const parts = doc.id.split('/')
-    const docLang = parts[0]
-    if (docLang !== 'en') continue
-    const slug = parts.slice(1).join('/')
-    paths.push({
-      params: { slug },
-      props: { doc, lang: docLang },
-    })
-  }
-  return paths
+  return docs
+    .filter(d => d.id.startsWith('en/'))
+    .map(d => ({ params: { slug: d.id.split('/').slice(1).join('/') } }))
 }
-
-const { doc } = Astro.props
-const { Content } = await render(doc)
-const slug = doc.id.split('/').slice(1).join('/')
 ---
 
-<DocsLayout current={slug} lang={lang}>
-  <Content />
-</DocsLayout>
+<Base title="Docs">
+  <meta http-equiv="refresh" content="0;url=https://docs.qomicex.top" />
+  <div class="mx-auto max-w-lg px-4 py-20 text-center">
+    <p class="text-muted-foreground">Docs have moved to <a href="https://docs.qomicex.top" class="text-primary underline underline-offset-2">docs.qomicex.top</a>.</p>
+  </div>
+</Base>
