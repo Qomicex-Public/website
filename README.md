@@ -4,6 +4,12 @@ https://www.qomicex.top/
 
 基于 Astro 构建，使用 Tailwind CSS 和纯前端 JavaScript。
 
+## Flashduty 告警集成
+
+项目通过 `/api/flashduty/push` 推送变更/告警事件到 Flashduty。
+
+环境变量：在 Vercel 控制台添加 `FLASHDUTY_INTEGRATION_KEY`（从 [Flashduty 控制台](https://console.flashcat.cloud) 的集成详情页获取）。
+
 ## 本地开发
 
 ```bash
