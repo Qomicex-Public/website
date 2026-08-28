@@ -82,6 +82,21 @@ const zhUrl = lang === 'zh' ? canonical : `https://www.qomicex.top${Astro.url.pa
       document.addEventListener('astro:page-load', observeAnimate)
     </script>
     <script is:inline>
+      const qmlLogo = [
+        '  ██████╗   ██████╗  ███╗   ███╗ ██╗  ██████╗ ███████╗ ██╗    ██╗ ',
+        ' ██╔═══██╗ ██╔═══██╗ ████╗ ████║ ██║ ██╔════╝ ██╔════╝  ╚██╗ ██╔╝ ',
+        ' ██║   ██║ ██║   ██║ ██╔████╔██║ ██║ ██║      █████╗      ╚██╔╝   ',
+        ' ██║ █╗██║ ██║   ██║ ██║╚██╔╝██║ ██║ ██║      ██╔══╝      █╔ █╗   ',
+        ' ██║ ╚██╔╝ ██║   ██║ ██║ ╚═╝ ██║ ██║ ██║      ██║       ██╔╝  ██╗ ',
+        ' ╚█████╔█╗ ╚██████╔╝ ██║     ██║ ██║ ╚██████╗ ███████╗ ██╔╝    ██╗',
+        '  ╚════╝╚╝  ╚═════╝  ╚═╝     ╚═╝ ╚═╝  ╚═════╝  ╚═════╝ ╚═╝     ╚═╝ ',
+        ' Console - Qomicex Launcher ======================================'
+      ]
+      qmlLogo.forEach(function(line) {
+        console.log('%c' + line, 'color:#4fc3f7;font-family:monospace;')
+      })
+    </script>
+    <script is:inline>
       function initImageViewer() {
         var imgs = document.querySelectorAll('main img')
         if (!imgs.length) return
