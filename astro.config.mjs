@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
 import sitemap from '@astrojs/sitemap';
+import react from '@astrojs/react';
 import { unified, rehypeHeadingIds } from '@astrojs/markdown-remark';
 
 function remarkAdmonition() {
@@ -44,6 +45,7 @@ export default defineConfig({
     }),
   },
   integrations: [
+    react(),
     icon(),
     sitemap({
       i18n: {

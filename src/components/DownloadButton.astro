@@ -1,5 +1,6 @@
 ---
 import { getReleases } from '../lib/releases.ts';
+import DownloadButtonUI from './DownloadButton.tsx';
 
 const { platform, label = '下载' } = Astro.props as {
   platform: string;
@@ -12,11 +13,4 @@ const downloadUrl = `https://github.com/Qomicex-Public/Qomicex.Tauri/releases/${
 const isPre = releases[0]?.prerelease
 ---
 
-<a
-  href={downloadUrl}
-  class="inline-flex items-center gap-2 rounded-lg bg-[var(--color-primary)] px-5 py-2.5 text-sm font-semibold text-[var(--color-bg)] transition-colors hover:bg-[var(--color-primary-hover)]"
-  target="_blank"
->
-  <span>{label}</span>
-  {platform && <span class="text-xs opacity-70">({platform})</span>}
-</a>
+<DownloadButtonUI href={downloadUrl} label={label} platform={platform} />

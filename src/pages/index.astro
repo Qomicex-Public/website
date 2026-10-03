@@ -5,6 +5,9 @@ import { MIRRORS } from '../data/mirrors.ts';
 import releases from '../data/releases.json';
 import stats from '../data/stats.json';
 import { t, langFromPath, carouselWords, getFeatures } from '../i18n';
+import StatBadge from '../components/index/StatBadge.tsx';
+import CtaButton from '../components/index/CtaButton.tsx';
+import FeatureCard from '../components/index/FeatureCard.tsx';
 
 const lang = langFromPath(Astro.url.pathname)
 const stable = releases.find(r => !r.prerelease)
@@ -39,10 +42,7 @@ const partners = [
       <img src="/high_logo.svg" alt="QML启动器" class="mb-6 w-full max-w-xs" />
 
       {verDisplay && (
-        <span class="mb-4 inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-green-400">
-          <Icon name="lucide:tag" class="size-3" />
-          {verDisplay} · {lang === 'en' ? 'All Platforms' : '全平台'} · {t('stats.downloads', lang, { n: stats.totalInstallerDownloads })}
-        </span>
+        <StatBadge text={`${verDisplay} · ${lang === 'en' ? 'All Platforms' : '全平台'} · ${t('stats.downloads', lang, { n: stats.totalInstallerDownloads })}`} />
       )}
 
       <p class="hero-desc mb-8 max-w-sm text-sm text-slate-300">
@@ -50,9 +50,7 @@ const partners = [
         <span class="carousel-word" id="carousel-word">{carouselWords[lang][0]}</span>
       </p>
 
-      <button id="dl-btn" class="inline-flex h-14 w-full max-w-xs cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-green-500 text-base font-semibold text-white shadow-lg shadow-green-500/30 transition-all hover:bg-green-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-green-400/40 active:scale-[0.98]">
-        <Icon name="lucide:download" class="size-5" />{stable ? t('dl.stable', lang) : t('dl.download', lang)}
-      </button>
+      <CtaButton id="dl-btn" kind="hero" label={stable ? t('dl.stable', lang) : t('dl.download', lang)} />
 
       <div class="mt-5 flex items-center gap-3 text-xs text-slate-400 sm:gap-4">
         <span class="inline-flex items-center gap-1.5"><Icon name="fa6-brands:windows" class="size-3.5" />Windows</span>
@@ -60,7 +58,7 @@ const partners = [
         <span class="inline-flex items-center gap-1.5"><Icon name="lucide:terminal" class="size-3.5" />Linux</span>
         {hasPre && <>
           <span class="text-slate-500">|</span>
-          <button id="dl-pre-btn" class="cursor-pointer text-slate-400 underline underline-offset-2 transition-colors hover:text-white">{t('dl.pre', lang)}</button>
+          <CtaButton id="dl-pre-btn" kind="pre" label={t('dl.pre', lang)} />
         </>}
       </div>
     </div>
@@ -77,13 +75,7 @@ const partners = [
                 <Icon name={['lucide:layout-dashboard', 'lucide:layers', 'lucide:users', 'lucide:file-stack', 'lucide:package', 'lucide:zap', 'lucide:sliders', 'lucide:wrench', 'lucide:globe'][i]} class="size-5" />
               </span>
             </div>
-            <h2 data-animate class="mb-3 text-2xl font-bold tracking-tight sm:text-3xl" style="transition-delay:80ms">{f.title}</h2>
-            <p data-animate class="mb-5 text-sm leading-relaxed text-muted-foreground sm:text-base" style="transition-delay:160ms">{f.desc}</p>
-            <div data-animate class="flex flex-wrap gap-2" style="transition-delay:240ms">
-              {features[i].tags.map(tag => (
-                <span class="rounded-full border border-border bg-background px-2.5 py-1 text-[11px] text-muted-foreground">{tag}</span>
-              ))}
-            </div>
+            <FeatureCard title={f.title} desc={f.desc} tags={features[i].tags} />
           </div>
           <div class={`w-full sm:w-1/2 ${f.reversed ? 'sm:order-1' : ''}`} data-animate style="transition-delay:380ms">
             <div class="relative">

@@ -1,5 +1,6 @@
 ---
 import { t, type Lang } from '../i18n';
+import HeaderUI from './Header.tsx';
 
 const lang = Astro.props.lang as Lang
 const links = [
@@ -14,33 +15,13 @@ const otherLang: Lang = lang === 'en' ? 'zh' : 'en'
 const switchUrl = otherLang === 'en' ? '/en' + Astro.url.pathname : Astro.url.pathname.replace(/^\/en/, '') || '/'
 ---
 
-<header class="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-sm">
-  <div class="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
-    <a href={lang === 'en' ? '/en/' : '/'} class="flex items-center gap-2 text-lg font-bold">
-      <img src="/logo.svg" alt="QML" class="h-7 w-auto" />
-      {lang === 'en' ? 'QML Launcher' : 'QML启动器'}
-    </a>
-    <button id="menu-btn" class="md:hidden inline-flex size-9 cursor-pointer items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground transition-colors" aria-label="Menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-    </button>
-    <nav id="nav-menu" class="hidden md:block max-md:fixed max-md:inset-x-0 max-md:top-14 max-md:border-b max-md:border-border max-md:bg-background/95 max-md:backdrop-blur-sm max-md:px-4 max-md:pb-4">
-      <ul class="flex max-md:flex-col items-center gap-1 max-md:gap-0 max-md:pt-2">
-        {links.map(link => (
-          <li class="max-md:w-full">
-            <a href={link.href} target={link.external ? '_blank' : undefined} rel={link.external ? 'noopener' : undefined} class="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground max-md:block max-md:w-full max-md:rounded-lg max-md:px-3 max-md:py-2.5">
-              {link.label}
-            </a>
-          </li>
-        ))}
-        <li class="max-md:w-full max-md:pt-2 max-md:border-t max-md:border-border max-md:mt-2">
-          <a href={switchUrl} class="ml-1 rounded-md border border-border px-2.5 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground max-md:ml-0 max-md:block max-md:w-full max-md:text-center max-md:py-2">
-            {otherLang === 'en' ? 'EN' : '中'}
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<HeaderUI
+  homeHref={lang === 'en' ? '/en/' : '/'}
+  brand={lang === 'en' ? 'QML Launcher' : 'QML启动器'}
+  links={links}
+  switchHref={switchUrl}
+  switchLabel={otherLang === 'en' ? 'EN' : '中'}
+/>
 <script>
   const menuBtn = document.getElementById('menu-btn')
   const navMenu = document.getElementById('nav-menu')

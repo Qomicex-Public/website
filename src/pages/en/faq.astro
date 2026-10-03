@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { Icon } from 'astro-icon/components';
 import { faqs } from '../../data/faq.ts';
+import FaqItem from '../../components/faq/FaqItem';
 ---
 
 <Base title="FAQ">
@@ -9,15 +9,7 @@ import { faqs } from '../../data/faq.ts';
     <h1 class="mb-8 text-3xl font-bold">Frequently Asked Questions</h1>
     <div class="space-y-2">
       {faqs.map(faq => (
-        <details class="group rounded-xl border border-border bg-card">
-          <summary class="flex cursor-pointer items-center justify-between p-4 font-medium transition-colors hover:text-primary">
-            {faq.question}
-            <Icon name="lucide:chevron-down" class="size-4 shrink-0 transition-transform group-open:rotate-180" />
-          </summary>
-          <div class="border-t border-border px-4 py-3 text-sm text-muted-foreground leading-relaxed">
-            {faq.answer}
-          </div>
-        </details>
+        <FaqItem question={faq.question} answer={faq.answer} />
       ))}
     </div>
   </section>

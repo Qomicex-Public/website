@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import VersionList from '../components/versions/VersionList.tsx';
 import releases from '../data/releases.json';
 import { t, langFromPath } from '../i18n';
 
@@ -30,6 +31,32 @@ function platLabel(platform: string): string {
 }
 
 const sorted = [...releases].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+
+// 版本卡片列表的数据整形（保持原逻辑与顺序）：
+// 过滤 .sig/.json → 按平台分组（分组顺序 = 平台在资产里首次出现的顺序）→
+// 算好 archLabel/extLabel 展示文本与 i18n / 语言分支文案，产出 JSON 可序列化 props。
+const rows = sorted.map(r => {
+  const assets = r.assets.filter(a => !a.name.endsWith('.sig') && !a.name.endsWith('.json'))
+  const groups: Record<string, { platform: string; assets: { label: string; url: string }[] }> = {}
+  for (const a of assets) {
+    const p = a.platform || 'other'
+    if (!groups[p]) groups[p] = { platform: platLabel(p), assets: [] }
+    const arch = archLabel(a.name)
+    groups[p].assets.push({ label: `${arch ? `${arch} ` : ''}${extLabel(a.name)}`, url: a.url })
+  }
+  return {
+    version: r.version,
+    date: r.publishedAt.slice(0, 10),
+    isPrerelease: !!r.prerelease,
+    prereleaseLabel: t('versions.prerelease', lang),
+    detailLabel: lang === 'en' ? 'GitHub' : 'GitHub 发布页',
+    detailUrl: r.htmlUrl,
+    changesLabel: t('versions.changes', lang),
+    changes: r.changes,
+    downloadsLabel: lang === 'en' ? 'Downloads' : '下载',
+    downloads: Object.values(groups),
+  }
+})
 ---
 
 <Base title={t('versions.title', lang)}>
@@ -38,53 +65,6 @@ const sorted = [...releases].sort((a, b) => new Date(b.publishedAt).getTime() - 
 
     {sorted.length === 0 && <p class="text-muted-foreground">{lang === 'en' ? 'No versions available.' : '暂无版本记录。'}</p>}
 
-    <div class="space-y-6">
-      {sorted.map(r => {
-        const assets = r.assets.filter(a => !a.name.endsWith('.sig') && !a.name.endsWith('.json'))
-        const groups: Record<string, typeof assets> = {}
-        for (const a of assets) {
-          const p = a.platform || 'other'
-          if (!groups[p]) groups[p] = []
-          groups[p].push(a)
-        }
-        return (
-          <div class="rounded-xl border border-border bg-card p-5">
-            <div class="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <h2 class="text-lg font-semibold">v{r.version}</h2>
-              <span class="text-xs text-muted-foreground">{r.publishedAt.slice(0, 10)}</span>
-              {r.prerelease && <span class="rounded-full bg-yellow-500/10 px-2 py-0.5 text-xs font-medium text-yellow-600 dark:text-yellow-400">{t('versions.prerelease', lang)}</span>}
-              <a href={r.htmlUrl} class="ml-auto text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline">{lang === 'en' ? 'GitHub' : 'GitHub 发布页'}</a>
-            </div>
-
-            {r.changes.length > 0 && (
-              <>
-                <h3 class="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t('versions.changes', lang)}</h3>
-                <ul class="mb-4 space-y-1 text-sm text-muted-foreground">
-                  {r.changes.map(c => <li class="flex gap-2"><span class="mt-1.5 block h-1 w-1 shrink-0 rounded-full bg-muted-foreground/40" />{c}</li>)}
-                </ul>
-              </>
-            )}
-
-            {Object.keys(groups).length > 0 && (
-              <>
-                <h3 class="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{lang === 'en' ? 'Downloads' : '下载'}</h3>
-                <div class="space-y-1.5">
-                  {Object.entries(groups).map(([platform, platAssets]) => (
-                    <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-                      <span class="w-28 shrink-0 font-medium text-foreground">{platLabel(platform)}</span>
-                      {platAssets.map(a => (
-                        <a href={a.url} class="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1 text-xs text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground">
-                          <span>{archLabel(a.name) && `${archLabel(a.name)} `}{extLabel(a.name)}</span>
-                        </a>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        )
-      })}
-    </div>
+    <VersionList releases={rows} />
   </section>
 </Base>
