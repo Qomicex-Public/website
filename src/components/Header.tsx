@@ -14,6 +14,8 @@ export interface HeaderProps {
   currentPath?: string;
   switchHref: string;
   switchLabel: string;
+  /** 切换目标语言（zh|en）：锚点携带该值，供脚本记录「用户显式选择」 */
+  switchLang?: string;
 }
 
 /**
@@ -31,7 +33,7 @@ export interface HeaderProps {
  * 故此处以「Tabs 视觉语言」实现：横排等高铁底边框，
  * 当前项用 border-primary 指示条 + text-foreground + aria-current="page" 表达选中。
  */
-export default function Header({ homeHref, brand, links, currentPath, switchHref, switchLabel }: HeaderProps) {
+export default function Header({ homeHref, brand, links, currentPath, switchHref, switchLabel, switchLang }: HeaderProps) {
   const norm = (p: string) => (p.endsWith('/') ? p : p + '/');
   const current = currentPath ? norm(currentPath) : '';
   const isActive = (href: string) => {
@@ -90,6 +92,7 @@ export default function Header({ homeHref, brand, links, currentPath, switchHref
             <li className="max-md:mt-2 max-md:w-full max-md:border-t max-md:border-border max-md:pt-2">
               <a
                 href={switchHref}
+                data-lang-switch={switchLang}
                 className="inline-flex h-14 items-center px-3 text-sm text-muted-foreground transition-colors hover:text-foreground max-md:h-auto max-md:w-full max-md:rounded-lg max-md:px-3 max-md:py-2.5 max-md:hover:bg-accent"
               >
                 {switchLabel}

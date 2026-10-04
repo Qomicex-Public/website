@@ -22,8 +22,22 @@ const switchUrl = otherLang === 'en' ? '/en' + Astro.url.pathname : Astro.url.pa
   currentPath={Astro.url.pathname}
   switchHref={switchUrl}
   switchLabel={otherLang === 'en' ? 'EN' : '中'}
+  switchLang={otherLang}
 />
 <script>
+  // 语言切换：记录「用户显式选择」，供 Base.astro 的自动语言重定向读取。
+  // 不记录的话，系统语言为英文的用户点「中」→ 进入 / → 首页 <head> 的
+  // 重定向脚本又把他弹回 /en/，形成无法切到中文的死循环。
+  // 用 localStorage（同一浏览器长期有效）；异常（隐私模式禁用存储）静默忽略，
+  // 退化为「仅本次点击不生效」而非报错。
+  document.addEventListener('click', (e) => {
+    const el = e.target instanceof Element ? e.target.closest('[data-lang-switch]') : null
+    if (!el) return
+    try {
+      localStorage.setItem('qml-lang', el.getAttribute('data-lang-switch') || '')
+    } catch {}
+  })
+
   const menuBtn = document.getElementById('menu-btn')
   const navMenu = document.getElementById('nav-menu')
   if (menuBtn && navMenu) {

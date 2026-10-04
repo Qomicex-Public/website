@@ -72,9 +72,26 @@ const ogImage = 'https://www.qomicex.top/og-image.webp'
       .admonition.caution { background: hsl(0 84% 60% / 0.12); border-color: hsl(0 84% 60%); }
     </style>
     <script>
-      if (location.pathname === '/' && navigator.language.startsWith('en')) {
-        location.replace('/en/')
-      }
+      // 首访按系统语言导流到 /en/；但「用户显式选过语言」时必须尊重其选择，
+      // 否则系统语言为英文的用户点顶栏「中」→ 进入 / → 又被弹回 /en/，
+      // 永远无法停留在中文站（Header.astro 的切换锚点会写入 qml-lang）。
+      ;(function () {
+        var chosen = null
+        try { chosen = localStorage.getItem('qml-lang') } catch (e) { chosen = null }
+
+        if (chosen === 'zh') return  // 明确选中文：一律不自动跳转
+
+        // 明确选英文：仅当当前处于中文路径时才导流，避免把 /en/xxx 也踢回 /en/ 首页
+        if (chosen === 'en') {
+          if (location.pathname === '/' || location.pathname === '') location.replace('/en/')
+          return
+        }
+
+        // 未表达过偏好 → 沿用原有行为（仅首页按系统语言导流）
+        if (location.pathname === '/' && navigator.language.startsWith('en')) {
+          location.replace('/en/')
+        }
+      })()
     </script>
   </head>
   <body id="top" class="bg-background text-foreground">
