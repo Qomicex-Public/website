@@ -77,12 +77,38 @@ const ogImage = 'https://www.qomicex.top/og-image.webp'
       }
     </script>
   </head>
-  <body class="bg-background text-foreground">
+  <body id="top" class="bg-background text-foreground">
     <Header lang={lang} />
     <main class="flex-1">
       <slot />
     </main>
     <Footer lang={lang} />
+
+    {/* 一键返回顶部：<a href="#top"> 原生锚点（html 已设 scroll-behavior:smooth），
+        脚本仅按滚动位置切换可见性，不干预滚动本身；无 JS 时保持隐藏不占位。 */}
+    <a
+      id="to-top"
+      href="#top"
+      aria-label={lang === 'en' ? 'Back to top' : '返回顶部'}
+      class="pointer-events-none fixed bottom-6 right-6 z-40 inline-flex size-10 items-center justify-center rounded-lg border border-border bg-background/90 text-muted-foreground opacity-0 shadow-sm backdrop-blur-sm transition-opacity duration-200 hover:text-foreground"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m18 15-6-6-6 6" />
+      </svg>
+    </a>
+    <script>
+      const toTop = document.getElementById('to-top')
+      if (toTop) {
+        const sync = () => {
+          const show = window.scrollY > 400
+          toTop.classList.toggle('opacity-0', !show)
+          toTop.classList.toggle('pointer-events-none', !show)
+        }
+        sync()
+        window.addEventListener('scroll', sync, { passive: true })
+        document.addEventListener('astro:page-load', sync)
+      }
+    </script>
     <script>
       const observer = new IntersectionObserver(entries => {
         for (const e of entries) {

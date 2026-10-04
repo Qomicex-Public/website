@@ -17,8 +17,9 @@ const switchUrl = otherLang === 'en' ? '/en' + Astro.url.pathname : Astro.url.pa
 
 <HeaderUI
   homeHref={lang === 'en' ? '/en/' : '/'}
-  brand={lang === 'en' ? 'QML Launcher' : 'QML启动器'}
+  brand="Qomicex Launcher"
   links={links}
+  currentPath={Astro.url.pathname}
   switchHref={switchUrl}
   switchLabel={otherLang === 'en' ? 'EN' : '中'}
 />

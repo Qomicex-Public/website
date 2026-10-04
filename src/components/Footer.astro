@@ -1,7 +1,7 @@
 ---
 import { updatedAt } from '../data/last-fetch.json';
 import stats from '../data/stats.json';
-import { t, type Lang } from '../i18n';
+import { t, formatNumber, type Lang } from '../i18n';
 import FooterUI from './Footer.tsx';
 
 const lang = Astro.props.lang as Lang
@@ -18,8 +18,8 @@ const links = [
 <FooterUI
   copyright={t('footer.copyright', lang)}
   links={links}
-  downloadsText={t('stats.downloads', lang, { n: stats.totalInstallerDownloads })}
-  usageText={t('stats.usage', lang, { n: stats.updateCheckCount })}
+  downloadsText={t('stats.downloads', lang, { n: formatNumber(stats.totalInstallerDownloads) })}
+  usageText={t('stats.usage', lang, { n: formatNumber(stats.updateCheckCount) })}
   dataUpdatedText={t('footer.dataUpdated', lang)}
   dataUpdatedDate={updatedAt.slice(0, 10)}
 />

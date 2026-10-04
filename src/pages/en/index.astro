@@ -4,7 +4,7 @@ import { Icon } from 'astro-icon/components';
 import { MIRRORS } from '../../data/mirrors.ts';
 import releases from '../../data/releases.json';
 import stats from '../../data/stats.json';
-import { t, langFromPath, carouselWords, getFeatures } from '../../i18n';
+import { t, langFromPath, carouselWords, getFeatures, formatNumber } from '../../i18n';
 import StatBadge from '../../components/index/StatBadge.tsx';
 import CtaButton from '../../components/index/CtaButton.tsx';
 import FeatureCard from '../../components/index/FeatureCard.tsx';
@@ -45,7 +45,7 @@ const partners = [
       <img src="/high_logo.svg" alt="QML Launcher" class="mb-6 w-full max-w-xs" />
 
       {verDisplay && (
-        <StatBadge text={`${verDisplay} · ${lang === 'en' ? 'All Platforms' : '全平台'} · ${t('stats.downloads', lang, { n: stats.totalInstallerDownloads })}`} />
+        <StatBadge text={`${verDisplay} · ${lang === 'en' ? 'All Platforms' : '全平台'} · ${t('stats.downloads', lang, { n: formatNumber(stats.totalInstallerDownloads) })}`} />
       )}
 
       <p class="hero-desc mb-8 max-w-sm text-sm text-slate-300">

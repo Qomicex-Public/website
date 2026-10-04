@@ -3,9 +3,10 @@ import Base from '../layouts/Base.astro';
 import { Icon } from 'astro-icon/components';
 import { platforms } from '../data/platforms.ts';
 import releases from '../data/releases.json';
-import { t, langFromPath } from '../i18n';
-import PlatformCard from '../components/download/PlatformCard.tsx';
-import CompatibilityCard from '../components/download/CompatibilityCard.tsx';
+import stats from '../data/stats.json';
+import { t, langFromPath, formatNumber } from '../i18n';
+import VersionSelector from '../components/download/VersionSelector.tsx';
+import SystemRequirements from '../components/download/SystemRequirements.tsx';
 
 const lang = langFromPath(Astro.url.pathname)
 const stable = releases.find(r => !r.prerelease)
@@ -15,62 +16,101 @@ const stableTag = stable?.tagName ?? ''
 const preTag = pre?.tagName ?? ''
 const stableAssets = stable?.assets ?? []
 const preAssets = pre?.assets ?? []
+
+// 版本选项：正式版默认选中；两者都无时给出空态提示
+const versionOptions = [
+  stable && {
+    id: 'stable',
+    title: lang === 'en' ? 'Stable' : '正式版',
+    version: `v${stable.version}`,
+    date: stable.publishedAt?.slice(0, 10) ?? '',
+    selected: true,
+  },
+  pre && {
+    id: 'pre',
+    title: lang === 'en' ? 'Preview' : '测试版',
+    version: `v${pre.version}`,
+    date: pre.publishedAt?.slice(0, 10) ?? '',
+    tag: 'Beta',
+    selected: false,
+  },
+].filter(Boolean) as { id: string; title: string; version: string; date: string; tag?: string; selected: boolean }[]
+
+// 当前平台兜底文案（构建期）：脚本随后按 UA 覆写为真实识别结果
+const fallbackPlat = { name: 'Windows', arch: 'x64', min: platforms[0]?.minVersion ?? '' }
 ---
 
 <Base title={t('nav.download', lang)}>
   <section class="relative overflow-hidden">
-    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.08)_0%,transparent_60%)]" />
-    <div class="mx-auto flex max-w-lg flex-col items-center px-4 py-16 text-center sm:py-20">
+    {/* 环境光：极轻的一层，仅作氛围，不铺满页面 */}
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-64 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.05)_0%,transparent_65%)]" />
+    <div class="relative mx-auto w-full max-w-2xl px-4 pb-16 pt-10 text-center sm:pt-12">
 
-      <h1 class="mb-1 text-2xl font-bold">{lang === 'en' ? 'Download Qomicex Launcher' : '下载 Qomicex Launcher'}</h1>
-      <p class="mb-6 text-sm text-muted-foreground">{lang === 'en' ? 'Select your platform and architecture to start downloading.' : '选择你的平台与架构，开始下载。'}</p>
+      <h1 class="text-xl font-semibold tracking-tight sm:text-2xl">{lang === 'en' ? 'Download Qomicex Launcher' : '下载 Qomicex Launcher'}</h1>
+      <p class="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
+        {lang === 'en' ? 'Pick a version, then download for your platform.' : '选择版本，然后下载适合你平台的安装包。'}
+      </p>
 
-      <div class="mb-6 flex w-full gap-3">
-        {stable && (
-          <PlatformCard layout="panel" icon="verified" className="flex-1"
-            title={lang === 'en' ? 'Stable' : '正式版'}
-            version={`v${stable.version}`}
-            desc={stable.publishedAt?.slice(0, 10) ?? ''} />
-        )}
-        {pre && (
-          <PlatformCard layout="panel" accent="preview" icon="beaker" className="flex-1"
-            title={lang === 'en' ? 'Preview' : '测试版'}
-            version={`v${pre.version}`}
-            desc={pre.publishedAt?.slice(0, 10) ?? ''} />
+      {/* 版本选择 —— 决定下方 CTA 的目标版本 */}
+      {versionOptions.length > 0 && (
+        <div class="mt-8">
+          <VersionSelector
+            label={t('dl.version', lang)}
+            currentLabel={t('dl.current', lang)}
+            options={versionOptions}
+          />
+        </div>
+      )}
+
+      {/* 当前平台推荐 + 单一主 CTA */}
+      <div class="mt-8 border-t border-border/60 pt-8">
+        <div class="mb-4 text-xs font-medium uppercase tracking-wider text-muted-foreground/70">{t('dl.reco', lang)}</div>
+        <div class="mb-5">
+          <div id="reco-plat" class="font-mono text-sm text-foreground">{fallbackPlat.name} · {fallbackPlat.arch}</div>
+          <div id="reco-min" class="mt-1 text-xs text-muted-foreground">{fallbackPlat.min}</div>
+        </div>
+
+        <button id="dl-btn" class="inline-flex h-11 cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
+          <Icon name="lucide:download" class="size-4" /><span id="dl-btn-label">{stable ? t('dl.stable', lang) : t('dl.download', lang)}</span>
+        </button>
+
+        {hasPre && (
+          <p class="mt-3 text-xs text-muted-foreground/70">
+            {lang === 'en'
+              ? <><span class="tabular-nums">{formatNumber(stats.totalInstallerDownloads)}</span> downloads</>
+              : <>共 <span class="tabular-nums">{formatNumber(stats.totalInstallerDownloads)}</span> 次下载</>}
+          </p>
         )}
       </div>
 
-      <button id="dl-btn" class="inline-flex h-14 w-full max-w-xs cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-primary text-base font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/25 active:scale-[0.98]">
-        <Icon name="lucide:download" class="size-5" />{stable ? t('dl.stable', lang) : t('dl.download', lang)}
-      </button>
-      {hasPre && <p class="mt-3 text-xs text-muted-foreground"><button id="dl-pre-btn" class="cursor-pointer underline underline-offset-2 hover:text-foreground transition-colors">{t('dl.pre', lang)}</button></p>}
-
-      {/* 兼容平台卡片：Card 壳 + 表格由 CompatibilityCard 岛渲染；数据/文案在 frontmatter 取好后以可序列化 props 传入，行顺序与 platforms 源一致 */}
-      <CompatibilityCard
-        title={lang === 'en' ? 'Compatible Platforms' : '兼容平台'}
-        headers={[
-          lang === 'en' ? 'Platform' : '平台',
-          lang === 'en' ? 'Architecture' : '支持架构',
-          lang === 'en' ? 'Min. Version' : '最低系统版本',
-          lang === 'en' ? 'Status' : '测试状态',
-          lang === 'en' ? 'Package' : '安装包',
-        ]}
-        rows={platforms.map((p) => ({
-          os: p.os,
-          arch: p.arch,
-          note: p.note,
-          minVersion: p.minVersion,
-          status: lang === 'en' && p.status === '稳定' ? 'Stable' : p.status,
-          packageType: p.packageType,
-        }))}
-      />
+      {/* 系统要求 —— 平面表格，保留全部真实信息 */}
+      <div class="mt-12">
+        <SystemRequirements
+          title={t('dl.sysreq', lang)}
+          headers={[
+            lang === 'en' ? 'Platform' : '平台',
+            lang === 'en' ? 'Architecture' : '支持架构',
+            lang === 'en' ? 'Min. Version' : '最低系统版本',
+            lang === 'en' ? 'Status' : '测试状态',
+            lang === 'en' ? 'Package' : '安装包',
+          ]}
+          rows={platforms.map((p) => ({
+            os: p.os,
+            arch: p.arch,
+            note: p.note,
+            minVersion: p.minVersion,
+            status: lang === 'en' && p.status === '稳定' ? 'Stable' : p.status,
+            packageType: p.packageType,
+          }))}
+        />
+      </div>
     </div>
   </section>
 </Base>
 
 <div id="dl-overlay" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto px-4 pt-[12vh] opacity-0 pointer-events-none transition-opacity duration-300">
   <div class="fixed inset-0 bg-black/60 backdrop-blur-xs" id="dl-backdrop"></div>
-  <div id="dl-dialog" class="relative w-full max-w-sm rounded-2xl border border-border bg-background p-6 shadow-2xl scale-95 transition-all duration-300">
+  <div id="dl-dialog" class="relative w-full max-w-sm rounded-lg border border-border bg-background p-6 shadow-xl scale-95 transition-all duration-300">
     <button id="dl-close" class="absolute right-4 top-4 cursor-pointer text-muted-foreground hover:text-foreground transition-colors">
       <Icon name="lucide:x" class="size-5" />
     </button>
@@ -106,7 +146,7 @@ const preAssets = pre?.assets ?? []
     </div>
 
     <div id="dl-link-section" class="opacity-0 translate-y-2 transition-all duration-500 ease-out pointer-events-none">
-      <a id="dl-link" href="#" target="_blank" class="hidden inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90">
+      <a id="dl-link" href="#" target="_blank" class="hidden inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
         <Icon name="lucide:download" class="size-4" />{t('dlmodal.download', lang)}
       </a>
     </div>
@@ -130,7 +170,7 @@ const preAssets = pre?.assets ?? []
   </div>
 </div>
 
-<script data-astro-rerun define:vars={{ lang, stableTag, preTag, stableAssets, preAssets, srcProxy: t('dlmodal.sourceProxy', lang), srcMirror: t('dlmodal.sourceMirror', lang), srcDirect: t('dlmodal.sourceDirect', lang) }}>
+<script data-astro-rerun define:vars={{ lang, stableTag, preTag, stableAssets, preAssets, srcProxy: t('dlmodal.sourceProxy', lang), srcMirror: t('dlmodal.sourceMirror', lang), srcDirect: t('dlmodal.sourceDirect', lang), stableLabel: stable ? t('dl.stable', lang) : t('dl.download', lang), preLabel: pre ? t('dl.pre', lang) : t('dl.download', lang), PLAT_MIN: platforms.map(p => ({ id: p.os.toLowerCase(), min: p.minVersion })) }}>
 (function () {
   function matchAsset(assets, plat, arch, pkgType) {
     var candidates = assets.filter(function (a) {
@@ -196,6 +236,8 @@ const preAssets = pre?.assets ?? []
   // lazily re-acquired state
   var $ = {}
   function acquire() {
+    // 版本选择状态：stable 默认选中（与构建期 VersionSelector 的 selected 一致）
+    $.selectedVersion = 'stable'
     $.isPre = false
     $.currentSourceIdx = 0
     $.closeTimer = null
@@ -204,6 +246,9 @@ const preAssets = pre?.assets ?? []
     $.currentPlat = d.plat
     $.currentArch = d.arch
     $.btn = document.getElementById('dl-btn')
+    $.btnLabel = document.getElementById('dl-btn-label')
+    $.recoPlat = document.getElementById('reco-plat')
+    $.recoMin = document.getElementById('reco-min')
     $.overlay = document.getElementById('dl-overlay')
     $.backdrop = document.getElementById('dl-backdrop')
     $.dialog = document.getElementById('dl-dialog')
@@ -220,12 +265,54 @@ const preAssets = pre?.assets ?? []
     $.thanks = document.getElementById('dl-thanks')
     $.thanksClose = document.getElementById('dl-thanks-close')
     $.retry = document.getElementById('dl-retry')
-    $.preBtn = document.getElementById('dl-pre-btn')
   }
 
   function getAssets() { return $.isPre ? preAssets : stableAssets }
   function getTag() { return $.isPre ? preTag : stableTag }
   function getTypeLabels() { var c = PLATFORMS[$.currentPlat]; return c ? c.typeLabels : [] }
+
+  // —— 版本选择（复用既有 $.isPre 语义，不改变下载匹配逻辑）——
+  function selectVersion(id) {
+    $.selectedVersion = id
+    $.isPre = id === 'pre'
+    var list = document.getElementById('ver-list')
+    if (list) {
+      var items = list.querySelectorAll('[data-ver]')
+      for (var i = 0; i < items.length; i++) {
+        var active = items[i].getAttribute('data-ver') === id
+        items[i].setAttribute('data-selected', active ? 'true' : 'false')
+        items[i].setAttribute('aria-selected', active ? 'true' : 'false')
+      }
+    }
+    updateCtaLabel()
+  }
+
+  function updateCtaLabel() {
+    if (!$.btnLabel) return
+    $.btnLabel.textContent = $.isPre ? preLabel : stableLabel
+  }
+
+  // —— 当前平台推荐文案：复用 detect()，与模态框默认选中项保持一致 ——
+  function platDisplayName(id) {
+    if (id === 'macos') return 'macOS'
+    if (id === 'linux') return 'Linux'
+    return 'Windows'
+  }
+  function archDisplayName(plat, arch) {
+    if (plat === 'macos') return arch === 'Apple Silicon (ARM64)' ? 'ARM64' : 'x64'
+    return arch
+  }
+  function platMinVersion(plat) {
+    for (var i = 0; i < PLAT_MIN.length; i++) {
+      if (PLAT_MIN[i].id === plat) return PLAT_MIN[i].min
+    }
+    return ''
+  }
+  function updateReco() {
+    if (!$.recoPlat) return
+    $.recoPlat.textContent = platDisplayName($.currentPlat) + ' · ' + archDisplayName($.currentPlat, $.currentArch)
+    if ($.recoMin) $.recoMin.textContent = platMinVersion($.currentPlat)
+  }
 
   function initPlatformType() {
     var labels = getTypeLabels()
@@ -435,10 +522,10 @@ const preAssets = pre?.assets ?? []
   if (!window._downloadInit) {
     window._downloadInit = true
     document.addEventListener('click', function (e) {
-      var el = e.target.closest('#dl-btn, .dl-plat, .dl-arch, .dl-type, .dl-source, #dl-link, #dl-thanks-close, #dl-close, #dl-backdrop, #dl-pre-btn')
+      var el = e.target.closest('#dl-btn, [data-ver], .dl-plat, .dl-arch, .dl-type, .dl-source, #dl-link, #dl-thanks-close, #dl-close, #dl-backdrop')
       if (!el) return
-      if (el.id === 'dl-btn') { openModal(false); return }
-      if (el.id === 'dl-pre-btn') { e.preventDefault(); openModal(true); return }
+      if (el.id === 'dl-btn') { openModal($.isPre); return }
+      if (el.hasAttribute && el.hasAttribute('data-ver')) { selectVersion(el.getAttribute('data-ver')); return }
       if (el.classList.contains('dl-plat')) { switchPlat(el.getAttribute('data-plat')); return }
       if (el.classList.contains('dl-arch')) { selectArch(el.getAttribute('data-arch')); return }
       if (el.classList.contains('dl-type')) { selectType(el.getAttribute('data-type')); return }
@@ -451,7 +538,14 @@ const preAssets = pre?.assets ?? []
   }
 
   acquire()
+  selectVersion($.selectedVersion)
+  updateReco()
   renderSources($.currentSourceIdx)
-  document.addEventListener('astro:page-load', acquire)
+  document.addEventListener('astro:page-load', function () {
+    acquire()
+    selectVersion($.selectedVersion)
+    updateReco()
+    renderSources($.currentSourceIdx)
+  })
 })()
 </script>

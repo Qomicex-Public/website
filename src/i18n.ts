@@ -20,6 +20,12 @@ const zh = {
   'dl.stable': '下载正式版',
   'dl.download': '下载',
   'dl.pre': '下载测试版',
+  'dl.version': '版本',
+  'dl.current': '当前选择',
+  'dl.beta': 'Beta',
+  'dl.reco': '当前平台',
+  'dl.recoFallback': '正在识别你的平台…',
+  'dl.sysreq': '系统要求',
 
   'footer.copyright': 'Qomicex Launcher · GPL-3.0',
   'footer.qq': 'QQ 群',
@@ -58,8 +64,14 @@ const zh = {
   'versions.noChanges': '无详细更新说明',
   'versions.prerelease': '预发布',
 
-  'stats.downloads': '总下载 {n} 次',
-  'stats.usage': '总使用 {n} 次',
+  'stats.downloads': '{n} 次下载',
+  'stats.usage': '{n} 次启动',
+}
+
+export function formatNumber(n: number | string): string {
+  const num = typeof n === 'string' ? Number(n) : n
+  if (!Number.isFinite(num)) return String(n)
+  return num.toLocaleString('en-US')
 }
 
 const en: Record<string, string> = {
@@ -82,6 +94,12 @@ const en: Record<string, string> = {
   'dl.stable': 'Download Stable',
   'dl.download': 'Download',
   'dl.pre': 'Download Preview',
+  'dl.version': 'Version',
+  'dl.current': 'Selected',
+  'dl.beta': 'Beta',
+  'dl.reco': 'Your platform',
+  'dl.recoFallback': 'Detecting your platform…',
+  'dl.sysreq': 'System Requirements',
 
   'footer.copyright': 'Qomicex Launcher · GPL-3.0',
   'footer.qq': 'QQ Group',
@@ -120,8 +138,8 @@ const en: Record<string, string> = {
   'versions.noChanges': 'No detailed changelog',
   'versions.prerelease': 'Pre-release',
 
-  'stats.downloads': 'Total {n} downloads',
-  'stats.usage': 'Total {n} launches',
+  'stats.downloads': '{n} downloads',
+  'stats.usage': '{n} launches',
 }
 
 export function t(key: string, lang: Lang, params?: Record<string, string | number>): string {

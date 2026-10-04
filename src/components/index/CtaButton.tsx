@@ -17,18 +17,16 @@ export interface CtaButtonProps {
 /**
  * 首页下载 CTA — plugin-ui Button 静态岛，零运行时 JS。
  *
- * - 原类名整体经 className 传入，tailwind-merge 实测覆盖基类冲突项
- *   （rounded-md→xl、text-sm→base/xs、h-9→h-14/auto、gap-2→2.5、
- *   active:scale-95→[0.98]/100、ghost 的 hover:bg-accent→transparent、
- *   [&_svg]:size-4→size-5 等）。
- * - 基类残留但视觉无影响的项：whitespace-nowrap（文案短不换行）、
- *   duration-150（transition-all 默认即 150ms，等值）、px-4 py-2
- *   （w-full 居中按钮内边距不可见）、disabled:*（永不禁用）、
- *   [&_svg]:pointer-events-none/shrink-0（无视觉差）。
- * - focus-visible 键盘聚焦时显示组件库绿环（替代浏览器默认轮廓）——
- *   与 W1 Header.tsx 一致的组件语义，纯视觉差异仅在键盘聚焦瞬间。
- * - hero 图标内联 JSX svg（Header.tsx 先例），几何精确复制 astro-icon 的
- *   lucide:download（width/height="1em" + class="size-5"）。
+ * 视觉口径（去除「AI 感」发光，与下载页 CTA 统一）：
+ * - hero 主按钮用品牌绿 bg-primary（= global.css --primary 142 71% 48%），
+ *   不再使用硬编码 green-500；去掉 shadow-lg/shadow-green-500/30 光晕、
+ *   hover:shadow-xl、hover:-translate-y-0.5 位移与 active:scale 缩放，
+ *   只保留 background 过渡（transition-colors），尺寸由 h-14→h-12、rounded-xl→rounded-lg 收敛。
+ * - 原类名整体经 className 传入，tailwind-merge 覆盖基类冲突项。
+ * - 基类残留但视觉无影响的项：whitespace-nowrap、duration-150、px-4 py-2、
+ *   disabled:*（永不禁用）、[&_svg]:pointer-events-none/shrink-0。
+ * - focus-visible 键盘聚焦时显示组件库绿环（与 W1 Header.tsx 一致的组件语义）。
+ * - hero 图标内联 JSX svg（Header.tsx 先例），几何精确复制 astro-icon 的 lucide:download。
  */
 export default function CtaButton({ id, label, kind }: CtaButtonProps) {
   if (kind === 'hero') {
@@ -36,9 +34,9 @@ export default function CtaButton({ id, label, kind }: CtaButtonProps) {
       <Button
         id={id}
         variant="default"
-        className="h-14 w-full max-w-xs cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-green-500 text-base font-semibold text-white shadow-lg shadow-green-500/30 transition-all hover:bg-green-400 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-green-400/40 active:scale-[0.98] [&_svg]:size-5"
+        className="h-11 w-full max-w-xs cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 [&_svg]:size-4"
       >
-        <svg width="1em" height="1em" viewBox="0 0 24 24" className="size-5">
+        <svg width="1em" height="1em" viewBox="0 0 24 24" className="size-4">
           <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
             <path d="M12 15V3m9 12v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
             <path d="m7 10l5 5l5-5" />
