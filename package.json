@@ -10,6 +10,7 @@
     "build": "astro build",
     "prebuild": "node scripts/fetch-site-data.mjs",
     "preview": "astro preview",
+    "indexnow": "node scripts/indexnow.mjs",
     "astro": "astro"
   },
   "dependencies": {

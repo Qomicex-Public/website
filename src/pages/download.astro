@@ -40,7 +40,7 @@ const versionOptions = [
 const fallbackPlat = { name: 'Windows', arch: 'x64', min: platforms[0]?.minVersion ?? '' }
 ---
 
-<Base title={t('nav.download', lang)}>
+<Base title={t('nav.download', lang)} page="download">
   <section class="relative overflow-hidden">
     {/* 环境光：极轻的一层，仅作氛围，不铺满页面 */}
     <div class="pointer-events-none absolute inset-x-0 top-0 h-64 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.05)_0%,transparent_65%)]" />

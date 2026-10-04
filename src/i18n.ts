@@ -5,8 +5,23 @@ const zh = {
   'site.titleSuffix': ' | Qomicex Launcher | QML 启动器',
   'site.homeTitle': 'Qomicex Launcher | QML 启动器 - 现代化的 Minecraft 启动器',
   'site.h1': 'Qomicex Launcher | QML 启动器 — 现代化的 Minecraft 启动器',
-  'site.description': 'QML启动器 — 一个现代化的 Minecraft 启动器，拥有多实例管理、模组安装、账户管理、多人联机、个性化主题设置等功能',
+  'site.description': 'Qomicex Launcher（QML 启动器）是免费开源的 Minecraft 启动器，支持多实例管理、模组与整合包安装、账户管理、多人联机与个性化主题，兼容 Windows、macOS 和 Linux，下载即用。',
   'site.keywords': 'QML, QML启动器, Qomicex启动器, Qomicex Launcher, Minecraft启动器, 我的世界启动器, 多实例管理, 模组安装',
+
+  // 各页专属 SEO 标题与描述（避免多页共用同一 description 被搜索引擎判为重复内容）
+  // 这些 title 是「完整标题」，自带品牌词，Base.astro 不会再拼接 site.titleSuffix
+  'seo.about.title': '关于 Qomicex Launcher（QML 启动器）— 开源免费的 Minecraft 启动器',
+  'seo.about.desc': 'Qomicex Launcher（QML 启动器）是采用 GPL-3.0 开源协议的免费 Minecraft 启动器，支持多实例管理、模组安装、账户管理与多人联机，兼容 Windows、macOS 与 Linux 全平台。',
+  'seo.download.title': '下载 Qomicex Launcher（QML 启动器）— Windows、macOS、Linux 全平台安装包',
+  'seo.download.desc': '下载 Qomicex Launcher（QML 启动器）最新版：提供 Windows（x64/ARM64）、macOS（Intel/Apple Silicon）与 Linux（AppImage/DEB/RPM）安装包，含正式版与测试版，支持代理与镜像加速下载。',
+  'seo.versions.title': 'Qomicex Launcher（QML 启动器）版本历史 — 全部发行版本与更新说明',
+  'seo.versions.desc': '查看 Qomicex Launcher（QML 启动器）的完整版本历史与更新说明，包含每个正式版与测试版的发布日期、更新内容与各平台安装包下载链接。',
+  'seo.changelog.title': 'Qomicex Launcher（QML 启动器）更新日志 — 各版本更新内容与发布日期',
+  'seo.changelog.desc': 'Qomicex Launcher（QML 启动器）的更新日志：按时间倒序记录每个版本的更新内容，包括多实例管理、模组安装、多人联机等功能的迭代详情。',
+  'seo.faq.title': 'Qomicex Launcher（QML 启动器）常见问题 — 安装、模组与故障排查',
+  'seo.faq.desc': 'Qomicex Launcher（QML 启动器）常见问题解答：涵盖安装、Java 环境配置、启动失败排查、模组与整合包安装、多人联机等高频问题的处理方法。',
+  'seo.legal.title': 'Qomicex Launcher（QML 启动器）用户协议 — 完整服务条款与许可范围',
+  'seo.legal.desc': 'Qomicex Launcher（QML 启动器）用户协议：请在使用本软件前仔细阅读全部服务条款，了解您的权利与义务、软件许可范围及免责声明。',
 
   'nav.home': '首页',
   'nav.download': '下载',
@@ -79,8 +94,23 @@ const en: Record<string, string> = {
   'site.titleSuffix': ' | Qomicex Launcher | QML Launcher',
   'site.homeTitle': 'Qomicex Launcher | QML Launcher - A Modern Minecraft Launcher',
   'site.h1': 'Qomicex Launcher | QML Launcher — A Modern Minecraft Launcher',
-  'site.description': 'QML Launcher — A modern Minecraft launcher with multi-instance management, mod installation, account management, multiplayer support, and customizable themes.',
+  'site.description': 'Qomicex Launcher (QML Launcher) is a free, open-source Minecraft launcher with multi-instance management, mod and modpack installation, account management, multiplayer and customizable themes, for Windows, macOS and Linux.',
   'site.keywords': 'QML, QML Launcher, Qomicex Launcher, Qomicex, Minecraft launcher, Minecraft 启动器',
+
+  // Per-page SEO titles and descriptions (avoids many pages sharing one
+  // description, which search engines treat as duplicate content).
+  'seo.about.title': 'About QML Launcher — Free, Open-Source Minecraft Launcher',
+  'seo.about.desc': 'Qomicex Launcher (QML Launcher) is a free, GPL-3.0 open-source Minecraft launcher with multi-instance management, mod installation, account management and multiplayer, available for Windows, macOS and Linux.',
+  'seo.download.title': 'Download QML Launcher — Windows, macOS & Linux',
+  'seo.download.desc': 'Download the latest Qomicex Launcher (QML Launcher) for Windows (x64/ARM64), macOS (Intel/Apple Silicon) and Linux (AppImage/DEB/RPM). Stable and preview builds available, with proxy and mirror download options.',
+  'seo.versions.title': 'Version History — All QML Launcher Releases',
+  'seo.versions.desc': 'Browse the full release history of Qomicex Launcher (QML Launcher), including each stable and preview build with its release date, changelog and per-platform installer download links.',
+  'seo.changelog.title': 'Qomicex Launcher (QML Launcher) Changelog — Release Notes by Version',
+  'seo.changelog.desc': 'The complete changelog for Qomicex Launcher (QML Launcher), listing what changed in every release across multi-instance management, mod installation and multiplayer.',
+  'seo.faq.title': 'FAQ — QML Launcher Help & Troubleshooting',
+  'seo.faq.desc': 'Frequently asked questions about Qomicex Launcher (QML Launcher): installation, Java setup, startup troubleshooting, installing mods and modpacks, and multiplayer connection issues.',
+  'seo.legal.title': 'User Agreement — QML Launcher Terms of Service',
+  'seo.legal.desc': 'The Qomicex Launcher (QML Launcher) user agreement. Please read all terms carefully before using the software to understand your rights, the license scope and the disclaimer.',
 
   'nav.home': 'Home',
   'nav.download': 'Download',

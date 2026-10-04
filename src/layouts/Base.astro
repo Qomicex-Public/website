@@ -3,20 +3,30 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Analytics from '@vercel/analytics/astro';
+import releases from '../data/releases.json';
 import { t, langFromPath } from '../i18n';
 
 const lang = langFromPath(Astro.url.pathname)
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '/en/'
 const noindex: boolean = Astro.props.noindex ?? false
-// 首页直接用规范标题（品牌 + 定位关键词）；内页为「页面名 | 品牌」，避免出现「QML启动器 — QML启动器」式的自我重复
+// page 键（about/download/versions/changelog/faq/legal）：从 i18n 取该页专属的
+// 完整 SEO 标题与描述。这样 12 个内页各有独立 description，不再共用 site.description
+// （多页共用会被搜索引擎判为重复内容）。
+// t() 对未登记的键会原样返回键名，故构建后需核对标题未出现 "seo." 字样。
+const page: string | undefined = Astro.props.page
+const seoTitle: string | null = page ? t(`seo.${page}.title`, lang) : null
+const seoDesc: string | null = page ? t(`seo.${page}.desc`, lang) : null
+// 标题优先级：首页规范标题 > 该页专属完整标题（已含品牌词，不再拼接后缀）> 「页面名 + 品牌后缀」
 const fullTitle: string = isHome
   ? t('site.homeTitle', lang)
-  : (Astro.props.title ?? t('site.title', lang)) + t('site.titleSuffix', lang)
-const desc = Astro.props.desc ?? t('site.description', lang)
+  : (seoTitle ?? ((Astro.props.title ?? t('site.title', lang)) + t('site.titleSuffix', lang)))
+const desc = Astro.props.desc ?? seoDesc ?? t('site.description', lang)
 const canonical = `https://www.qomicex.top${Astro.url.pathname.replace(/\/$/, '')}/`
 const enUrl = lang === 'en' ? canonical : `https://www.qomicex.top/en${Astro.url.pathname}`
 const zhUrl = lang === 'zh' ? canonical : `https://www.qomicex.top${Astro.url.pathname.replace(/^\/en/, '')}`
 const ogImage = 'https://www.qomicex.top/og-image.webp'
+// JSON-LD 用：最新正式版版本号（无正式版时为 undefined，该字段会被 JSON.stringify 省略）
+const stableVersion = releases.find(r => !r.prerelease)?.version
 ---
 
 <!doctype html>
@@ -52,6 +62,46 @@ const ogImage = 'https://www.qomicex.top/og-image.webp'
     <meta name="twitter:image" content={ogImage} />
     <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'zh_CN'} />
     {lang === 'zh' && <meta property="og:locale:alternate" content="en_US" />}
+
+    {/* JSON-LD 结构化数据（SoftwareApplication）：让搜索引擎以富结果展示
+        名称/版本/系统要求/下载入口/许可协议。仅在首页输出——它是「关于这个软件」
+        的实体描述，内页重复注入会造成同一实体多份声明。
+        数据取自构建期的 releases.json，与页面展示的版本号天然一致。
+        用 set:html 输出，避免 Astro 对对象做 HTML 转义。 */}
+    {isHome && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'SoftwareApplication',
+        name: 'Qomicex Launcher',
+        alternateName: ['QML 启动器', 'QML', 'QML Launcher'],
+        applicationCategory: 'GameApplication',
+        applicationSubCategory: 'Minecraft Launcher',
+        operatingSystem: 'Windows 10 1809+, macOS 10.15+, Linux (glibc 2.28+)',
+        softwareVersion: stableVersion || undefined,
+        license: 'https://www.gnu.org/licenses/gpl-3.0.en.html',
+        isAccessibleForFree: true,
+        inLanguage: ['zh-CN', 'en'],
+        url: canonical,
+        description: desc,
+        downloadUrl: `https://www.qomicex.top${lang === 'en' ? '/en' : ''}/download/`,
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'CNY',
+          availability: 'https://schema.org/InStock',
+        },
+        author: {
+          '@type': 'Organization',
+          name: 'Qomicex',
+          url: 'https://github.com/Qomicex-Public',
+        },
+        sameAs: [
+          'https://github.com/Qomicex-Public/Qomicex.Tauri',
+          lang === 'en' ? 'https://www.qomicex.top/' : 'https://www.qomicex.top/en/',
+        ],
+      })} />
+    )}
+
     <Analytics />
     <style is:global>
       .admonition {
