@@ -48,6 +48,7 @@ const zh = {
   'footer.about': '关于',
   'footer.agreement': '用户协议',
   'footer.dataUpdated': '数据更新于',
+  'about.friends': '友情链接',
 
   'docs.title': '文档',
   'docs.back': '返回文档首页',
@@ -137,6 +138,7 @@ const en: Record<string, string> = {
   'footer.about': 'About',
   'footer.agreement': 'User Agreement',
   'footer.dataUpdated': 'Data updated on',
+  'about.friends': 'Friends',
 
   'docs.title': 'Docs',
   'docs.back': 'Back to docs home',

@@ -4,7 +4,11 @@ import releases from '../data/releases.json';
 import contributors from '../data/contributors.json';
 import AppInfoCard from '../components/about/AppInfoCard';
 import ContributorCard from '../components/about/ContributorCard';
+import FriendsCard from '../components/about/FriendsCard';
+import { friends } from '../data/friends.ts';
+import { t, langFromPath } from '../i18n';
 
+const lang = langFromPath(Astro.url.pathname)
 const latestStable = releases.find(r => !r.prerelease)
 const latestPre = releases.find(r => r.prerelease)
 ---
@@ -52,6 +56,12 @@ const latestPre = releases.find(r => r.prerelease)
         ))}
       </div>
     </div>
+
+    {/* 友情链接 — 友链伙伴（MCNav 要求提交收录前先挂其友链） */}
+    <FriendsCard
+      title={t('about.friends', lang)}
+      items={friends.map(f => ({ name: f.name, url: f.url, desc: f.desc[lang] }))}
+    />
 
   </section>
 </Base>
