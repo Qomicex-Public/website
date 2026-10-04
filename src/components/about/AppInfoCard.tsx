@@ -4,6 +4,7 @@ export interface AppInfoCardProps {
   logoSrc: string;
   logoAlt: string;
   name: string;
+  versionLabel: string;
   version: string;
   description: string;
   repoUrl: string;
@@ -16,15 +17,16 @@ export interface AppInfoCardProps {
  * 构建期静态渲染，零运行时 JS。
  */
 export default function AppInfoCard({
-  logoSrc, logoAlt, name, version, description, repoUrl, repoLabel,
+  logoSrc, logoAlt, name, versionLabel, version, description, repoUrl, repoLabel,
 }: AppInfoCardProps) {
   return (
     <div className="mb-4 rounded-xl border border-border bg-card p-6">
       <div className="flex items-center gap-4">
         <img src={logoSrc} alt={logoAlt} className="h-14 w-14 rounded-2xl" />
         <div className="min-w-0 flex-1">
-          <div className="text-lg font-semibold">{name}</div>
-          <div className="text-sm text-muted-foreground">版本 {version}</div>
+          {/* 应用名承载本页 h1 语义；Tailwind preflight 下与原先的 div 渲染一致，视觉零变化 */}
+          <h1 className="text-lg font-semibold">{name}</h1>
+          <div className="text-sm text-muted-foreground">{versionLabel} {version}</div>
         </div>
         <a
           href={repoUrl}

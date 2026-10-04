@@ -17,6 +17,7 @@ const latestPre = releases.find(r => r.prerelease)
       logoSrc="/logo.svg"
       logoAlt="Qomicex Launcher"
       name="Qomicex Launcher"
+      versionLabel="Version"
       version={latestPre ? `${latestPre.version}${latestPre.prerelease ? ' (Preview)' : ''}` : latestStable?.version ?? '...' }
       description="A modern Minecraft launcher with multi-instance management, fast mod installation, account management, multiplayer support, and customizable themes. Fully open-source under GPL-3.0."
       repoUrl="https://github.com/Qomicex-Public/Qomicex.Tauri"

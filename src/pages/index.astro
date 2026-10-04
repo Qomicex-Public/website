@@ -39,6 +39,9 @@ const partners = [
     </div>
     <div class="relative z-10 mx-auto flex max-w-lg flex-col items-center px-4 py-24 text-center sm:py-32">
 
+      {/* 页面主标题（SEO/无障碍）：视觉上由下方 logo 承担，故 sr-only 保留语义而不改布局 */}
+      <h1 class="sr-only">{t('site.h1', lang)}</h1>
+
       <img src="/high_logo.svg" alt="QML启动器" class="mb-6 w-full max-w-xs" />
 
       {verDisplay && (

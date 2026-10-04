@@ -2,7 +2,9 @@ export type Lang = 'zh' | 'en'
 
 const zh = {
   'site.title': 'QML启动器',
-  'site.titleSuffix': ' — QML启动器',
+  'site.titleSuffix': ' | Qomicex Launcher | QML 启动器',
+  'site.homeTitle': 'Qomicex Launcher | QML 启动器 - 现代化的 Minecraft 启动器',
+  'site.h1': 'Qomicex Launcher | QML 启动器 — 现代化的 Minecraft 启动器',
   'site.description': 'QML启动器 — 一个现代化的 Minecraft 启动器，拥有多实例管理、模组安装、账户管理、多人联机、个性化主题设置等功能',
   'site.keywords': 'QML, QML启动器, Qomicex启动器, Qomicex Launcher, Minecraft启动器, 我的世界启动器, 多实例管理, 模组安装',
 
@@ -62,7 +64,9 @@ const zh = {
 
 const en: Record<string, string> = {
   'site.title': 'QML Launcher',
-  'site.titleSuffix': ' — QML Launcher',
+  'site.titleSuffix': ' | Qomicex Launcher | QML Launcher',
+  'site.homeTitle': 'Qomicex Launcher | QML Launcher - A Modern Minecraft Launcher',
+  'site.h1': 'Qomicex Launcher | QML Launcher — A Modern Minecraft Launcher',
   'site.description': 'QML Launcher — A modern Minecraft launcher with multi-instance management, mod installation, account management, multiplayer support, and customizable themes.',
   'site.keywords': 'QML, QML Launcher, Qomicex Launcher, Qomicex, Minecraft launcher, Minecraft 启动器',
 

@@ -6,12 +6,17 @@ import Analytics from '@vercel/analytics/astro';
 import { t, langFromPath } from '../i18n';
 
 const lang = langFromPath(Astro.url.pathname)
-const pageTitle: string = Astro.props.title ?? t('site.title', lang)
-const fullTitle = pageTitle + t('site.titleSuffix', lang)
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '/en/'
+const noindex: boolean = Astro.props.noindex ?? false
+// 首页直接用规范标题（品牌 + 定位关键词）；内页为「页面名 | 品牌」，避免出现「QML启动器 — QML启动器」式的自我重复
+const fullTitle: string = isHome
+  ? t('site.homeTitle', lang)
+  : (Astro.props.title ?? t('site.title', lang)) + t('site.titleSuffix', lang)
 const desc = Astro.props.desc ?? t('site.description', lang)
 const canonical = `https://www.qomicex.top${Astro.url.pathname.replace(/\/$/, '')}/`
 const enUrl = lang === 'en' ? canonical : `https://www.qomicex.top/en${Astro.url.pathname}`
 const zhUrl = lang === 'zh' ? canonical : `https://www.qomicex.top${Astro.url.pathname.replace(/^\/en/, '')}`
+const ogImage = 'https://www.qomicex.top/og-image.webp'
 ---
 
 <!doctype html>
@@ -28,14 +33,23 @@ const zhUrl = lang === 'zh' ? canonical : `https://www.qomicex.top${Astro.url.pa
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="description" content={desc} />
     <meta name="keywords" content={t('site.keywords', lang)} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="alternate" hreflang="zh-CN" href={zhUrl} />
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="x-default" href={zhUrl} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={desc} />
-    <meta property="og:image" content="/og-image.webp" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={t('site.h1', lang)} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Qomicex Launcher" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={desc} />
+    <meta name="twitter:image" content={ogImage} />
     <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'zh_CN'} />
     {lang === 'zh' && <meta property="og:locale:alternate" content="en_US" />}
     <Analytics />
@@ -82,7 +96,7 @@ const zhUrl = lang === 'zh' ? canonical : `https://www.qomicex.top${Astro.url.pa
       document.addEventListener('astro:page-load', observeAnimate)
     </script>
     <script is:inline>
-      const qmlLogo = [
+      console.log('%c' + [
         '  ██████╗   ██████╗  ███╗   ███╗ ██╗  ██████╗ ███████╗ ██╗    ██╗ ',
         ' ██╔═══██╗ ██╔═══██╗ ████╗ ████║ ██║ ██╔════╝ ██╔════╝  ╚██╗ ██╔╝ ',
         ' ██║   ██║ ██║   ██║ ██╔████╔██║ ██║ ██║      █████╗      ╚██╔╝   ',
@@ -91,10 +105,7 @@ const zhUrl = lang === 'zh' ? canonical : `https://www.qomicex.top${Astro.url.pa
         ' ╚█████╔█╗ ╚██████╔╝ ██║     ██║ ██║ ╚██████╗ ███████╗ ██╔╝    ██╗',
         '  ╚════╝╚╝  ╚═════╝  ╚═╝     ╚═╝ ╚═╝  ╚═════╝  ╚═════╝ ╚═╝     ╚═╝ ',
         ' Console - Qomicex Launcher ======================================'
-      ]
-      qmlLogo.forEach(function(line) {
-        console.log('%c' + line, 'color:#4fc3f7;font-family:monospace;')
-      })
+      ].join('\n'), 'color:#4fc3f7;font-family:monospace;')
     </script>
     <script is:inline>
       function initImageViewer() {
