@@ -1,24 +1,74 @@
-name: Auto Redeploy Vercel
+name: Deploy & IndexNow
+
+# 本站的部署链路（已实测核实）：
+#   - push 到 master 不会自动触发 Vercel 的 Git 集成部署：提交后十几分钟线上仍是旧版，
+#     而远程 master 已含该提交（git ls-remote 确认）。故部署只能由本 workflow 执行。
+#   - 现在三种触发：push 到 master、每日定时保活、手动。
+#
+# IndexNow 必须挂在这里、且必须排在部署步骤之后：
+# 部署完成前提交 URL，搜索引擎抓到的是 404，会损害收录信任度。
 
 on:
+  push:
+    branches: [master]
+    # 只改以下内容时不做重新部署与再次索引提交。
+    # 注意：不能用宽泛的 '**.md' —— src/content/docs/**/*.md 是站点的内容源
+    # （18 个文档页由它构建），改动它们必须重新部署。故只排除项目文档与记忆目录。
+    paths-ignore:
+      - 'docs/**'
+      - '.memory/**'
+      - '*.md'
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
+concurrency:
+  # 连续 push 时只保留最新一次，取消排队中的旧运行：
+  # 避免多次部署互相覆盖，也避免向 IndexNow 重复提交同一批 URL。
+  group: deploy-production
+  cancel-in-progress: true
+
 jobs:
   redeploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          
+          # 与 package.json 的 engines（>=22.12.0）和 Vercel 项目 nodeVersion 对齐；
+          # 原为 18，会让 npm ci 因引擎不匹配而失败。
+          node-version: '22'
+
       - name: Install Vercel CLI
         run: npm install -g vercel
-        
+
       - name: Deploy to Production
+        id: deploy
         run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --yes
+
+      - name: Wait for the new deployment to serve traffic
+        # `vercel --prod` 返回时部署已完成，但边缘节点可能还差几秒。
+        # 轮询首页直到可达，避免紧随其后的抓取落到旧版本/空响应。
+        run: |
+          set -euo pipefail
+          echo "等待线上站点就绪…"
+          for i in $(seq 1 30); do
+            if curl -fsS -H "Cache-Control: no-cache" \
+                 "https://www.qomicex.top/?cb=${GITHUB_RUN_ID}-${i}" -o /tmp/live.html; then
+              echo "站点可达（第 ${i} 次探测，用时约 $((i*5))s）"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "::error::部署后线上不可达（等待 150s 超时）"
+          exit 1
+
+      - name: Ping IndexNow
+        # --live：从线上 sitemap 取 URL，确保提交的正是刚部署上线的那一批。
+        # 该脚本只用 Node 内置 API（fs/path/url/fetch），无需 npm install。
+        run: node scripts/indexnow.mjs --live

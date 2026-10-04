@@ -6,11 +6,14 @@
 // 因此这里直接复用，不再新建 key（新建会让旧 key 失效并需重新验证所有权）。
 //
 // 用法：
-//   node scripts/indexnow.mjs              # 提交 sitemap 中的全部 URL
-//   node scripts/indexnow.mjs <url> [...]  # 仅提交指定 URL
+//   node scripts/indexnow.mjs                 # 优先用本地 dist/sitemap-0.xml，无则拉线上
+//   node scripts/indexnow.mjs --live          # 强制读线上 sitemap（CI 部署后使用）
+//   node scripts/indexnow.mjs --dry-run       # 只打印将提交的 URL，不发请求
+//   node scripts/indexnow.mjs <url> [...]     # 仅提交指定 URL
 //
-// 该脚本不参与 build，避免每次构建都向外发请求（构建环境可能无网络/
-// 不应有副作用）。需要时手动执行或在部署后由 CI 单独调用。
+// 该脚本不挂在 build 上，避免每次构建都向外发请求（构建环境可能无网络/
+// 不应有副作用）。由 .github/workflows/vercel-redeploy.yml 在「部署成功之后」
+// 调用——顺序很重要：部署完成前提交，搜索引擎抓到的是 404，会损害收录信任度。
 
 import { readFileSync, existsSync } from 'fs'
 import { resolve, dirname } from 'path'
@@ -20,6 +23,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
 const HOST = 'www.qomicex.top'
 const KEY_FILE = resolve(ROOT, 'public/511e7619b0c04f65824972919a831202.txt')
+
+const ARGS = process.argv.slice(2)
+const LIVE = ARGS.includes('--live')
+const DRY_RUN = ARGS.includes('--dry-run')
 
 if (!existsSync(KEY_FILE)) {
   console.error(`✗ 缺少 IndexNow key 文件: public/511e7619b0c04f65824972919a831202.txt`)
@@ -31,25 +38,55 @@ if (KEY !== '511e7619b0c04f65824972919a831202') {
   process.exit(1)
 }
 
-// 取待提交 URL：命令行参数优先，否则从构建产物 sitemap 读取
-async function collectUrls() {
-  const argv = process.argv.slice(2).filter(a => a.startsWith('http'))
-  if (argv.length > 0) return argv
-
-  const local = resolve(ROOT, 'dist/sitemap-0.xml')
-  if (existsSync(local)) {
-    const xml = readFileSync(local, 'utf-8')
-    return [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1])
+/** 带重试的 GET：CI 中紧随部署完成，边缘节点可能还差几秒才稳定 */
+async function fetchText(url, tries = 3, delayMs = 5000) {
+  let lastErr
+  for (let i = 1; i <= tries; i++) {
+    try {
+      const res = await fetch(url, { headers: { 'Cache-Control': 'no-cache' } })
+      if (res.ok) return await res.text()
+      lastErr = new Error(`HTTP ${res.status}`)
+    } catch (e) {
+      lastErr = e
+    }
+    if (i < tries) {
+      console.log(`  第 ${i} 次获取失败(${lastErr.message})，${delayMs / 1000}s 后重试…`)
+      await new Promise((r) => setTimeout(r, delayMs))
+    }
   }
-  // 回退：拉线上 sitemap
-  const idx = await (await fetch(`https://${HOST}/sitemap-index.xml`)).text()
-  const sm = [...idx.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1])
+  throw new Error(`获取 ${url} 失败: ${lastErr.message}`)
+}
+
+/** 从 sitemap 文本里抽出全部 <loc> */
+function locs(xml) {
+  return [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1])
+}
+
+/** 线上 sitemap（index → 子 sitemap）展开为完整 URL 列表 */
+async function collectFromLive() {
+  const idx = await fetchText(`https://${HOST}/sitemap-index.xml`)
   const urls = []
-  for (const s of sm) {
-    const xml = await (await fetch(s)).text()
-    urls.push(...[...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]))
+  for (const sm of locs(idx)) {
+    const xml = await fetchText(sm)
+    urls.push(...locs(xml))
   }
   return urls
+}
+
+async function collectUrls() {
+  // 显式传入 URL 时优先，便于人工补推单页
+  const argv = ARGS.filter((a) => a.startsWith('http'))
+  if (argv.length > 0) return argv
+
+  // --live：强制取线上 sitemap。部署后线上已是本次产物，
+  // 用它可保证提交的 URL 与线上完全一致。
+  if (LIVE) return collectFromLive()
+
+  const local = resolve(ROOT, 'dist/sitemap-0.xml')
+  if (existsSync(local)) return locs(readFileSync(local, 'utf-8'))
+
+  console.log('未找到本地 dist/sitemap-0.xml，回退读取线上 sitemap')
+  return collectFromLive()
 }
 
 const urlList = [...new Set(await collectUrls())]
@@ -58,7 +95,27 @@ if (urlList.length === 0) {
   process.exit(1)
 }
 
+// 递交前校验：URL 必须属于本站 host，否则 IndexNow 返回 422
+const foreign = urlList.filter((u) => {
+  try {
+    return new URL(u).host !== HOST
+  } catch {
+    return true
+  }
+})
+if (foreign.length > 0) {
+  console.error(`✗ 以下 URL 不属于 ${HOST}，IndexNow 会拒绝:`)
+  foreign.slice(0, 5).forEach((u) => console.error(`   ${u}`))
+  process.exit(1)
+}
+
 console.log(`准备提交 ${urlList.length} 个 URL 到 IndexNow (${HOST})`)
+
+if (DRY_RUN) {
+  console.log('--dry-run 已启用，仅列出将提交的 URL（不发请求）:')
+  urlList.forEach((u) => console.log(`   ${u}`))
+  process.exit(0)
+}
 
 // IndexNow 单次上限 10000 条；本站远小于此，一次提交
 const body = {
