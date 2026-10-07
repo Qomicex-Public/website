@@ -1,16 +1,35 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { faqs } from '../../data/faq.ts';
+import { getFaqs } from '../../data/faq.ts';
+import { langFromPath } from '../../i18n';
 import FaqItem from '../../components/faq/FaqItem';
+
+const lang = langFromPath(Astro.url.pathname)
+const faqs = getFaqs(lang)
 ---
 
 <Base title="FAQ" page="faq">
   <section class="mx-auto max-w-3xl px-4 py-16">
-    <h1 class="mb-8 text-3xl font-bold">Frequently Asked Questions</h1>
+    <h1 class="mb-4 text-3xl font-bold">Frequently Asked Questions</h1>
+    <p class="mb-8 text-sm leading-relaxed text-muted-foreground">
+      Answers to the questions we see most often about Qomicex Launcher (QML Launcher): supported Minecraft versions and mod loaders, Java requirements, troubleshooting a launch failure, migrating instances, installing mods and modpacks, multiplayer, and how your data is handled. If your question is not covered here, please
+      <a href="https://github.com/Qomicex-Public/Qomicex.Tauri/issues" target="_blank" rel="noopener" class="text-primary underline underline-offset-2">open an issue on GitHub</a>
+      or read the illustrated guides on the
+      <a href="https://docs.qomicex.top" target="_blank" rel="noopener" class="text-primary underline underline-offset-2">documentation site</a>.
+    </p>
     <div class="space-y-2">
       {faqs.map(faq => (
         <FaqItem question={faq.question} answer={faq.answer} />
       ))}
+    </div>
+
+    <div class="mt-12 rounded-xl border border-border bg-card p-6">
+      <h2 class="mb-3 text-base font-semibold">Still stuck?</h2>
+      <ul class="ml-5 list-disc space-y-1.5 text-sm leading-relaxed text-muted-foreground">
+        <li>Read the installation and troubleshooting chapters in the <a href="https://docs.qomicex.top" target="_blank" rel="noopener" class="text-primary underline underline-offset-2">online documentation</a>, which include step-by-step screenshots.</li>
+        <li>Search for an existing report or open a new one on <a href="https://github.com/Qomicex-Public/Qomicex.Tauri/issues" target="_blank" rel="noopener" class="text-primary underline underline-offset-2">GitHub Issues</a>, attaching your log file.</li>
+        <li>Join the QQ group 623362446 to talk with other users; the group number is also listed on the GitHub repository page.</li>
+      </ul>
     </div>
   </section>
 </Base>

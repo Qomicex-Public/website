@@ -69,16 +69,30 @@ export interface VersionReleaseRow {
   changesLabel: string;
   /** 变更条目 */
   changes: string[];
+  /** 该版本对外提供的下载项（仅用于合成摘要文案，不再逐条渲染链接） */
+  downloads: VersionDownloadGroup[];
+  /** 下载摘要文案，如 "Windows、macOS、Linux 共 12 个安装包" */
+  downloadsSummary: string;
   /** 下载小节标题文案（"下载" / "Downloads"） */
   downloadsLabel: string;
-  /** 按平台分组的下载项，顺序 = 资产在 JSON 中首次出现的平台顺序 */
-  downloads: VersionDownloadGroup[];
+  /** 下载入口链接文案（"前往 GitHub 下载" / "Download on GitHub"） */
+  downloadsLinkLabel: string;
 }
 
 export interface VersionListProps {
   releases: VersionReleaseRow[];
 }
 
+/**
+ * 版本历史列表岛（卡片流）。
+ *
+ * 为什么每个版本只保留一个外链：早先每个版本都逐条渲染全部构建产物
+ * （38 版 × 约 13 个资产 = 498 条指向 github.com 的链接），使本页达到
+ * 535KB / 545 条站外链接。搜索引擎把这种「大量低价值站外链接」视为抓取
+ * 浪费，会稀释本页与全站的信号质量（Bing Webmaster Guidelines 第 8、21 条）。
+ * 现在每版只保留「GitHub 发布页」一个链接，用户在该页可取到全部资产；
+ * 常规下载入口本就由 /download/ 页承担。
+ */
 export default function VersionList({ releases }: VersionListProps) {
   return (
     <div className="space-y-6">
@@ -123,29 +137,20 @@ export default function VersionList({ releases }: VersionListProps) {
           )}
 
           {r.downloads.length > 0 && (
-            <>
-              <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{r.downloadsLabel}</h3>
-              <div className="space-y-1.5">
-                {r.downloads.map((g, gi) => (
-                  <div key={gi} className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-                    <span className="w-28 shrink-0 font-medium text-foreground">{g.platform}</span>
-                    {g.assets.map((a, ai) => (
-                      <Button
-                        key={ai}
-                        asChild
-                        variant="outline"
-                        size="sm"
-                        className="h-auto w-auto gap-1 border-border bg-transparent px-2 py-1 font-normal shadow-none transition-colors hover:border-primary/40 hover:bg-transparent hover:text-foreground active:scale-100"
-                      >
-                        <a href={a.url}>
-                          <span>{a.label}</span>
-                        </a>
-                      </Button>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </>
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border/50 pt-3">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{r.downloadsLabel}</h3>
+              <span className="text-sm text-muted-foreground">{r.downloadsSummary}</span>
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="h-auto w-auto gap-1 border-border bg-transparent px-2 py-1 font-normal shadow-none transition-colors hover:border-primary/40 hover:bg-transparent hover:text-foreground active:scale-100"
+              >
+                <a href={r.detailUrl} target="_blank" rel="noopener">
+                  <span>{r.downloadsLinkLabel}</span>
+                </a>
+              </Button>
+            </div>
           )}
         </Card>
       ))}

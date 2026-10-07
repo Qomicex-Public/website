@@ -104,6 +104,49 @@ const fallbackPlat = { name: 'Windows', arch: 'x64', min: platforms[0]?.minVersi
           }))}
         />
       </div>
+
+      {/* 安装说明 — 补足实质内容：选择版本、安装步骤与常见问题 */}
+      <div class="mt-12 text-left">
+        <h2 class="mb-4 text-lg font-semibold">安装说明</h2>
+        <div class="space-y-4 text-sm leading-relaxed text-muted-foreground">
+          <div>
+            <h3 class="mb-1.5 font-medium text-foreground">如何选择版本</h3>
+            <p>
+              上方「版本」处可切换正式版与测试版。正式版经过完整测试，适合日常游玩；
+              测试版会提前包含新功能，但可能存在未发现的问题。若你只是想稳定游玩，选择正式版即可。
+              安装包按平台与架构区分：Windows 与 Linux 的 ARM64 包仅适用于 ARM 设备（如骁龙笔记本、树莓派），
+              普通 x86 电脑请下载 x64 包。
+            </p>
+          </div>
+          <div>
+            <h3 class="mb-1.5 font-medium text-foreground">安装步骤</h3>
+            <ol class="ml-5 list-decimal space-y-1.5">
+              <li>点击上方下载按钮，在弹出的对话框中选择平台、架构与安装包类型。</li>
+              <li>选择下载源。默认的代理下载适合中国大陆网络环境；若代理不可用，可切换镜像源或 GitHub 直连。</li>
+              <li>下载完成后运行安装程序：Windows 为 <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">.exe</code>，macOS 为 <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">.dmg</code>，Linux 可用 AppImage / DEB / RPM。</li>
+              <li>macOS 首次打开若提示「无法验证开发者」，请在「系统设置 → 隐私与安全性」中允许该应用运行。</li>
+              <li>启动后新建实例，选择游戏版本与加载器，启动器会自动补全所需文件与 Java 环境。</li>
+            </ol>
+          </div>
+          <div>
+            <h3 class="mb-1.5 font-medium text-foreground">校验与安全</h3>
+            <p>
+              所有安装包均构建并发布于本项目的 GitHub Releases，可对照发布页核对版本号与文件名。
+              每个发布资产都附带 <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">.sig</code> 签名文件，供自动更新校验完整性。
+              请勿从第三方渠道下载，以免取得被篡改的安装包。
+            </p>
+          </div>
+          <div>
+            <h3 class="mb-1.5 font-medium text-foreground">安装遇到问题？</h3>
+            <p>
+              常见原因包括系统版本低于最低要求、架构选择错误（在 x64 系统上安装了 ARM64 包），
+              以及缺少 Java 环境。更多排查步骤见
+              <a href={lang === 'en' ? '/en/faq' : '/faq'} class="text-primary underline underline-offset-2">常见问题</a>，
+              或查阅<a href="https://docs.qomicex.top" target="_blank" rel="noopener" class="text-primary underline underline-offset-2">在线文档</a>中的图文安装教程。
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </Base>

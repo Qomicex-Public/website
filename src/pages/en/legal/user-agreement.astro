@@ -72,7 +72,7 @@ import Base from '../../../layouts/Base.astro';
           <li class="text-justify"><strong>Game Instance Management</strong>: Create, configure, and manage multiple independent Minecraft game instances with version isolation.</li>
           <li class="text-justify"><strong>Download Center</strong>: Download Minecraft game versions, loaders (Forge, Fabric, NeoForge, Quilt, etc.), and Java runtimes from multiple sources.</li>
           <li class="text-justify"><strong>Resource Center</strong>: Browse, search, and download mods, resource packs, and modpacks from platforms such as Modrinth and CurseForge.</li>
-          <li class="text-justify"><strong>Account Management</strong>: Support for Microsoft accounts (OAuth), Yggdrasil authentication servers (third-party login), Unified Pass, and offline mode.</li>
+          <li class="text-justify"><strong>Account Management</strong>: Support for Microsoft accounts (OAuth), Yggdrasil authentication servers (third-party login) and Unified Pass, plus a local account mode for offline scenarios (see Chapter 4).</li>
           <li class="text-justify"><strong>Multiplayer Module</strong>: LAN and mesh networking features based on EasyTier technology.</li>
           <li class="text-justify"><strong>Settings and Updates</strong>: Application settings management and automatic update checking and installation.</li>
         </ul>
@@ -89,8 +89,12 @@ import Base from '../../../layouts/Base.astro';
           <li class="text-justify"><strong>Microsoft Account</strong>: Authenticated via the Microsoft OAuth 2.0 protocol. This process is handled entirely by Microsoft's platform; the Software only receives the authorized access token.</li>
           <li class="text-justify"><strong>Yggdrasil (Third-Party Login)</strong>: Allows users to connect to custom AuthlibInjector-compatible authentication servers.</li>
           <li class="text-justify"><strong>Unified Pass</strong>: A third-party Yggdrasil authentication service (e.g. <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">login.mc-user.com</code>), with registration and authentication provided by community server operators.</li>
-          <li class="text-justify"><strong>Offline Mode</strong>: No online authentication required; only a username is needed.</li>
+          <li class="text-justify"><strong>Local Account Mode</strong>: A local account form intended for offline or testing scenarios; it requires only a username and does not participate in online authentication. This mode is for single-player or self-hosted environments only and must not be used to circumvent legitimate licensing.</li>
         </ul>
+
+        <div class="admonition warning">
+          <strong>Please support the official game:</strong> If you do not yet own a legitimate copy of Minecraft, please purchase one through official channels first. The Software recommends and prioritizes Microsoft account sign-in; local account mode is not a substitute for a licensed copy of the game.
+        </div>
         <p class="mb-3 text-justify"><strong>4.2 Account Information Security</strong>. Your account credentials (including access tokens) are stored in an encrypted file on your local machine. We will not upload your credentials to any unnecessary third-party server. The encryption is tied to your machine's hardware identifier; changing your device may render stored credentials inaccessible.</p>
         <p class="mb-3 text-justify"><strong>4.3 User Responsibility</strong>. You are responsible for safeguarding your account credentials. We shall not be held liable for any loss or legal liability resulting from your disclosure of credentials or account sharing.</p>
 

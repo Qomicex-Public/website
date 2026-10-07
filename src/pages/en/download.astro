@@ -98,6 +98,53 @@ const fallbackPlat = { name: 'Windows', arch: 'x64', min: platforms[0]?.minVersi
           }))}
         />
       </div>
+
+      {/* Installation notes — substantive content: version choice, steps, checks */}
+      <div class="mt-12 text-left">
+        <h2 class="mb-4 text-lg font-semibold">Installation</h2>
+        <div class="space-y-4 text-sm leading-relaxed text-muted-foreground">
+          <div>
+            <h3 class="mb-1.5 font-medium text-foreground">Choosing a version</h3>
+            <p>
+              Use the version selector above to switch between stable and preview builds. Stable builds have gone
+              through full testing and are the right choice for everyday play; preview builds include new features
+              earlier but may contain undiscovered issues. Packages are separated by platform and architecture: the
+              ARM64 builds for Windows and Linux only apply to ARM hardware such as Snapdragon laptops or Raspberry
+              Pi, so on ordinary x86 computers choose the x64 package.
+            </p>
+          </div>
+          <div>
+            <h3 class="mb-1.5 font-medium text-foreground">Steps</h3>
+            <ol class="ml-5 list-decimal space-y-1.5">
+              <li>Click the download button above and pick your platform, architecture and package type.</li>
+              <li>Choose a download source. The default proxy download works well on mainland Chinese networks; if it is unavailable, switch to the mirror or direct GitHub source.</li>
+              <li>Run the installer once the download finishes: <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">.exe</code> on Windows, <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">.dmg</code> on macOS, and AppImage / DEB / RPM on Linux.</li>
+              <li>If macOS reports that the developer cannot be verified on first launch, allow the app under System Settings &rarr; Privacy &amp; Security.</li>
+              <li>Create an instance, pick a game version and loader, and the launcher will fetch the required files and Java runtime automatically.</li>
+            </ol>
+          </div>
+          <div>
+            <h3 class="mb-1.5 font-medium text-foreground">Verification and safety</h3>
+            <p>
+              Every package is built and published through this project&rsquo;s GitHub Releases, where you can check the
+              version number and file name against the release page. Each release asset ships with a
+              <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">.sig</code> signature file used
+              to verify integrity during automatic updates. Please avoid third-party download sites, which may serve
+              modified packages.
+            </p>
+          </div>
+          <div>
+            <h3 class="mb-1.5 font-medium text-foreground">Trouble installing?</h3>
+            <p>
+              Common causes are an OS older than the minimum requirement, the wrong architecture (an ARM64 package on
+              an x64 system), or a missing Java runtime. More troubleshooting steps are in the
+              <a href={lang === 'en' ? '/en/faq' : '/faq'} class="text-primary underline underline-offset-2">FAQ</a>, or
+              see the illustrated installation guide in the
+              <a href="https://docs.qomicex.top" target="_blank" rel="noopener" class="text-primary underline underline-offset-2">documentation</a>.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </Base>

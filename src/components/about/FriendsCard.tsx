@@ -8,8 +8,7 @@
  *
  * 内容为纯文字列表：站名（外链）+ 一句真实描述。
  * - 不用图标/第三方图片：避免额外请求与对方图裂导致的破图。
- * - rel 只写 noopener，不写 nofollow：友链是互惠收录，nofollow 会被对方
- *   判定为无效友链（MCNav 要求提交前先挂其友链）。
+ * - rel 写 noopener：外链新窗口打开的标准安全写法。
  * 构建期静态渲染，零运行时 JS。
  */
 export interface FriendItem {

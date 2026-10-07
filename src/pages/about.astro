@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import releases from '../data/releases.json';
 import contributors from '../data/contributors.json';
+import { platforms } from '../data/platforms.ts';
 import AppInfoCard from '../components/about/AppInfoCard';
 import ContributorCard from '../components/about/ContributorCard';
 import FriendsCard from '../components/about/FriendsCard';
@@ -11,6 +12,7 @@ import { t, langFromPath } from '../i18n';
 const lang = langFromPath(Astro.url.pathname)
 const latestStable = releases.find(r => !r.prerelease)
 const latestPre = releases.find(r => r.prerelease)
+const stableVersion = latestStable?.version ?? '—'
 ---
 
 <Base title="关于" page="about">
@@ -28,7 +30,74 @@ const latestPre = releases.find(r => r.prerelease)
       repoLabel="查看仓库"
     />
 
-    {/* Version Info — 原样保留（非卡片 UI，数据展示块） */}
+    {/* 项目简介 — 补足实质内容，避免页面单薄 */}
+    <div class="mb-4 rounded-xl border border-border bg-card p-6">
+      <h2 class="mb-3 text-base font-semibold">项目简介</h2>
+      <div class="space-y-3 text-sm leading-relaxed text-muted-foreground">
+        <p>
+          Qomicex Launcher（简称 QML 启动器，英文名 Qomicex Launcher）是一款面向 Minecraft Java 版玩家的免费开源启动器，
+          使用 Tauri 与 Rust 技术栈构建，目标是提供启动快、占用低、界面简洁且功能完整的游戏管理体验。
+          项目完全开源，源代码发布于 GitHub，采用 GPL-3.0 许可协议，任何人均可自由使用、审阅与分发。
+        </p>
+        <p>
+          与仅负责「启动游戏」的轻量工具不同，QML 把日常游玩中反复出现的操作集中到一处：多实例的创建与隔离、
+          模组与整合包从 Modrinth 和 CurseForge 的检索与安装、前置依赖的自动补全、账户的加密存储与切换、
+          以及基于 EasyTier 的多人联机。启动器同时提供游戏选项、世界设置、地图预览与投影预览等辅助功能，
+          尽量免去手动编辑配置文件的步骤。
+        </p>
+        <p>
+          非中文语言环境需先登录 Microsoft 正版账户才能添加第三方账户，这是为遵守平台授权要求而设的限制。
+          我们推荐并优先支持使用 Microsoft 正版账户登录。
+        </p>
+      </div>
+    </div>
+
+    {/* 功能概览 */}
+    <div class="mb-4 rounded-xl border border-border bg-card p-6">
+      <h2 class="mb-3 text-base font-semibold">主要功能</h2>
+      <ul class="ml-5 list-disc space-y-1.5 text-sm leading-relaxed text-muted-foreground">
+        <li><strong class="text-foreground">多实例管理</strong>：为每个实例配置独立的 Java、内存、窗口与启动参数，支持版本隔离、备份与恢复。</li>
+        <li><strong class="text-foreground">游戏与加载器安装</strong>：支持从 1.6 到最新版的 Minecraft，以及 Forge、Fabric、Quilt、NeoForge、OptiFine 等加载器。</li>
+        <li><strong class="text-foreground">资源中心</strong>：集成 Modrinth 与 CurseForge，可按版本、加载器与分类筛选，查看依赖后直接安装到指定实例。</li>
+        <li><strong class="text-foreground">账户管理</strong>：支持 Microsoft 正版账户、Yggdrasil 外置登录与统一通行证，凭据本地加密存储并与机器码绑定。</li>
+        <li><strong class="text-foreground">多人联机</strong>：基于 EasyTier 的组网联机，凭房间码即可加入，无需公网 IP 或手动端口映射。</li>
+        <li><strong class="text-foreground">游戏辅助</strong>：游戏选项与世界设置的图形化编辑、存档地图预览、<code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">.litematic</code> 蓝图等距投影预览。</li>
+        <li><strong class="text-foreground">自动更新</strong>：内置更新检查与安装，支持稳定版与测试版两条更新通道。</li>
+      </ul>
+    </div>
+
+    {/* 系统要求 */}
+    <div class="mb-4 rounded-xl border border-border bg-card p-6">
+      <h2 class="mb-3 text-base font-semibold">系统要求</h2>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead>
+            <tr class="border-b border-border text-xs uppercase tracking-wider text-muted-foreground">
+              <th class="py-2 pr-4 font-medium">平台</th>
+              <th class="py-2 pr-4 font-medium">架构</th>
+              <th class="py-2 pr-4 font-medium">最低系统版本</th>
+              <th class="py-2 font-medium">安装包</th>
+            </tr>
+          </thead>
+          <tbody>
+            {platforms.map(p => (
+              <tr class="border-b border-border/50 last:border-0">
+                <td class="py-2 pr-4 text-foreground">{p.os}</td>
+                <td class="py-2 pr-4 text-muted-foreground">{p.arch}</td>
+                <td class="py-2 pr-4 text-muted-foreground">{p.minVersion}</td>
+                <td class="py-2 text-muted-foreground">{p.packageType}{p.note ? `（${p.note}）` : ''}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs leading-relaxed text-muted-foreground">
+        除上述平台外，还需要可用的 Java 运行环境；启动器可自动检测并安装与目标游戏版本匹配的 Java。详细要求见
+        <a href="/download" class="text-primary underline underline-offset-2">下载页</a>。
+      </p>
+    </div>
+
+    {/* 版本信息 — 原样保留（非卡片 UI，数据展示块） */}
     <div class="mb-4 rounded-xl border border-border bg-card p-6">
       <h2 class="mb-3 text-base font-semibold">版本信息</h2>
       <div class="rounded-lg bg-background p-4 text-sm">
@@ -36,8 +105,32 @@ const latestPre = releases.find(r => r.prerelease)
           {latestStable && <div><div class="text-xs text-muted-foreground">正式版</div><div class="mt-0.5 font-medium">{latestStable.version}</div></div>}
           {latestPre && <div><div class="text-xs text-muted-foreground">测试版</div><div class="mt-0.5 font-medium">{latestPre.version}</div></div>}
           {!latestStable && !latestPre && <div><div class="text-xs text-muted-foreground">应用版本</div><div class="mt-0.5 font-medium">...</div></div>}
-          <div><div class="text-xs text-muted-foreground">许可协议</div><div class="mt-0.5 font-medium"><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank" class="text-primary underline underline-offset-2">GPL-3.0</a></div></div>
+          <div><div class="text-xs text-muted-foreground">许可协议</div><div class="mt-0.5 font-medium"><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank" rel="noopener" class="text-primary underline underline-offset-2">GPL-3.0</a></div></div>
         </div>
+      </div>
+      <p class="mt-3 text-xs leading-relaxed text-muted-foreground">
+        当前最新正式版为 {stableVersion}。完整的版本历史与每个版本的更新内容见
+        <a href="/versions" class="text-primary underline underline-offset-2">版本历史</a>页，逐条变更记录另见
+        <a href="/changelog" class="text-primary underline underline-offset-2">更新日志</a>。
+      </p>
+    </div>
+
+    {/* 开源与参与 */}
+    <div class="mb-4 rounded-xl border border-border bg-card p-6">
+      <h2 class="mb-3 text-base font-semibold">开源与参与</h2>
+      <div class="space-y-3 text-sm leading-relaxed text-muted-foreground">
+        <p>
+          本项目以 GPL-3.0 协议开源，欢迎阅读源码、提交问题与参与改进。你可以通过以下方式参与：
+        </p>
+        <ul class="ml-5 list-disc space-y-1.5">
+          <li>在 GitHub 仓库提交 Issue 反馈 Bug 或建议新功能，报告问题时请附上启动器日志。</li>
+          <li>通过 Pull Request 贡献代码或文档改进；提交前请先阅读仓库中的贡献说明。</li>
+          <li>在使用过程中发现问题时，也可先查阅<a href="/faq" class="text-primary underline underline-offset-2">常见问题</a>与<a href="https://docs.qomicex.top" target="_blank" rel="noopener" class="text-primary underline underline-offset-2">在线文档</a>。</li>
+        </ul>
+        <p>
+          本软件是独立的第三方工具，与 Mojang Studios、Microsoft Corporation 及其关联公司无任何隶属、赞助或授权关系。
+          Minecraft 是 Mojang AB 的商标。若你尚未拥有正版游戏，请通过官方渠道购买。
+        </p>
       </div>
     </div>
 
@@ -57,7 +150,7 @@ const latestPre = releases.find(r => r.prerelease)
       </div>
     </div>
 
-    {/* 友情链接 — 友链伙伴（MCNav 要求提交收录前先挂其友链） */}
+    {/* 友情链接 — 同生态、长期运营的互补站点 */}
     <FriendsCard
       title={t('about.friends', lang)}
       items={friends.map(f => ({ name: f.name, url: f.url, desc: f.desc[lang] }))}

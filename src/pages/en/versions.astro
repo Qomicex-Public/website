@@ -38,12 +38,14 @@ const sorted = [...releases].sort((a, b) => new Date(b.publishedAt).getTime() - 
 const rows = sorted.map(r => {
   const assets = r.assets.filter(a => !a.name.endsWith('.sig') && !a.name.endsWith('.json'))
   const groups: Record<string, { platform: string; assets: { label: string; url: string }[] }> = {}
+  const platformOrder: string[] = []
   for (const a of assets) {
     const p = a.platform || 'other'
-    if (!groups[p]) groups[p] = { platform: platLabel(p), assets: [] }
+    if (!groups[p]) { groups[p] = { platform: platLabel(p), assets: [] }; platformOrder.push(groups[p].platform) }
     const arch = archLabel(a.name)
     groups[p].assets.push({ label: `${arch ? `${arch} ` : ''}${extLabel(a.name)}`, url: a.url })
   }
+  const pkgCount = Object.values(groups).reduce((n, g) => n + g.assets.length, 0)
   return {
     version: r.version,
     date: r.publishedAt.slice(0, 10),
@@ -55,6 +57,10 @@ const rows = sorted.map(r => {
     changes: r.changes,
     downloadsLabel: lang === 'en' ? 'Downloads' : '下载',
     downloads: Object.values(groups),
+    downloadsSummary: lang === 'en'
+      ? `${platformOrder.join(', ')} — ${pkgCount} packages`
+      : `${platformOrder.join('、')} 共 ${pkgCount} 个安装包`,
+    downloadsLinkLabel: lang === 'en' ? 'Download on GitHub' : '前往 GitHub 下载',
   }
 })
 ---
