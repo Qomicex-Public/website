@@ -45,8 +45,8 @@ export default function Header({ homeHref, brand, links, currentPath, switchHref
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-sm">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
         <a href={homeHref} className="flex items-center gap-2 text-base font-semibold tracking-tight">
-          <img src="/logo.svg" alt="" className="h-6 w-auto" />
-          {brand}
+          <img src="/logo.svg" alt="Qomicex Launcher" className="h-6 w-auto" />
+          <span aria-hidden="true">{brand}</span>
         </a>
         <Button
           id="menu-btn"
