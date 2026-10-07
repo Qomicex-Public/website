@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated": "2026-10-07 17:51",
+  "updated": "2026-10-07 20:32",
   "paths": [],
   "docs": [
     {
@@ -106,6 +106,19 @@
       "tags": [
         "1-决策记录"
       ]
+    },
+    {
+      "path": "docs/junsi-dev-docs/1-决策记录/ADR-009-Bing评级违规整改-内容质量优先与淡化离线模式.md",
+      "id": null,
+      "external": false,
+      "title": "ADR-009：Bing 评级违规整改：内容质量优先、淡化离线模式、消除抓取浪费",
+      "explicit_tags": [],
+      "zh": null,
+      "i18n": null,
+      "schema": null,
+      "tags": [
+        "1-决策记录"
+      ]
     }
   ],
   "tags": {
@@ -117,7 +130,8 @@
       "docs/junsi-dev-docs/1-决策记录/ADR-005-修复系统语言英文时无法切换中文-首页自动导流覆盖用户选择.md",
       "docs/junsi-dev-docs/1-决策记录/ADR-006-SEO第二轮-逐页元数据-JSON-LD-IndexNow与友链.md",
       "docs/junsi-dev-docs/1-决策记录/ADR-007-部署链路-push触发部署与部署后自动IndexNow.md",
-      "docs/junsi-dev-docs/1-决策记录/ADR-008-修复首页被Bing拒绝索引-移除按系统语言自动跳转.md"
+      "docs/junsi-dev-docs/1-决策记录/ADR-008-修复首页被Bing拒绝索引-移除按系统语言自动跳转.md",
+      "docs/junsi-dev-docs/1-决策记录/ADR-009-Bing评级违规整改-内容质量优先与淡化离线模式.md"
     ]
   }
 }
