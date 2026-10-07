@@ -217,6 +217,26 @@ const featureDataZh = [
     tags: ['版本管理', '模组管理', '启动参数'],
   },
   {
+    title: '游戏设置',
+    desc: '在实例内直接编辑游戏选项与启动参数，支持搜索与开关式编辑，不必再手动翻改配置文件。',
+    tags: ['选项编辑', '启动参数', '快捷开关'],
+  },
+  {
+    title: '存档设置',
+    desc: '世界名称、游戏模式、难度、作弊与极限模式随手可改，存档配置不再需要手动编辑。',
+    tags: ['游戏模式', '难度', '世界选项'],
+  },
+  {
+    title: '地图预览',
+    desc: '俯视渲染整个存档的已探索区块，可调高度切片查看洞穴，并标记路径点与上次位置。',
+    tags: ['俯视地图', '高度切片', '路径点'],
+  },
+  {
+    title: '投影预览',
+    desc: '直接打开 .litematic 蓝图，用等距投影查看结构，可按图层裁剪、自由旋转镜头。',
+    tags: ['litematic', '等距投影', '图层裁剪'],
+  },
+  {
     title: '自动安装前置依赖',
     desc: '智能检测并自动安装前置 Mod，一次点击轻松安装。',
     tags: ['前置检测', '自动安装', '一键安装'],
@@ -265,6 +285,26 @@ const featureDataEn = [
     tags: ['Version Mgmt', 'Mod Mgmt', 'Launch Args'],
   },
   {
+    title: 'Game Settings',
+    desc: 'Edit game options and launch arguments right inside the instance, with search and toggle-based editing — no more hand-editing config files.',
+    tags: ['Options', 'Launch Args', 'Toggles'],
+  },
+  {
+    title: 'World Settings',
+    desc: 'World name, game mode, difficulty, cheats and hardcore mode are all one click away — no manual level.dat editing.',
+    tags: ['Game Mode', 'Difficulty', 'World Options'],
+  },
+  {
+    title: 'World Preview',
+    desc: 'Render every explored chunk from above, slice through the height range to reveal caves, and mark waypoints and your last position.',
+    tags: ['Top-down Map', 'Height Slice', 'Waypoints'],
+  },
+  {
+    title: 'Projection Preview',
+    desc: 'Open .litematic schematics and inspect the build in isometric projection, clipping by layer and orbiting the camera freely.',
+    tags: ['Litematic', 'Isometric', 'Layer Clipping'],
+  },
+  {
     title: 'Auto Install Prerequisites',
     desc: 'Smart detection and auto-install of prerequisite mods with a single click.',
     tags: ['Dependency Check', 'Auto Install', 'One-Click'],
@@ -299,6 +339,10 @@ export function getFeatures(lang: Lang): FeatureData[] {
     '/screenshots/resource-center.webp',
     '/screenshots/download-management.webp',
     '/screenshots/instance-detail.webp',
+    '/screenshots/game-settings.webp',
+    '/screenshots/world-settings.webp',
+    '/screenshots/world-preview.webp',
+    '/screenshots/projection-preview.webp',
     '/screenshots/download-mod.webp',
     '/screenshots/online.webp',
   ]
