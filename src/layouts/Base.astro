@@ -122,24 +122,24 @@ const stableVersion = releases.find(r => !r.prerelease)?.version
       .admonition.caution { background: hsl(0 84% 60% / 0.12); border-color: hsl(0 84% 60%); }
     </style>
     <script>
-      // 首访按系统语言导流到 /en/；但「用户显式选过语言」时必须尊重其选择，
-      // 否则系统语言为英文的用户点顶栏「中」→ 进入 / → 又被弹回 /en/，
-      // 永远无法停留在中文站（Header.astro 的切换锚点会写入 qml-lang）。
+      // 语言导流只认「用户显式选过的语言」，绝不按系统语言自动跳转。
+      //
+      // 原因：爬虫（含 Googlebot）的 Accept-Language 通常是英文。一旦按
+      // navigator.language 导流，根路径 / 会被客户端 location.replace 弹到 /en/，
+      // Google 随即判定 / 是 /en/ 的重复页并拒绝索引（规范 URL 指向 /en/）。
+      //
+      // 爬虫侧 localStorage 恒为空，所以下面两个分支对搜索引擎不可见；
+      // 而显式选过语言的用户仍能正确直达对应站点（Header 的切换锚点会写入 qml-lang）。
       ;(function () {
         var chosen = null
         try { chosen = localStorage.getItem('qml-lang') } catch (e) { chosen = null }
 
-        if (chosen === 'zh') return  // 明确选中文：一律不自动跳转
+        // 明确选中文：一律不自动跳转
+        if (chosen === 'zh') return
 
         // 明确选英文：仅当当前处于中文路径时才导流，避免把 /en/xxx 也踢回 /en/ 首页
         if (chosen === 'en') {
           if (location.pathname === '/' || location.pathname === '') location.replace('/en/')
-          return
-        }
-
-        // 未表达过偏好 → 沿用原有行为（仅首页按系统语言导流）
-        if (location.pathname === '/' && navigator.language.startsWith('en')) {
-          location.replace('/en/')
         }
       })()
     </script>
