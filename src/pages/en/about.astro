@@ -13,63 +13,55 @@ const lang = langFromPath(Astro.url.pathname)
 const latestStable = releases.find(r => !r.prerelease)
 const latestPre = releases.find(r => r.prerelease)
 const stableVersion = latestStable?.version ?? '—'
+const displayVersion = latestPre
+  ? `${latestPre.version} (Preview)`
+  : latestStable?.version ?? '...'
 ---
 
 <Base title="About" page="about">
   <section data-animate class="mx-auto max-w-3xl px-4 py-16">
 
-    {/* App Info — 岛屿化 */}
     <AppInfoCard
       logoSrc="/logo.svg"
       logoAlt="Qomicex Launcher"
       name="Qomicex Launcher"
       versionLabel="Version"
-      version={latestPre ? `${latestPre.version}${latestPre.prerelease ? ' (Preview)' : ''}` : latestStable?.version ?? '...' }
-      description="A modern Minecraft launcher with multi-instance management, fast mod installation, account management, multiplayer support, and customizable themes. Fully open-source under GPL-3.0."
+      version={displayVersion}
+      description="Rediscover Minecraft with pure elegance — a modern, fast, and open launcher for creators and players."
       repoUrl="https://github.com/Qomicex-Public/Qomicex.Tauri"
       repoLabel="View Repository"
     />
 
-    {/* Overview — substantive content so the page is not thin */}
     <div class="mb-4 rounded-xl border border-border bg-card p-6">
       <h2 class="mb-3 text-base font-semibold">Overview</h2>
       <div class="space-y-3 text-sm leading-relaxed text-muted-foreground">
         <p>
-          Qomicex Launcher (also known as QML Launcher) is a free, open-source launcher for Minecraft: Java Edition,
-          built with Tauri and Rust. The goal is a launcher that starts quickly, uses few resources and offers a clean
-          interface without sacrificing capability. The project is fully open source on GitHub under GPL-3.0, so anyone
-          is free to use, review and redistribute it.
+          Qomicex Launcher (also known as QML Launcher) helps you rediscover Minecraft with pure elegance — a modern,
+          fast, and open launcher for creators and players. The source code is published on GitHub under the GPL-3.0
+          license, so anyone is free to use, review and redistribute it.
         </p>
         <p>
-          Rather than only launching the game, QML brings the tasks you repeat every day into one place: creating and
-          isolating multiple instances, searching and installing mods and modpacks from Modrinth and CurseForge,
-          resolving prerequisite dependencies automatically, storing and switching accounts securely, and playing
-          together over EasyTier mesh networking. It also covers auxiliary work such as editing game options and world
-          settings, previewing worlds, and rendering <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">.litematic</code> schematics.
-        </p>
-        <p>
-          In non-Chinese locales, signing in with a Microsoft account is required before third-party accounts can be
-          added; this restriction exists to comply with platform licensing requirements. We recommend and prioritise
-          signing in with a legitimate Microsoft account.
+          From v0.1.4-beta3.0 onward, you need to sign in with a legitimate Microsoft account before you can add
+          third-party accounts. This restriction exists to comply with platform licensing requirements and regulatory
+          compliance. We recommend and prioritise signing in with a Microsoft account.
         </p>
       </div>
     </div>
 
-    {/* Feature summary */}
     <div class="mb-4 rounded-xl border border-border bg-card p-6">
-      <h2 class="mb-3 text-base font-semibold">What it does</h2>
+      <h2 class="mb-3 text-base font-semibold">Features at a Glance</h2>
       <ul class="ml-5 list-disc space-y-1.5 text-sm leading-relaxed text-muted-foreground">
-        <li><strong class="text-foreground">Multi-instance management</strong>: per-instance Java, memory, window options and launch arguments, with version isolation, backup and restore.</li>
-        <li><strong class="text-foreground">Game and loader installs</strong>: Minecraft from 1.6 through the latest release, plus Forge, Fabric, Quilt, NeoForge and OptiFine.</li>
-        <li><strong class="text-foreground">Resource center</strong>: Modrinth and CurseForge integration with filtering by version, loader and category, dependency inspection, and direct install into a chosen instance.</li>
-        <li><strong class="text-foreground">Account management</strong>: Microsoft, Yggdrasil (third-party login) and Unified Pass, with credentials encrypted locally and bound to the machine identifier.</li>
-        <li><strong class="text-foreground">Multiplayer</strong>: EasyTier-based networking; join with a room code, no public IP or manual port forwarding required.</li>
-        <li><strong class="text-foreground">Companion tools</strong>: graphical editing of game options and world settings, world map preview, and isometric schematic preview for <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">.litematic</code> blueprints.</li>
-        <li><strong class="text-foreground">Updates</strong>: built-in update checks and installation, with separate stable and preview channels.</li>
+        <li><strong class="text-foreground">Clean mod and instance management</strong>: keep your modpacks, saves and shaders neatly separated. Each instance gets its own Java, memory, window options and launch arguments, so nothing interferes with anything else.</li>
+        <li><strong class="text-foreground">Loader installation</strong>: from 1.6 through the latest release, install Vanilla, Forge, Fabric, Quilt, NeoForge and OptiFine in one click.</li>
+        <li><strong class="text-foreground">Resource center</strong>: search and download directly from Modrinth and CurseForge, filter by version, loader and category, and let the launcher automatically fix missing mod dependencies for you.</li>
+        <li><strong class="text-foreground">Modpacks</strong>: got a modpack to share? Export it in a snap, or drop a <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">.zip</code> / <code class="font-mono text-xs bg-muted text-primary px-1.5 py-0.5 rounded">.mrpack</code> right in to start playing immediately.</li>
+        <li><strong class="text-foreground">Accounts made simple</strong>: log in securely with your Microsoft account, or hop into offline mode instantly for local testing. Yggdrasil and Unified Pass are also supported; credentials are encrypted locally and bound to the machine. Got custom skins? Just drag and drop your skin server link to import it.</li>
+        <li><strong class="text-foreground">Play together, no public IP needed</strong>: want to play with friends? Jump straight into online mode without messing with port forwarding. It handles the connection for you, keeps out griefers, and even works smoothly with other popular launchers.</li>
+        <li><strong class="text-foreground">Companion tools</strong>: edit game options and world settings graphically, preview world maps, and inspect Litematica schematics in 3D right inside the app before building them in-game. Slide through layers and check material lists without needing any official Mojang assets.</li>
+        <li><strong class="text-foreground">Automatic updates</strong>: built-in update checks and installation, with separate stable and preview channels.</li>
       </ul>
     </div>
 
-    {/* System requirements */}
     <div class="mb-4 rounded-xl border border-border bg-card p-6">
       <h2 class="mb-3 text-base font-semibold">System Requirements</h2>
       <div class="overflow-x-auto">
@@ -101,7 +93,6 @@ const stableVersion = latestStable?.version ?? '—'
       </p>
     </div>
 
-    {/* Version Info — 原样保留 */}
     <div class="mb-4 rounded-xl border border-border bg-card p-6">
       <h2 class="mb-3 text-base font-semibold">Version Info</h2>
       <div class="rounded-lg bg-background p-4 text-sm">
@@ -119,7 +110,6 @@ const stableVersion = latestStable?.version ?? '—'
       </p>
     </div>
 
-    {/* Open source and contributing */}
     <div class="mb-4 rounded-xl border border-border bg-card p-6">
       <h2 class="mb-3 text-base font-semibold">Open Source &amp; Contributing</h2>
       <div class="space-y-3 text-sm leading-relaxed text-muted-foreground">
@@ -133,14 +123,14 @@ const stableVersion = latestStable?.version ?? '—'
           <li>Before filing an issue, you may also find an answer in the <a href="/en/faq" class="text-primary underline underline-offset-2">FAQ</a> or the <a href="https://docs.qomicex.top" target="_blank" rel="noopener" class="text-primary underline underline-offset-2">documentation</a>.</li>
         </ul>
         <p>
-          This is an independent third-party tool with no affiliation, sponsorship or endorsement from Mojang Studios,
-          Microsoft Corporation or their affiliates. Minecraft is a trademark of Mojang AB. If you do not own a
-          legitimate copy of the game, please purchase one through official channels.
+          Game files are downloaded from Mojang's official servers and their public mirrors. This project does not
+          host or redistribute Minecraft itself. Qomicex Launcher is a third-party tool with no affiliation,
+          sponsorship or endorsement from Mojang, Microsoft or NetEase. Minecraft is a trademark of Mojang AB. If you
+          do not own a legitimate copy of the game, please purchase one through official channels.
         </p>
       </div>
     </div>
 
-    {/* Contributors — 岛屿化 */}
     <div class="mb-4 rounded-xl border border-border bg-card p-6">
       <h2 class="mb-3 text-base font-semibold">Developers</h2>
       {contributors.length === 0 && <p class="text-sm text-muted-foreground">No contributor information.</p>}
@@ -156,7 +146,6 @@ const stableVersion = latestStable?.version ?? '—'
       </div>
     </div>
 
-    {/* Friends — complementary sites in the same ecosystem */}
     <FriendsCard
       title={t('about.friends', lang)}
       items={friends.map(f => ({ name: f.name, url: f.url, desc: f.desc[lang] }))}
